@@ -6,7 +6,7 @@
 /*   By: nofloren <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/07 15:46:34 by nofloren          #+#    #+#             */
-/*   Updated: 2020/09/07 20:31:33 by nofloren         ###   ########.fr       */
+/*   Updated: 2020/09/08 20:32:14 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,12 @@
 #include <errno.h>
 #include <sys/errno.h>
 #include <stdio.h>
+#include <signal.h>
+#include <dirent.h>
 #include <unistd.h>
 #include <string.h>
+
+int		ft_pork(char *s, char *path, char **str, char **env);
 
 int	main(int argc, char **argv, char **env)
 {
@@ -26,8 +30,6 @@ int	main(int argc, char **argv, char **env)
 	char *line;
 	char **str;
 	char *tmp;
-	char *old_pwd;
-	char *buf[100];
 	line = NULL;
 	int	flag;
 	
@@ -45,13 +47,15 @@ int	main(int argc, char **argv, char **env)
 		if (str[0] && ((str[0][0] == 'c') && (str[0][1] == 'd')))
 		{
 			flag = 1;
+			flag_exit = 0;
 			tmp = getcwd(NULL, 0);
-			if ((k = chdir(str[1])) == -1)
+			if (str[1] && (k = chdir(str[1])) == -1)
 			{
 				ft_putstr_fd("minishell: cd: ", 2);
 				ft_putstr_fd(str[1], 2);
 				ft_putstr_fd(": ", 2);
 				ft_putendl_fd(strerror(errno), 2);
+				flag_exit = 1;
 			}
 			else
 			{
@@ -121,16 +125,63 @@ int	main(int argc, char **argv, char **env)
 		else if (str[0] && str[0][0] == '$' && str[0][1] == '?')
 		{
 			ft_putstr_fd("minishell: ", 2);
-			ft_putnbr_fd(errno, 2);
+			ft_putnbr_fd(flag_exit, 2);
 			ft_putendl_fd(": command not found", 2);
 		}
-		else if (str[0])
+		else if (str[0] && ((ft_strncmp(str[0], "exit", 4)) == 0))
 		{
-			ft_putstr_fd("minishell: ", 2);
-			ft_putstr_fd(str[0], 2);
-			ft_putendl_fd(": command not found", 2);
+			ft_putendl_fd("exit", 2);
+			flag_exit = ft_atoi(str[1]);
+			exit(flag_exit);
 		}
-		
+		else
+		{
+			char **str_path;
+			DIR *dir;
+			struct dirent *entry;
+			int	flag2;
+
+			flag2 = 0;
+			k = 0;
+			while(env[k])
+			{
+				if (ft_strncmp(env[k], "PATH=", 5) == 0)
+					str_path = ft_split(&env[k][5], ':');
+				k++;
+			}
+			k = 0;
+			while (str_path[k])
+			{
+				dir = opendir(str_path[k]);
+				if (!dir)
+				{
+     				perror("diropen");
+        			exit(1);
+   				}
+				while ((entry = readdir(dir)) != NULL)
+				{
+					if ((ft_strcmp(str[0], entry->d_name)) == 0)
+					{
+						flag_exit = ft_pork(str[0], str_path[k], str, env);
+						flag2 = 1;
+						break ;
+					}
+				}
+				closedir(dir);
+				k++;
+			}
+			if (flag2 == 0)
+			{
+				flag_exit = ft_pork(str[0], ".", str, env);
+				if (flag_exit == 127)
+				{
+					ft_putstr_fd("minishell: ", 2);
+					ft_putstr_fd(str[0], 2);
+					ft_putendl_fd(": command not found", 2);
+				}
+			}
+		}
+
 		write(1, "minishell > ", 12);
 	}
 	return (0);

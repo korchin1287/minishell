@@ -5,6 +5,8 @@
 # include <stdlib.h>
 # include "libft/libft.h"
 
+int		flag_exit;
+
 int		get_next_line(char **line);
 int		main(int argc, char **argv, char **env);
 
