@@ -6,7 +6,7 @@
 /*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/07 15:46:34 by nofloren          #+#    #+#             */
-/*   Updated: 2020/09/09 14:01:12 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/09/09 15:07:49 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,10 @@ void ft_echo(t_minshl *shell, char *str, int flag)
 	write(1, str, ft_strlen(str));
 	if (flag)
 		write(1, " ", 1);
-	if (shell->echo_flag == 1)
+	if (shell->echo_flag == 0 && !flag)
 		write (1, "\n", 1);
+	if (shell->echo_flag == 1 && !flag)
+		write(1, "%\n", 2);
 }
 void ft_pwd(t_minshl *shell)
 {
