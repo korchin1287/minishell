@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nofloren <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/07 15:46:34 by nofloren          #+#    #+#             */
-/*   Updated: 2020/09/08 20:32:14 by nofloren         ###   ########.fr       */
+/*   Updated: 2020/09/10 13:59:26 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
-#include "libft/libft.h"
+#include "minishell.h"
 #include <sys/types.h>
 #include <errno.h>
 #include <sys/errno.h>
@@ -20,8 +19,6 @@
 #include <dirent.h>
 #include <unistd.h>
 #include <string.h>
-
-int		ft_pork(char *s, char *path, char **str, char **env);
 
 int	main(int argc, char **argv, char **env)
 {
@@ -36,11 +33,12 @@ int	main(int argc, char **argv, char **env)
 	flag = 0;
 	write(1, "minishell > ", 12);
 	k = 0;
+	int l = 0;
 	while (1)
 	{
-		if ((k = (get_next_line(&line)) > 0))
-		{	
-			str = ft_split(line, ' ');
+		if ((k = (ft_get_next_line(0, &line)) > 0))
+		{	k = 0;
+			str = ft_parse_line(line);
 			free(line);
 			line = NULL;
 		}
@@ -184,5 +182,4 @@ int	main(int argc, char **argv, char **env)
 
 		write(1, "minishell > ", 12);
 	}
-	return (0);
 }

@@ -3,38 +3,69 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nofloren <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/05/01 02:51:00 by nofloren          #+#    #+#             */
-/*   Updated: 2020/09/08 20:03:35 by nofloren         ###   ########.fr       */
+/*   Created: 2020/05/09 11:57:34 by ndreadno          #+#    #+#             */
+/*   Updated: 2020/05/26 10:04:35 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_atoi(const char *str)
+static	size_t	ft_checksp(const char *str)
 {
-	int i;
-	int rez;
+	size_t i;
+
+	i = 0;
+	while (str[i] == ' ' || str[i] == '\t' || str[i] == '\v' ||
+	str[i] == '\f' || str[i] == '\r' || str[i] == '\n')
+		i++;
+	return (i);
+}
+
+static	int		ft_conv(const char *str, size_t i, size_t l)
+{
+	int res;
 	int k;
 
-	if (!str)
-		return (0);
-	i = 0;
-	while ((str[i] >= 9 && str[i] <= 13) || str[i] == 32)
-		i++;
-	k = 1;
-	if (str[i] == '-' || str[i] == '+')
+	res = 0;
+	k = 0;
+	while (str[i] >= '0' && str[i] <= '9')
 	{
-		if (str[i] == '-')
-			k = -k;
+		if (str[i] != '0')
+			k++;
+		if (k > 19)
+		{
+			if (l > 0)
+				return (0);
+			else
+			{
+				return (-1);
+			}
+		}
+		res = res * 10 + (str[i] - '0');
 		i++;
 	}
-	rez = 0;
-	while ((str[i] >= '0') && (str[i] <= '9'))
+	return (res);
+}
+
+int				ft_atoi(const char *str)
+{
+	size_t	i;
+	int		res;
+	size_t	minus;
+
+	minus = 0;
+	i = ft_checksp(str);
+	if (str[i] == '-')
 	{
-		rez = rez * 10 + (str[i] - '0');
+		minus++;
 		i++;
 	}
-	return (rez * k);
+	if (str[i] == '+' && str[i - 1] != '-')
+		i++;
+	res = ft_conv(str, i, minus);
+	if (minus > 0)
+		res = res * -1;
+	return (res);
 }

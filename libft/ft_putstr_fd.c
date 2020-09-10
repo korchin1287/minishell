@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nofloren <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/05/03 03:15:17 by nofloren          #+#    #+#             */
-/*   Updated: 2020/05/05 02:03:54 by nofloren         ###   ########.fr       */
+/*   Created: 2020/05/22 11:26:26 by ndreadno          #+#    #+#             */
+/*   Updated: 2020/08/17 19:45:46 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	ft_putstr_fd(char *s, int fd)
 	int i;
 
 	i = 0;
-	if (!s || fd < 0)
+	if (s == NULL)
 		return ;
 	while (s[i] != '\0')
 	{

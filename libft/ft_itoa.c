@@ -3,57 +3,58 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nofloren <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/05/04 03:28:12 by nofloren          #+#    #+#             */
-/*   Updated: 2020/05/11 01:58:53 by nofloren         ###   ########.fr       */
+/*   Created: 2020/05/20 19:30:27 by ndreadno          #+#    #+#             */
+/*   Updated: 2020/05/26 16:51:23 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static size_t		ft_len(int n)
+static	void	ft_nb(int n, char *str, int len)
 {
-	size_t	i;
+	int				i;
+	unsigned int	nb;
 
-	i = 0;
-	if (n == 0)
-		return (1);
-	if (n < 0)
-		i = 1;
-	while (n != 0)
-	{
-		n = n / 10;
-		i++;
-	}
-	return (i);
-}
-
-char				*ft_itoa(int n)
-{
-	size_t	len;
-	size_t	i;
-	char	*str;
-	long	nb;
-
-	len = ft_len(n);
-	if (!(str = (char*)malloc(sizeof(char) * (len + 1))))
-		return (NULL);
-	nb = n;
+	i = len;
 	if (n < 0)
 	{
 		str[0] = '-';
-		nb = -nb;
+		nb = (unsigned int)-n;
+		len--;
 	}
-	if (n == 0)
-		str[0] = '0';
-	i = 1;
-	while (nb != 0)
+	else
 	{
-		str[len - i] = (nb % 10) + '0';
+		nb = (unsigned int)n;
+	}
+	str[i] = '\0';
+	while (len-- > 0)
+	{
+		i--;
+		str[i] = nb % 10 + 48;
 		nb = nb / 10;
+	}
+}
+
+char			*ft_itoa(int n)
+{
+	int		nn;
+	int		i;
+	char	*res;
+
+	i = 0;
+	nn = n;
+	while (nn != 0)
+	{
+		nn = nn / 10;
 		i++;
 	}
-	str[len] = '\0';
-	return (str);
+	if (n <= 0)
+		i++;
+	res = (char*)malloc(sizeof(*res) * (i + 1));
+	if (res == NULL)
+		return (NULL);
+	ft_nb(n, res, i);
+	return (res);
 }

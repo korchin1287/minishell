@@ -6,12 +6,12 @@
 #    By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/05/12 18:43:36 by ndreadno          #+#    #+#              #
-#    Updated: 2020/09/08 12:49:49 by ndreadno         ###   ########.fr        #
+#    Updated: 2020/09/09 20:55:31 by ndreadno         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
-OBJ  = minishell.o parser.o
+OBJ  = minishell.o parser.o ft_pork.o
 LIB = -lft
 INCLUDES = ./header.h
 FLAGS = -g
@@ -25,7 +25,7 @@ $(LIB):
 	@mv libft/libft.a .
 clean:
 	/bin/rm -f $(OBJ)
-	$(MAKE) -C libft
+	$(MAKE) -C libft clean
 fclean:clean
 	/bin/rm -f $(NAME)
 	/bin/rm -f libft.a

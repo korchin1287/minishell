@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_pork.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nofloren <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/08 17:01:56 by nofloren          #+#    #+#             */
-/*   Updated: 2020/09/08 19:43:14 by nofloren         ###   ########.fr       */
+/*   Updated: 2020/09/09 20:33:23 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
-#include "libft/libft.h"
+#include "minishell.h"
 #include <sys/types.h>
 #include <errno.h>
 #include <sys/errno.h>
@@ -20,8 +19,6 @@
 #include <signal.h>
 #include <unistd.h>
 #include <string.h>
-
-int	main(int argc, char **argv, char **env);
 
 int		ft_pork(char *s, char *path, char **str, char **env)
 {
