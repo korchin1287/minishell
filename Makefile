@@ -6,7 +6,7 @@
 #    By: nofloren <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/05/12 18:43:36 by ndreadno          #+#    #+#              #
-#    Updated: 2020/09/10 15:56:17 by nofloren         ###   ########.fr        #
+#    Updated: 2020/09/10 16:03:40 by nofloren         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,4 +34,7 @@ clean:
 fclean:clean
 	/bin/rm -f $(NAME)
 	/bin/rm -f $(LIB)
+
 re:fclean all
+
+.PHONY: re, clean, fclean, all
