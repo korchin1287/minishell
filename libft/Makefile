@@ -6,7 +6,7 @@
 #    By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/05/12 18:43:36 by ndreadno          #+#    #+#              #
-#    Updated: 2020/09/10 13:43:58 by ndreadno         ###   ########.fr        #
+#    Updated: 2020/09/12 14:48:28 by ndreadno         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,8 @@ OBJ  = ft_memcmp.o ft_memset.o ft_memcpy.o ft_memmove.o ft_isalnum.o ft_isalpha.
 	ft_calloc.o ft_strjoin.o ft_strtrim.o ft_split.o ft_itoa.o ft_strmapi.o \
 	ft_putchar_fd.o ft_putstr_fd.o ft_putnbr_fd.o ft_putendl_fd.o\
 	ft_get_next_line.o ft_space.o ft_skip_digit.o ft_strcmp.o\
-	ft_strtrim_new.o
+	ft_strtrim_char.o ft_lstadd_back.o ft_lstadd_front.o ft_lstclear.o ft_lstdelone.o\
+	ft_lstiter.o ft_lstlast.o ft_lstmap.o ft_lstnew.o ft_lstsize.o
 
 INCLUDES = ./
 FLAGS = -Wall -Wextra -Werror

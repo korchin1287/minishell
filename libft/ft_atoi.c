@@ -6,7 +6,7 @@
 /*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/09 11:57:34 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/09/10 16:08:37 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/09/10 16:06:39 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,9 @@ int				ft_atoi(const char *str)
 	int		res;
 	size_t	minus;
 
-	minus = 0;
 	if (!str)
 		return (0);
+	minus = 0;
 	i = ft_checksp(str);
 	if (str[i] == '-')
 	{

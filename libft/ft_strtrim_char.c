@@ -6,13 +6,13 @@
 /*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/10 13:18:18 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/09/10 13:58:45 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/09/12 14:46:17 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static char	*ft_trim(char *res, char *str, char *trim, int len)
+static char	*ft_trim(char *res, char *str, char trim, int len)
 {
 	int i;
 	int l;
@@ -23,35 +23,26 @@ static char	*ft_trim(char *res, char *str, char *trim, int len)
 	k = -1;
 	while(++k < len)
 	{
-		l = -1;
-		while (trim[++l])
-			if (str[i] == trim[l])
+		while (str[i] == trim)
 				i++;
-		res[k] = str[i];
-		i++;
+		res[k] = str[i++];
 	}
 	res[k] = '\0';
 	return (res);
 }
 
-char		*ft_strtrim_new(char *str, char *trim)
+char		*ft_strtrim_char(char *str, char trim)
 {
 	char *res;
 	int i;
-	int l;
 	int len;
 	int count;
 
-	i = -1;
-	l = -1;
+	i = 0;
 	count = 0;
-	while (str[++i])
-	{
-		l = -1;
-		while (trim[++l])
-			if (str[i] == trim[l])
-				count++;
-	}
+	while (str[i])
+		while (str[i++] == trim)
+			count++;
 	len = ft_strlen(str) - count;
 	if (!(res = (char *)malloc(sizeof(res) * (len + 1))))
 		return (NULL);
