@@ -16,13 +16,11 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-typedef struct s_list
+typedef struct	s_list
 {
-	void *content;
-	char flag;
-	struct s_list *new_list;
+	char *content;
 	struct s_list *next;
-}t_list;
+}				t_list;
 
 int		ft_tolower(int ch);
 int		ft_toupper(int ch);
