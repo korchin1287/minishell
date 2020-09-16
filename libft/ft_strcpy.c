@@ -1,21 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_bzero.c                                         :+:      :+:    :+:   */
+/*   ft_strcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/04/30 14:02:13 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/09/16 16:49:45 by ndreadno         ###   ########.fr       */
+/*   Created: 2020/09/15 21:45:27 by ndreadno          #+#    #+#             */
+/*   Updated: 2020/09/15 21:48:37 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_bzero(char *s, size_t n)
+void	ft_strcpy(char *dst, char *src)
 {
-	while (n > 0)
-	{
-		((unsigned char *)s)[n--] = 0;
-	}
+	int i;
+
+	i = -1;
+	while(src[++i] != '\0')
+		dst[i] = src[i];
+	dst[i] = '\0';
 }

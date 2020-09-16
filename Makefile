@@ -6,13 +6,14 @@
 #    By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/05/12 18:43:36 by ndreadno          #+#    #+#              #
-#    Updated: 2020/09/12 13:19:56 by ndreadno         ###   ########.fr        #
+#    Updated: 2020/09/15 23:27:14 by ndreadno         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
-SRCS = srcs/minishell.c srcs/parser.c srcs/ft_pork.c
-OBJ  = srcs/minishell.o srcs/parser.o srcs/ft_pork.o
+SRCS = srcs/minishell.c srcs/parser/parser.c srcs/parser/list.c srcs/parser/open_close_qoutes.c srcs/parser/check_arg.c srcs/parser/dollar.c srcs/ft_pork.c
+OBJ = $(SRCS:.c=.o)
+#OBJ  = srcs/minishell.o srcs/parser.o srcs/ft_pork.o
 LIB = libft/libft.a
 INCLUDES = ./srcs
 FLAGS = -g 
@@ -26,7 +27,7 @@ $(NAME):$(OBJ) $(LIB)
 	gcc $(FLAGS) -I $(INCLUDES) -c $< -o $@
 
 ts:
-	gcc -g srcs/*.c libft/*.c -o test
+	gcc -g srcs/*.c srcs/parser/*.c libft/*.c -o test
 	/bin/rm -f minishell
 $(LIB):
 	@$(MAKE) -C libft/

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nofloren <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/07 15:46:34 by nofloren          #+#    #+#             */
-/*   Updated: 2020/09/11 16:15:29 by nofloren         ###   ########.fr       */
+/*   Updated: 2020/09/16 15:29:57 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,46 +19,6 @@
 #include <dirent.h>
 #include <unistd.h>
 #include <string.h>
-
-size_t	ft_strlen_2(const char *str, char c)
-{
-	size_t i;
-
-	i = 0;
-	while (str[i] != '\0' && str[i] != c)
-		i++;
-	return (i);
-}
-
-char *ft_check_doll(char *str, t_list *lst_before_export, t_list *list_env)
-{
-	int	k;
-	t_list *first_dst;
-	t_list *first_tmp;
-
-	if (!str)
-		return (NULL);
-	if (str[0] == '$')
-	{
-		int count = ft_strlen_2(&str[1], ' ');
-		k = 0;
-		first_tmp = list_env;
-		while (first_tmp)
-		{
-			if (ft_strncmp(first_tmp->content, &str[1], count) == 0)
-				return (&first_tmp->content[count + 1]);
-			first_tmp = first_tmp->next;
-		}
-		first_dst = lst_before_export;
-		while (first_dst)
-		{
-			if (ft_strncmp(first_dst->content, &str[1], count) == 0)
-				return (&first_dst->content[count + 1]);
-			first_dst = first_dst->next;
-		}
-	}
-	return (NULL);
-}
 
 int 	ft_cout_mas(char **env)
 {
@@ -166,7 +126,7 @@ int	ft_unset(char **str, t_list **list)
 		return (0);
 	while (str[j])
 	{
-		int count = ft_strlen_2(str[j], ' ');
+		int count = ft_strlen_2(str[j], " ");
 
 		tmp = *list;
 		if (tmp->next)
@@ -197,39 +157,7 @@ int	ft_unset(char **str, t_list **list)
 	return (0);
 }
 
-char	*ft_change_dollar(char *str, t_list *lst_before_export, t_list *list_env)
-{
-	char *tmp;
-	char *tmp2;
-	int i;
 
-	i = 0;
-	while (str[i] != '\0')
-	{
-		if (str[i] == '$' && ft_check_doll(&str[i], lst_before_export, list_env))
-		{
-			tmp2 = str;
-			tmp = ft_check_doll(&str[i], lst_before_export, list_env);
-			str[i] = '\0';
-			str = ft_strjoin(str, tmp);
-			free(tmp2);
-		}
-		else if (str[i] == '$' && !ft_check_doll(&str[i], lst_before_export, list_env))
-		{
-			tmp2 = str;
-			str[i] = '\0';
-			str = ft_strdup(str);
-			free(tmp2);
-			if (str[0] == '\0')
-			{
-				str = NULL;
-				break;
-			}
-		}
-		i++;
-	}
-	return (str);
-}
 
 int	main(int argc, char **argv, char **env)
 {
@@ -243,11 +171,13 @@ int	main(int argc, char **argv, char **env)
 	int	j;
 	t_list *lst_before_export;
 	lst_before_export = NULL;
-	t_list_arg *list;
+	t_list_arg *list_arg;
 	int	flag_break = 0;
 	t_list *list_env;
 	list_env = NULL;
+	list_arg = NULL;
 	ft_list_create(&list_env, env);
+	
 
 	flag = 0;
 	int flag_doll = 0;
@@ -261,9 +191,19 @@ int	main(int argc, char **argv, char **env)
 	{
 		if ((k = (ft_get_next_line(0, &line)) > 0))
 		{
-			str = ft_parse_line(list, line);
+			str = ft_parse_line(lst_before_export, list_env, &list_arg, line);
+			if (!str)
+			{
+				write(1, "EROOR", 12);
+				
+			}
 			free(line);
 			line = NULL;
+			ft_clear_lst(&list_arg);
+			write(1, "minishell > ", 12);
+			ft_putstr_fd(getcwd(NULL, 0), 1);
+			write(1, " > ", 3);
+			continue;
 		}
 		flag_break = 0; 
 		j = 0;
@@ -283,17 +223,17 @@ int	main(int argc, char **argv, char **env)
         }
 		if (flag_break == 0)
 		{
-			if (str[0] && str[0][1])
-			{
-				while (str[j][0] == '$' && str[j][1] != '?' && !(ft_check_doll(str[j], lst_before_export, list_env)))
-				{
-					j++;
-					if (!str[j])
-						break;
-					if (str[j][0] == '$' && str[j][1] != '?' && ft_check_doll(str[j], lst_before_export, list_env))
-					str[j] = ft_check_doll(str[j], lst_before_export, list_env);
-				}
-			}
+			// if (str[0] && str[0][1])
+			// {
+			// 	while (str[j][0] == '$' && str[j][1] != '?' && !(ft_check_doll(str[j], lst_before_export, list_env)))
+			// 	{
+			// 		j++;
+			// 		if (!str[j])
+			// 			break;
+			// 		if (str[j][0] == '$' && str[j][1] != '?' && ft_check_doll(str[j], lst_before_export, list_env))
+			// 		str[j] = ft_check_doll(str[j], lst_before_export, list_env);
+			// 	}
+			// }
 			if (str[j] && ((ft_strcmp(str[j], "export")) == 0))
 			{
 				j++;
@@ -329,7 +269,7 @@ int	main(int argc, char **argv, char **env)
 						dst = lst_before_export;
 						while (dst)
 						{
-							if (ft_strncmp(str[j], dst->content, ft_strlen_2(dst->content, '=')) == 0)
+							if (ft_strncmp(str[j], dst->content, ft_strlen_2(dst->content, "=")) == 0)
 								ft_lstadd_back(&list_env, ft_lstnew2(dst->content));
 							dst = dst->next;					
 						}
@@ -357,15 +297,15 @@ int	main(int argc, char **argv, char **env)
 						k++;
 					}
 				}
-				while (str[j] && str[j][0] == '$')
-				{
-					if (ft_check_doll(str[j], lst_before_export, list_env))
-					{
-						str[j] = ft_check_doll(str[j], lst_before_export, list_env);
-						break;
-					}
-					j++;
-				}
+				// while (str[j] && str[j][0] == '$')
+				// {
+				// 	if (ft_check_doll(str[j], lst_before_export, list_env))
+				// 	{
+				// 		str[j] = ft_check_doll(str[j], lst_before_export, list_env);
+				// 		break;
+				// 	}
+				// 	j++;
+				// }
 				if (str[j] && (k = chdir(str[j])) == -1)
 				{
 					ft_putstr_fd("minishell: cd: ", 2);
@@ -439,7 +379,7 @@ int	main(int argc, char **argv, char **env)
 						// 	}
 						// 	j++;
 						// }
-						str[j] = ft_change_dollar(str[j], lst_before_export, list_env);
+						//str[j] = ft_change_dollar(str[j], lst_before_export, list_env);
 						if (str[j])
 						{
 							write(1, str[j], ft_strlen(str[j]));
@@ -480,11 +420,11 @@ int	main(int argc, char **argv, char **env)
 
 				x = j;
 				//str = ft_change_dollar(str, j, lst_before_export, list_env);
-				while (str[x] && str[x][1])
-				{
-					str[x] = ft_change_dollar(str[x], lst_before_export, list_env);
-					x++;
-				}
+				// while (str[x] && str[x][1])
+				// {
+				// 	str[x] = ft_change_dollar(str[x], lst_before_export, list_env);
+				// 	x++;
+				// }
 				char **str_path;
 				DIR *dir;
 				struct dirent *entry;

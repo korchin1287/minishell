@@ -6,7 +6,7 @@
 /*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/12 13:28:21 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/09/12 14:47:52 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/09/16 15:31:50 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,14 +43,14 @@ char	**ft_split(char const *s, char c);
 char	*ft_strchr(const char *str, int ch);
 char	*ft_strrchr(const char *str, int ch);
 char	*ft_strjoin(char const *s1, char const *s2);
-char	*ft_strtrim_char(char *str, char trim);
+char	*ft_strtrim_char(char *str, char trim, int size);
 char	*ft_strtrim(char const *s1, char const *set);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 char	*ft_strnstr(const char *big, const char *little, size_t len);
 void	ft_putchar_fd(char c, int fd);
 void	ft_putstr_fd(char *s, int fd);
-void	ft_bzero(void *s, size_t n);
+void	ft_bzero(char *s, size_t n);
 void	ft_putnbr_fd(int n, int fd);
 void	ft_putendl_fd(char *s, int fd);
 void	*ft_calloc(size_t num, size_t size);
@@ -59,6 +59,7 @@ void	*ft_memset(void *destination, int c, size_t n);
 void	*ft_memcpy(void *dst, const void *src, size_t n);
 void	*ft_memmove(void *dst, const void *src, size_t len);
 void	*ft_memccpy(void *dst, const void *src, int c, size_t n);
+void	ft_strcpy(char *dst, char *src);
 void            ft_lstadd_front(t_list **lst, t_list *new);
 void            ft_lstadd_back(t_list **lst, t_list *new);
 void            ft_lstdelone(t_list *lst, void (*del)(void*));
