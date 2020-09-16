@@ -6,7 +6,7 @@
 /*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/08 12:47:52 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/09/16 16:44:07 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/09/16 17:59:34 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,7 +158,7 @@ int ft_len_qoutes(t_data *data, char *str, char c, int *i)
 		else if (str[*i] == '$' && ((i && str[*i-1] != '\\') || i == 0) && str[*i + 1] != '\0' && str[*i + 1] != '?' && str[*i + 1] != '\\' && c != '\'')
 		{
 			len +=ft_len_dollars(str, data->before_export, data->env, *i);
-			*i += ft_strlen_2(&str[*i + 1], "\\$\'\" ") + 1;
+			*i += ft_strlen_2(&str[*i + 1],  "\\$\'\" <;>| ") + 1;
 		}
 		else
 		{
@@ -191,7 +191,7 @@ int ft_len_arg(t_data *data, char *str, int *i)
 		else if (str[*i] == '$' && ((i && str[*i-1] != '\\') || i == 0) && str[*i + 1] != '\0' && str[*i + 1] != '?' && str[*i + 1] != '\'' && str[*i + 1] != '\"')
 		{
 			len +=ft_len_dollars(str, data->before_export, data->env, *i);
-			*i += ft_strlen_2(&str[*i + 1], "\\$\'\" ") + 1;
+			*i += ft_strlen_2(&str[*i + 1],  "\\$\'\" <;>| ") + 1;
 		}	
 		
 		else

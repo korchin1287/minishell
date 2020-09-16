@@ -6,7 +6,7 @@
 /*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 16:41:37 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/09/16 16:38:08 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/09/16 17:59:08 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ char	*ft_check_doll(char *str, t_list *lst_before_export, t_list *list_env)
 
 	if (!str)
 		return (NULL);
-	int count = ft_strlen_2(str, "\\$\'\" ");
+	int count = ft_strlen_2(str, "\\$\'\" <;>| ");
 	k = 0;
 	first_tmp = list_env;
 	while (first_tmp)
@@ -77,7 +77,7 @@ char	*ft_change_dollar(t_data *data, char *str, char *dst)
 	int count;
 
 	i = 0;
-	count = ft_strlen_2(str,  "\\$\'\" ");
+	count = ft_strlen_2(str,   "\\$\'\" <;>| ");
 	tmp3 = ft_check_doll(str, data->before_export, data->env);
 	if (tmp3)
 	{
@@ -95,7 +95,7 @@ int		ft_dollar(t_data *data, char *str, char *out, int *l)
 	tmp = ft_change_dollar(data, &str[i + 1], out);
 	if (tmp)
 		*l += ft_strlen(tmp);
-	i += ft_strlen_2(&str[i + 1], "\\$\'\" ") + 1;
+	i += ft_strlen_2(&str[i + 1],  "\\$\'\" <;>| ") + 1;
 	return (i);
 }
 int		ft_len_dollars(char *str, t_list *lst_before_export, t_list *list_env, int k)
