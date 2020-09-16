@@ -6,7 +6,7 @@
 /*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/10 16:28:59 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/09/16 16:37:37 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/09/16 18:48:15 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ typedef struct s_list_arg
 	int flag_end;
 	int flag_pipe;
 	int flag_disable_char;
+	int flag_disable_dollar;
 	struct s_list_arg *next;
 }t_list_arg;
 
@@ -42,6 +43,7 @@ typedef struct s_tmp_list
 	int flag_end;
 	int flag_pipe;
 	int flag_disable_char;
+	int flag_disable_dollar;
 	struct s_tmp_list *next;
 }t_tmp_list;
 
@@ -61,6 +63,7 @@ typedef struct s_parser
 	int flag_end;
 	int flag_pipe;
 	int flag_disable_char;
+	int flag_disable_dollar;
 	int  arg;
 	int count_arg;
 	int error_arg;
@@ -76,10 +79,10 @@ typedef struct s_data
 	t_list *before_export;
 }				t_data;
 
-size_t		ft_strlen_2(const char *str, char *check);
+// size_t		ft_strlen_2(const char *str, char *check);
 
 int			ft_size_list(t_tmp_list *start);
-int			ft_len_dollars(char *str, t_list *lst_before_export, t_list *list_env, int k);
+// int			ft_len_dollars(char *str, t_list *lst_before_export, t_list *list_env, int k);
 int     	ft_check_arg(t_data *data, char *str, char c, int *k);
 char		*ft_check_close_qoutes(t_data *data, char *str, int *i);
 char		**make_map(t_tmp_list **map, int size);
@@ -87,8 +90,8 @@ void		ft_init(t_data *data);
 void 		ft_clear_list(t_tmp_list **head);
 void		ft_check_open_qoutes(t_data *data, char *str, int *i);
 void		ft_add_end(t_tmp_list **start, t_tmp_list *new);
-char		*ft_change_dollar(t_data *data, char *str, char *dst);
-int			ft_dollar(t_data *data, char *str, char *out, int *l);
+// char		*ft_change_dollar(t_data *data, char *str, char *dst);
+// int			ft_dollar(t_data *data, char *str, char *out, int *l);
 
 t_tmp_list	*ft_add(t_data *data, char *str);
 

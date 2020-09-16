@@ -6,7 +6,7 @@
 /*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/13 12:45:04 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/09/15 15:24:23 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/09/16 18:42:28 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,8 @@ t_tmp_list	*ft_add(t_data *data, char *str)
 	new->flag_redir_one_left = data->parser.flag_redir_one_left;
 	new->flag_end = data->parser.flag_end;
 	new->flag_pipe = data->parser.flag_pipe;
+	new->flag_disable_char = data->parser.flag_disable_char;
+	new->flag_disable_dollar = data->parser.flag_disable_dollar;
 	new->next = NULL;
 	return (new);
 }
@@ -115,6 +117,7 @@ t_list_arg *ft_add_lst(t_data *data, t_tmp_list *tmp_list, char **str)
 	new->flag_end = data->parser.flag_end;
 	new->flag_pipe = data->parser.flag_pipe;
 	new->flag_disable_char = data->parser.flag_disable_char;
+	new->flag_disable_dollar = data->parser.flag_disable_dollar;
 	new->next = NULL;
 	return (new);
 }

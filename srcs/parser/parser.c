@@ -6,7 +6,7 @@
 /*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/08 12:47:52 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/09/16 17:59:34 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/09/16 18:41:28 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void ft_flag_add(t_data *data, t_tmp_list **new)
 	(*new)->flag_end = data->parser.flag_end;
 	(*new)->flag_pipe = data->parser.flag_pipe;
 	(*new)->flag_disable_char = data->parser.flag_disable_char;
+	(*new)->flag_disable_char = data->parser.flag_disable_dollar;
 }
 
 void ft_qoutes_null(t_data *data)
@@ -52,6 +53,7 @@ void ft_flag_null(t_data *data)
 
 	data->parser.count_arg = 0;
 	data->parser.flag_disable_char = 0;
+	data->parser.flag_disable_dollar = 0;
 }
 
 int	ft_qoutes(t_data *data, char *tmp, char *str, int *l)
@@ -69,10 +71,10 @@ int	ft_qoutes(t_data *data, char *tmp, char *str, int *l)
 			i += 1;
 			tmp[(*l)++] = str[(i)++];
 		}
-		else if (str[i] == '$' && ((i && str[i-1] != '\\') || i == 0) &&
-			str[i + 1] != '\0' && str[i + 1] != '?' &&
-			str[i + 1] != '\\' && c != '\'')
-			i += ft_dollar(data, &str[i], tmp, l);
+		// else if (str[i] == '$' && ((i && str[i-1] != '\\') || i == 0) &&
+		// 	str[i + 1] != '\0' && str[i + 1] != '?' &&
+		// 	str[i + 1] != '\\' && c != '\'')
+		// 	i += ft_dollar(data, &str[i], tmp, l);
 		else
 		{
 			if (str[i] == '=')
@@ -99,10 +101,10 @@ void ft_parse_arg_loop(t_data *data, char *str, char *tmp, int *i)
 		}
 		else if (str[*i] == '\'' || str[*i] == '\"')
 			*i += ft_qoutes(data, tmp, &str[*i], &l);
-		else if (str[*i] == '$' && ((i && str[*i-1] != '\\') || i == 0) &&
-			str[*i + 1] != '\0' && str[*i + 1] != '?' &&
-			str[*i + 1] != '\'' && str[*i + 1] != '\"' && str[*i + 1])
-			*i += ft_dollar(data, &str[*i], tmp, &l);
+		// else if (str[*i] == '$' && ((i && str[*i-1] != '\\') || i == 0) &&
+		// 	str[*i + 1] != '\0' && str[*i + 1] != '?' &&
+		// 	str[*i + 1] != '\'' && str[*i + 1] != '\"' && str[*i + 1])
+		// 	*i += ft_dollar(data, &str[*i], tmp, &l);
 		else
 			tmp[l++] = str[(*i)++];
 	}
@@ -152,14 +154,17 @@ int ft_len_qoutes(t_data *data, char *str, char c, int *i)
 	{
 		if (str[*i] == '\\' && (str[*i + 1] == '$' || str[*i + 1] == '\"' || str[*i + 1] == '`' || str[*i + 1] == '\\') && c != '\'')
 		{
+			
 			len++;
 			*i += 2;
+			if (str[*i] == '$')
+				data->parser.flag_disable_dollar = 1;
 		}
-		else if (str[*i] == '$' && ((i && str[*i-1] != '\\') || i == 0) && str[*i + 1] != '\0' && str[*i + 1] != '?' && str[*i + 1] != '\\' && c != '\'')
-		{
-			len +=ft_len_dollars(str, data->before_export, data->env, *i);
-			*i += ft_strlen_2(&str[*i + 1],  "\\$\'\" <;>| ") + 1;
-		}
+		// else if (str[*i] == '$' && ((i && str[*i-1] != '\\') || i == 0) && str[*i + 1] != '\0' && str[*i + 1] != '?' && str[*i + 1] != '\\' && c != '\'')
+		// {
+		// 	len +=ft_len_dollars(str, data->before_export, data->env, *i);
+		// 	*i += ft_strlen_2(&str[*i + 1],  "\\$\'\" <;>| ") + 1;
+		// }
 		else
 		{
 			len++;
@@ -182,17 +187,19 @@ int ft_len_arg(t_data *data, char *str, int *i)
 		{
 			*i += 2;
 			len++;
+			if (str[*i])
+				data->parser.flag_disable_dollar = 1;
 		}
 		else if (str[*i] == '\'' || str[*i] == '\"')
 		{
 			(*i)++;
 			len += ft_len_qoutes(data, str, str[*i - 1], i);
 		}
-		else if (str[*i] == '$' && ((i && str[*i-1] != '\\') || i == 0) && str[*i + 1] != '\0' && str[*i + 1] != '?' && str[*i + 1] != '\'' && str[*i + 1] != '\"')
-		{
-			len +=ft_len_dollars(str, data->before_export, data->env, *i);
-			*i += ft_strlen_2(&str[*i + 1],  "\\$\'\" <;>| ") + 1;
-		}	
+		// else if (str[*i] == '$' && ((i && str[*i-1] != '\\') || i == 0) && str[*i + 1] != '\0' && str[*i + 1] != '?' && str[*i + 1] != '\'' && str[*i + 1] != '\"')
+		// {
+		// 	len +=ft_len_dollars(str, data->before_export, data->env, *i);
+		// 	*i += ft_strlen_2(&str[*i + 1],  "\\$\'\" <;>| ") + 1;
+		// }	
 		
 		else
 		{
@@ -264,6 +271,7 @@ char 		**ft_parse_line(t_list *lst_before_export, t_list *list_env, t_list_arg *
 		printf("two redirect 	  %d\n", (*list)->flag_redir_two);
 		printf("reverse redirect  %d\n", (*list)->flag_redir_one_left);
 		printf("disable char '='  %d\n", (*list)->flag_disable_char);
+		printf("disable char '$'  %d\n", (*list)->flag_disable_dollar);
 		*list = (*list)->next;
 	}
 	// exit(0);
