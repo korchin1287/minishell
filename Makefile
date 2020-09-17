@@ -6,12 +6,12 @@
 #    By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/05/12 18:43:36 by ndreadno          #+#    #+#              #
-#    Updated: 2020/09/16 18:47:13 by ndreadno         ###   ########.fr        #
+#    Updated: 2020/09/17 11:24:55 by ndreadno         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
-SRCS = srcs/minishell.c srcs/parser/parser.c srcs/parser/list.c srcs/parser/open_close_qoutes.c srcs/parser/check_arg.c srcs/ft_pork.c
+SRCS = srcs/minishell.c srcs/parser/parser.c srcs/parser/parser2.c  srcs/parser/list.c srcs/parser/open_close_qoutes.c srcs/parser/check_arg.c srcs/parser/dollar.c srcs/ft_pork.c
 OBJ = $(SRCS:.c=.o)
 #OBJ  = srcs/minishell.o srcs/parser.o srcs/ft_pork.o
 LIB = libft/libft.a

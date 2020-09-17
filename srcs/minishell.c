@@ -6,7 +6,7 @@
 /*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/07 15:46:34 by nofloren          #+#    #+#             */
-/*   Updated: 2020/09/16 15:29:57 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/09/17 11:38:24 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -197,14 +197,16 @@ int	main(int argc, char **argv, char **env)
 				write(1, "EROOR", 12);
 				
 			}
-			free(line);
-			line = NULL;
-			ft_clear_lst(&list_arg);
-			write(1, "minishell > ", 12);
-			ft_putstr_fd(getcwd(NULL, 0), 1);
-			write(1, " > ", 3);
-			continue;
+			// free(line);
+			// line = NULL;
+			// ft_clear_lst(&list_arg);
+			// write(1, "minishell > ", 12);
+			// ft_putstr_fd(getcwd(NULL, 0), 1);
+			// write(1, " > ", 3);
+			// continue;
 		}
+		ft_parse_list(list_arg, lst_before_export, list_env);
+		str = list_arg->arg;
 		flag_break = 0; 
 		j = 0;
 		if (str[0])
@@ -221,6 +223,8 @@ int	main(int argc, char **argv, char **env)
                 i++;
             }
         }
+		int v;
+		v = 0;
 		if (flag_break == 0)
 		{
 			// if (str[0] && str[0][1])

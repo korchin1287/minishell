@@ -6,7 +6,7 @@
 /*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/08 12:47:52 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/09/16 18:41:28 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/09/17 12:12:40 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,51 +56,51 @@ void ft_flag_null(t_data *data)
 	data->parser.flag_disable_dollar = 0;
 }
 
-int	ft_qoutes(t_data *data, char *tmp, char *str, int *l)
+int	ft_qoutes_line(t_data *data, char *tmp, char *str, int *l)
 {
 	char c;
 	int i;
 
 	i = 1;
 	c = str[0];
-	while (str[i] != c)
+	tmp[(*l)++] = str[0];
+	while (str[i] != c && str[i] != '\0')
 	{
-		if (str[i] == '\\' && (str[i + 1] == '$' || str[i + 1] == '\"' ||
-			str[i + 1] == '`' || str[i + 1] == '\\') && c != '\'')
-		{
-			i += 1;
-			tmp[(*l)++] = str[(i)++];
-		}
+		// if (str[i] == '\\' && (str[i + 1] == '$' || str[i + 1] == '\"' ||
+		// 	str[i + 1] == '`' || str[i + 1] == '\\') && c != '\'')
+		// {
+		// 	i += 1;
+		// 	tmp[(*l)++] = str[(i)++];
+		// }
 		// else if (str[i] == '$' && ((i && str[i-1] != '\\') || i == 0) &&
 		// 	str[i + 1] != '\0' && str[i + 1] != '?' &&
 		// 	str[i + 1] != '\\' && c != '\'')
 		// 	i += ft_dollar(data, &str[i], tmp, l);
-		else
-		{
-			if (str[i] == '=')
-				data->parser.flag_disable_char = 1;
+		// else
+		// {
+		// 	if (str[i] == '=')
+		// 		(*data->list)->flag_disable_char = 1;
 			tmp[(*l)++] = str[(i)++];
-		}
+		// }
 	}
-	return (++i);
+	tmp[(*l)++] = str[(i)++];
+	return (i);
 }
 void ft_parse_arg_loop(t_data *data, char *str, char *tmp, int *i)
 {
 	int		l;
 
 	l = 0;
-	while (str[*i] != ' ' && str[*i] != '\0' && str[*i] != '>' && str[*i] != ';'
+	while (str[*i] != '\0' && str[*i] != '>' && str[*i] != ';'
 		&& str[*i] != '|' && str[*i] != '<')
 	{
-		if (str[*i] == '\\' && str[*i + 1] != '\0')
+		if (str[*i] == '\\' && str[*i + 1] != '\0' && (str[*i + 1] == '>' || str[*i + 1] == '<' || str[*i + 1] == '|' || str[*i + 1] == ';') && (str[*i - 1] != '\'' || str[*i - 1] != '\"'))
 		{
 			*i += 1;
-			if (str[*i] == '=')
-				data->parser.flag_disable_char = 1;
 			tmp[l++] = str[(*i)++];
 		}
 		else if (str[*i] == '\'' || str[*i] == '\"')
-			*i += ft_qoutes(data, tmp, &str[*i], &l);
+			*i += ft_qoutes_line(data, tmp, &str[*i], &l);
 		// else if (str[*i] == '$' && ((i && str[*i-1] != '\\') || i == 0) &&
 		// 	str[*i + 1] != '\0' && str[*i + 1] != '?' &&
 		// 	str[*i + 1] != '\'' && str[*i + 1] != '\"' && str[*i + 1])
@@ -144,32 +144,29 @@ char *ft_parse_arg(t_data *data, char *str, int len, int i)
 
 
 //------------------------len--------------------//
-
 int ft_len_qoutes(t_data *data, char *str, char c, int *i)
 {
 	int len;
 
 	len = 0;
-	while (str[*i] != c)
+	while (str[*i] != c && str[*i] != '\0')
 	{
-		if (str[*i] == '\\' && (str[*i + 1] == '$' || str[*i + 1] == '\"' || str[*i + 1] == '`' || str[*i + 1] == '\\') && c != '\'')
-		{
+		// if (str[*i] == '\\' && (str[*i + 1] == '$' || str[*i + 1] == '\"' || str[*i + 1] == '`' || str[*i + 1] == '\\') && c != '\'')
+		// {
 			
-			len++;
-			*i += 2;
-			if (str[*i] == '$')
-				data->parser.flag_disable_dollar = 1;
-		}
+		// 	len++;
+		// 	*i += 2;
+		// }
 		// else if (str[*i] == '$' && ((i && str[*i-1] != '\\') || i == 0) && str[*i + 1] != '\0' && str[*i + 1] != '?' && str[*i + 1] != '\\' && c != '\'')
 		// {
 		// 	len +=ft_len_dollars(str, data->before_export, data->env, *i);
-		// 	*i += ft_strlen_2(&str[*i + 1],  "\\$\'\" <;>| ") + 1;
+		// 	*i += ft_strlen_2(&str[*i + 1],  "\\$\'\"<;>| ") + 1;
 		// }
-		else
-		{
+		// else
+		// {
 			len++;
 			(*i)++;
-		}
+		// }
 	}
 	(*i)++;
 	return (len);
@@ -181,32 +178,30 @@ int ft_len_arg(t_data *data, char *str, int *i)
 	int tmp;
 
 	len = 0;
-	while (str[*i] != ' ' && str[*i] != '\0' && str[*i] != '>' && str[*i] != ';' && str[*i] != '|' && str[*i] != '<')
+	while (str[*i] != '\0' && str[*i] != '>' && str[*i] != ';' && str[*i] != '|' && str[*i] != '<')
 	{
-		if (str[*i] == '\\' && str[*i + 1] != '\0')
+		if (str[*i] == '\\' && str[*i + 1] != '\0' && (str[*i + 1] == '>' || str[*i + 1] == '<' || str[*i + 1] == '|' || str[*i + 1] == ';') && (str[*i - 1] != '\'' || str[*i - 1] != '\"'))
 		{
 			*i += 2;
 			len++;
-			if (str[*i])
-				data->parser.flag_disable_dollar = 1;
+			// if (str[*i])
+			// 	data->parser.flag_disable_dollar = 1;
 		}
 		else if (str[*i] == '\'' || str[*i] == '\"')
 		{
 			(*i)++;
-			len += ft_len_qoutes(data, str, str[*i - 1], i);
+			len += ft_len_qoutes(data, str, str[*i - 1], i) + 1;
 		}
 		// else if (str[*i] == '$' && ((i && str[*i-1] != '\\') || i == 0) && str[*i + 1] != '\0' && str[*i + 1] != '?' && str[*i + 1] != '\'' && str[*i + 1] != '\"')
 		// {
 		// 	len +=ft_len_dollars(str, data->before_export, data->env, *i);
 		// 	*i += ft_strlen_2(&str[*i + 1],  "\\$\'\" <;>| ") + 1;
 		// }	
-		
 		else
 		{
 			(*i)++;
 			len++;
 		}
-		
 	}
 	if (str[*i] == '>' || str[*i] == '<' || str[*i] == ';' || str[*i] == '|')
 	{
@@ -260,20 +255,20 @@ char 		**ft_parse_line(t_list *lst_before_export, t_list *list_env, t_list_arg *
 		}
 	i = -1;
 	
-	while (*list)
-	{
-		i = -1;
-		while((*list)->arg[++i])
-			printf("%s\n", (*list)->arg[i]);
-		printf("pipe              %d\n", (*list)->flag_pipe);
-		printf("command end       %d\n", (*list)->flag_end);
-		printf("one redirect      %d\n", (*list)->flag_redir_one);
-		printf("two redirect 	  %d\n", (*list)->flag_redir_two);
-		printf("reverse redirect  %d\n", (*list)->flag_redir_one_left);
-		printf("disable char '='  %d\n", (*list)->flag_disable_char);
-		printf("disable char '$'  %d\n", (*list)->flag_disable_dollar);
-		*list = (*list)->next;
-	}
+	// while (*list)
+	// {
+	// 	i = -1;
+	// 	while((*list)->arg[++i])
+	// 		printf("%s\n", (*list)->arg[i]);
+	// 	printf("pipe              %d\n", (*list)->flag_pipe);
+	// 	printf("command end       %d\n", (*list)->flag_end);
+	// 	printf("one redirect      %d\n", (*list)->flag_redir_one);
+	// 	printf("two redirect 	  %d\n", (*list)->flag_redir_two);
+	// 	printf("reverse redirect  %d\n", (*list)->flag_redir_one_left);
+	// 	printf("disable char '='  %d\n", (*list)->flag_disable_char);
+	// 	printf("disable char '$'  %d\n", (*list)->flag_disable_dollar);
+	// 	*list = (*list)->next;
+	// }
 	// exit(0);
 	// // printf("%s\n", s[0]);
 	//ft_clear_list(&data.arg_list);
