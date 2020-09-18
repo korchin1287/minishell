@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/08 12:47:52 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/09/17 12:12:40 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/09/17 19:43:01 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,7 +136,10 @@ char *ft_parse_arg(t_data *data, char *str, int len, int i)
 		ft_flag_null(data);
 	}
 	else
+	{
+		ft_flag_null(data);
 		ft_add_end(&data->arg_list, ft_add(data, tmp));
+	}
 	free(tmp);
 	return (str);
 }

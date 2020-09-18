@@ -1,29 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstclear.c                                      :+:      :+:    :+:   */
+/*   ft_command_env.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/05/06 03:01:53 by nofloren          #+#    #+#             */
-/*   Updated: 2020/09/18 18:45:45 by nofloren         ###   ########.fr       */
+/*   Created: 2020/09/18 17:34:58 by nofloren          #+#    #+#             */
+/*   Updated: 2020/09/18 17:56:51 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minishell.h"
 
-void	ft_lstclear(t_list **lst, void (*del)(void*))
+void    ft_command_env(t_shell *shell)
 {
-	t_list *dst;
+	t_list *tmp;
+	int k;
 
-	if (!del)
-		return ;
-	while (*lst)
+	k = 0;
+	if (!shell->list_arg->arg[shell->j + 1])
 	{
-		dst = *lst;
-		del((*lst)->content);
-		*lst = dst->next;
-		free(dst);
-	}
-	*lst = NULL;
+		tmp = shell->list_env;
+		while(tmp)
+		{
+			if (shell->flag_cd == 1 && (ft_strncmp(tmp->content, "OLDPWD=", 7)) == 0)
+				tmp = tmp->next;
+			ft_putendl_fd(tmp->content, 1);
+			tmp = tmp->next;
+		}
+	}   
 }
