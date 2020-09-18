@@ -3,24 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/07 15:46:34 by nofloren          #+#    #+#             */
-/*   Updated: 2020/09/18 19:38:21 by nofloren         ###   ########.fr       */
+/*   Updated: 2020/09/18 20:48:40 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-size_t	ft_strlen_3(const char *str, char c)
-{
-	size_t i;
 
-	i = 0;
-	while (str[i] != '\0' && str[i] != c)
-		i++;
-	return (i);
-}
 
 int 	ft_cout_mas(char **env)
 {

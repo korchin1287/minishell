@@ -6,7 +6,7 @@
 /*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/10 16:28:59 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/09/17 11:36:35 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/09/18 20:52:43 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ typedef struct s_data
 	t_list *before_export;
 }				t_data;
 
-size_t		ft_strlen_2(const char *str, char *check);
+size_t		ft_count_dollar(const char *str);
 
 int			ft_size_list(t_tmp_list *start);
 int			ft_len_dollars(char *str, t_list *lst_before_export, t_list *list_env, int k);

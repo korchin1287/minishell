@@ -6,13 +6,23 @@
 /*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 16:41:37 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/09/17 14:02:21 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/09/18 22:24:15 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-size_t	ft_strlen_2(const char *str, char *check)
+size_t	ft_strlen_3(const char *str, char c)
+{
+	size_t i;
+
+	i = 0;
+	while (str[i] != '\0' && str[i] != c)
+		i++;
+	return (i);
+}
+
+size_t	ft_count_dollar(const char *str)
 {
 	size_t i;
 	size_t k;
@@ -33,35 +43,33 @@ size_t	ft_strlen_2(const char *str, char *check)
 
 char	*ft_check_doll(char *str, t_list *lst_before_export, t_list *list_env)
 {
-	int	k;
-	t_list *first_dst;
-	t_list *first_tmp;
+	t_list *tmp;
+	int count;
 
 	if (!str)
 		return (NULL);
-	int count = ft_strlen_2(str, "\\$\'\" <;>| ");
-	k = 0;
-	first_tmp = list_env;
-	while (first_tmp)
+	count = ft_count_dollar(str);
+	tmp = list_env;
+	while (tmp)
 	{
-		if (ft_strncmp(first_tmp->content, str, count) == 0)
+		if (ft_strncmp(tmp->content, str, count) == 0)
 		{
-			count = ft_strlen_2(first_tmp->content, "=");
-				if (ft_strncmp(first_tmp->content, str, count) == 0)
-					return (&first_tmp->content[count + 1]);
+			count = ft_strlen_3(tmp->content, '=');
+				if (ft_strncmp(tmp->content, str, count) == 0)
+					return (&tmp->content[count + 1]);
 		}
-		first_tmp = first_tmp->next;
+		tmp = tmp->next;
 	}
-	first_dst = lst_before_export;
-	while (first_dst)
+	tmp = lst_before_export;
+	while (tmp)
 	{
-		if (ft_strncmp(first_dst->content, str, count) == 0)
+		if (ft_strncmp(tmp->content, str, count) == 0)
 		{
-			count = ft_strlen_2(first_dst->content, "=");
-			if (ft_strncmp(first_dst->content, str, count) == 0)
-				return (&first_dst->content[count + 1]);
+			count = ft_strlen_3(tmp->content, '=');
+			if (ft_strncmp(tmp->content, str, count) == 0)
+				return (&tmp->content[count + 1]);
 		}
-		first_dst = first_dst->next;
+		tmp = tmp->next;
 	}
 	return (NULL);
 }
@@ -73,7 +81,7 @@ char	*ft_change_dollar(t_data *data, char *str, char *dst)
 	int count;
 
 	i = 0;
-	count = ft_strlen_2(str,   "\\$\'\" <;>| ");
+	count = ft_count_dollar(str);
 	tmp3 = ft_check_doll(str, data->before_export, data->env);
 	if (tmp3)
 	{
@@ -91,7 +99,7 @@ int		ft_dollar(t_data *data, char *str, char *out, int *l)
 	tmp = ft_change_dollar(data, &str[i + 1], out);
 	if (tmp)
 		*l += ft_strlen(tmp);
-	i += ft_strlen_2(&str[i + 1],  "\\$\'\" <;>| ") + 1;
+	i += ft_count_dollar(&str[i + 1]) + 1;
 	return (i);
 }
 int		ft_len_dollars(char *str, t_list *lst_before_export, t_list *list_env, int k)
@@ -103,5 +111,5 @@ int		ft_len_dollars(char *str, t_list *lst_before_export, t_list *list_env, int 
 	tmp = ft_check_doll(&str[k + 1], lst_before_export, list_env);
 	if (tmp)
 		len = ft_strlen(tmp);
-	return len;
+	return (len);
 }
