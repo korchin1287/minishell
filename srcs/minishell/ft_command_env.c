@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_command_env.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/18 17:34:58 by nofloren          #+#    #+#             */
-/*   Updated: 2020/09/18 17:56:51 by nofloren         ###   ########.fr       */
+/*   Updated: 2020/09/19 14:00:33 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 void    ft_command_env(t_shell *shell)
 {

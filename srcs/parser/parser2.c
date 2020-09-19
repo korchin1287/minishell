@@ -6,7 +6,7 @@
 /*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/17 10:08:03 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/09/18 22:21:16 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/09/19 17:03:54 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,27 +82,36 @@ int ft_len_arg_list(t_data *data, char *str, int *i)
 	}
 	return (len);
 }
-int ft_check_char_qual(char *str, int k)
+
+int	ft_check_cmd(char *str)
+{
+	if (str)
+		return (ft_strcmp(str, "export"));
+	return (1);
+}
+
+int	ft_check_char_qual(t_data *data, char *str, int k)
 {
 	int i;
-	int l;
+	int export;
 
 	i = k;
-	l = 0;
-	
 	if (k == 0)
 		return (0);
-	while (str[--i] != ' ' && i >= 0)
-		if (ft_isalpha(str[i]))
-			l++;
-	if (!l)
-		return (0);
 	i = k;
+	export = ft_check_cmd(data->arg_list->str); //if (export == 0)
+														//export = true
 	while (str[--i] != ' ' && i >=0)
 	{
-		if (!ft_isalpha(str[i]) && !ft_isdigit(str[i]))
+		if (!ft_isalnum(str[i]) && str[i] != '_' && export != 0)
+			return (0);
+		if (!ft_isalnum(str[i]) && str[i] != '_' && str[i] != '\'' && str[i] != '\"' && export == 0)
 			return (0);
 	}
+	if (ft_isalpha(str[i + 1]) == 0 && str[i + 1] != '_' && export != 0)
+		return (0);
+	if (!ft_isalnum(str[i + 1]) && str[i + 1] != '_' && str[i + 1] != '\'' && str[i + 1] != '\"' && export == 0)
+			return (0);
 	
 	return 1;	
 }
@@ -127,8 +136,8 @@ int	ft_qoutes(t_data *data, char *tmp, char *str, int *l)
 			i += ft_dollar(data, &str[i], tmp, l);
 		else
 		{
-			if (str[i] == '=')
-				(*data->list)->flag_disable_char = 1;
+			if (str[i] == '=' && !ft_check_char_qual(data, str, i))
+				(*data->list)->flag_disable_char = ft_size_list(data->arg_list) + 1;
 			tmp[(*l)++] = str[(i)++];
 		}
 	}
@@ -161,8 +170,8 @@ void ft_parse_arg_loop_list(t_data *data, char *str, char *tmp, int *i)
 		else
 		{
 			if (str[*i] == '=')
-				if (!ft_check_char_qual(str, *i))
-					(*data->list)->flag_disable_char = 1;
+				if (!ft_check_char_qual(data, str, *i))
+					(*data->list)->flag_disable_char = ft_size_list(data->arg_list) + 1;
 			tmp[l++] = str[(*i)++];
 		}
 	}

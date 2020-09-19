@@ -6,16 +6,16 @@
 /*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/30 14:02:13 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/09/16 16:49:45 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/09/19 14:05:35 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_bzero(char *s, size_t n)
+void	ft_bzero(char *s, int n)
 {
-	while (n > 0)
+	while (n >= 0)
 	{
-		((unsigned char *)s)[n--] = 0;
+		((unsigned char *)s)[n--] = '\0';
 	}
 }

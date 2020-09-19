@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+         #
+#    By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/05/12 18:43:36 by ndreadno          #+#    #+#              #
-#    Updated: 2020/09/18 18:23:42 by nofloren         ###   ########.fr        #
+#    Updated: 2020/09/19 14:02:33 by ndreadno         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,14 +31,12 @@ all: $(NAME)
 
 $(NAME):$(OBJ) $(OBJ_PARS) $(LIB)
 	gcc $(FLAGS) $(OBJ) $(OBJ_PARS) $(LIB) -o $(NAME)
-	/bin/rm -f test
 
 %.o:%.c
 	gcc $(FLAGS) -I $(INCLUDES) -c $< -o $@
 
 ts:
-	gcc -g srcs/*.c srcs/parser/*.c libft/*.c -o test
-	/bin/rm -f minishell
+	gcc -g srcs/minishell/*.c srcs/parser/*.c libft/*.c -o minishell
 $(LIB):
 	@$(MAKE) -C libft/
 
