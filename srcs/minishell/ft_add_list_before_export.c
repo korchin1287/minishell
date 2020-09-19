@@ -6,7 +6,7 @@
 /*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/17 17:26:44 by nofloren          #+#    #+#             */
-/*   Updated: 2020/09/18 19:11:43 by nofloren         ###   ########.fr       */
+/*   Updated: 2020/09/19 18:23:23 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,10 @@ static int	ft_check_args_be(t_shell *shell)
 		i = 0;
 		while (tmp[j][i] != '\0')
 		{
-			if (tmp[j][i] == '=' && shell->list_arg->flag_disable_char == 0)
+			if (tmp[j][i] == '=')
 				break;
-			if (tmp[j][i] != '=' && shell->list_arg->flag_disable_char == 0 && tmp[j][i + 1] == '\0')
-				return (j);
+			if (tmp[j][i] != '=' && tmp[j][i + 1] == '\0')
+				return (++j);
 			i++;
 		}
 		j++;
@@ -54,29 +54,32 @@ void ft_add_list_before_export(t_shell *shell)
 {
 	int i;
 	char **tmp;
+	int x;
 	
 	i = 0;
-
-	if (shell->list_arg->arg[0] && !ft_check_args_be(shell))
+	x = ft_check_args_be(shell);
+	if (shell->list_arg->arg[0] && !x && shell->list_arg->flag_disable_char == 0)
 	{
 		tmp = shell->list_arg->arg;
 		while (tmp[shell->j])
-		{
+		{ 
 			i = 0;
 			while (tmp[shell->j][i] != '\0')
 			{
 				if (tmp[shell->j][i] == '=' && shell->list_arg->flag_disable_char == 0)
 				{
-					ft_lstadd_back(&shell->lst_before_export, ft_lstnew2(tmp[shell->j]));
+					if (!ft_check_list_for_export(shell, &shell->list_env, tmp[shell->j]))
+						ft_lstadd_back(&shell->lst_before_export, ft_lstnew2(tmp[shell->j]));
 					break;
 				}
-				if (tmp[shell->j][i] != '=' && shell->list_arg->flag_disable_char == 0 && tmp[shell->j][i + 1] == '\0')
-					return;
 				i++;
 			}
 			shell->j++;
 		}
 	}
-	else
-		shell->j = ft_check_args_be(shell);
+	if (x == 0 && shell->list_arg->flag_disable_char != 0)
+		shell->j = shell->list_arg->flag_disable_char - 1;
+	else if (x != 0)
+		shell->j = --x;
+	
 }

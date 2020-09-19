@@ -6,7 +6,7 @@
 /*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/05 12:06:51 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/09/18 18:48:52 by nofloren         ###   ########.fr       */
+/*   Updated: 2020/09/19 18:12:15 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ typedef struct  s_shell
 
 void ft_add_list_before_export(t_shell *shell);
 t_list	*ft_lstnew2(char *content);
-void    ft_export(t_shell *shell);
+void    ft_command_export(t_shell *shell);
 char		**make_str(t_list **list_env, int size);
 char 	**ft_sort_mass(char **tmp);
 size_t	ft_strlen_3(const char *str, char c);
@@ -46,10 +46,9 @@ void    ft_command_echo(t_shell *shell);
 void    ft_command_unset(t_shell *shell);
 void    ft_command_bash(t_shell *shell);
 void 		ft_list_clear_before(t_list **list_before_export);
-// void ft_cd(t_minshl *shell, char *str);
-// void ft_pwd(t_minshl *shell);
-// void ft_env(t_minshl *shell);
-// void ft_echo(t_minshl *shell, char *str, int flag);
+int		ft_check_list_for_export(t_shell *shell, t_list **list, char *str);
+int	ft_unset(char **str, t_list **list);
+
 
 int			ft_pork(char *s, char *path, char **str, char **env);
 #endif

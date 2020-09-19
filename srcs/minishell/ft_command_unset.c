@@ -6,7 +6,7 @@
 /*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/18 18:11:39 by nofloren          #+#    #+#             */
-/*   Updated: 2020/09/18 18:14:21 by nofloren         ###   ########.fr       */
+/*   Updated: 2020/09/19 18:45:26 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	ft_unset(char **str, t_list **list)
 		return (0);
 	while (str[j])
 	{
-		int count = ft_strlen_3(str[j], ' ');
+		int count = ft_strlen(str[j]);
 
 		tmp = *list;
 		if (tmp->next)

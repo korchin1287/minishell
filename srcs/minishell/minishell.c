@@ -6,7 +6,7 @@
 /*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/07 15:46:34 by nofloren          #+#    #+#             */
-/*   Updated: 2020/09/18 19:38:21 by nofloren         ###   ########.fr       */
+/*   Updated: 2020/09/18 19:48:56 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,10 +122,10 @@ void	ft_print_name()
 	char *minishell;
 	
 	minishell = getcwd(NULL, 0);
-	minishell = ft_strjoin("\e[3;1;32mminishell > ", minishell);
+	minishell = ft_strjoin("\e[32mminishell > ", minishell);
 	minishell = ft_strjoin(minishell, "\e[0m");
 	ft_putstr_fd(minishell, 1);
-	ft_putstr_fd("\e[3;1;32m > \e[0m", 1);
+	ft_putstr_fd("\e[32m > \e[0m", 1);
 }
 
 int	main(int argc, char **argv, char **env)
@@ -167,7 +167,7 @@ int	main(int argc, char **argv, char **env)
 			if (shell.list_arg->arg[shell.j])
 			{
 				if ((ft_strcmp(shell.list_arg->arg[shell.j], "export")) == 0)
-					ft_export(&shell);				
+					ft_command_export(&shell);				
 				else if ((ft_strcmp(shell.list_arg->arg[shell.j], "cd")) == 0)
 					ft_command_cd(&shell);
 				else if ((ft_strcmp(shell.list_arg->arg[shell.j], "pwd")) == 0)
