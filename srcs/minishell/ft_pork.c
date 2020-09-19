@@ -6,11 +6,11 @@
 /*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/08 17:01:56 by nofloren          #+#    #+#             */
-/*   Updated: 2020/09/14 18:53:29 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/09/19 14:00:45 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 #include <sys/types.h>
 #include <errno.h>
 #include <sys/errno.h>

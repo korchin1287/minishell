@@ -6,7 +6,7 @@
 /*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/13 12:45:04 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/09/17 10:14:44 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/09/19 16:06:30 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,5 +149,5 @@ int			ft_size_list(t_tmp_list *start)
 		tmp = tmp->next;
 		i++;
 	}
-	return i;
+	return (i);
 }

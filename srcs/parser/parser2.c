@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/17 10:08:03 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/09/17 19:22:13 by nofloren         ###   ########.fr       */
+/*   Updated: 2020/09/19 17:03:54 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int ft_len_qoutes_list(t_data *data, char *str, char c, int *i)
 		else if (str[*i] == '$' && ((i && str[*i-1] != '\\') || i == 0) && str[*i + 1] != '\0' && str[*i + 1] != '?' && str[*i + 1] != '\\' && c != '\'')
 		{
 			len +=ft_len_dollars(str, data->before_export, data->env, *i);
-			*i += ft_strlen_2(&str[*i + 1],  "\\$\'\"<;>| ") + 1;
+			*i += ft_count_dollar(&str[*i + 1]) + 1;
 		}
 		else
 		{
@@ -46,6 +46,7 @@ int ft_len_arg_list(t_data *data, char *str, int *i)
 	int tmp;
 
 	len = 0;
+
 	while (str[*i] != ' ' && str[*i] != '\0')
 	{
 		if (str[*i] == '\\' && str[*i + 1] != '\0')
@@ -55,15 +56,22 @@ int ft_len_arg_list(t_data *data, char *str, int *i)
 			if (str[*i])
 				data->parser.flag_disable_dollar = 1;
 		}
+		else if (str[*i] == '~' && (str[*i + 1] == '\0' || str[*i + 1] == ' '||
+			str[*i + 1] == '/') && ((*i && str[*i - 1] == ' ') || (*i == 0)))
+		{
+			len += ft_len_dollars("$HOME", data->before_export, data->env, 0);
+			*i += ft_count_dollar("HOME") + 1;
+		}
 		else if (str[*i] == '\'' || str[*i] == '\"')
 		{
 			(*i)++;
 			len += ft_len_qoutes_list(data, str, str[*i - 1], i);
 		}
-		else if (str[*i] == '$' && ((i && str[*i-1] != '\\') || i == 0) && str[*i + 1] != '\0' && str[*i + 1] != '?' && str[*i + 1] != '\'' && str[*i + 1] != '\"')
+		else if (str[*i] == '$' && ((i && str[*i-1] != '\\') || i == 0) && str[*i + 1] != '\0' &&
+			str[*i + 1] != '?' && str[*i + 1] != '\'' && str[*i + 1] != '\"')
 		{
 			len +=ft_len_dollars(str, data->before_export, data->env, *i);
-			*i += ft_strlen_2(&str[*i + 1],  "\\$\'\"<;>| ") + 1;
+			*i += ft_count_dollar(&str[*i + 1]) + 1;
 		}	
 		
 		else
@@ -74,27 +82,36 @@ int ft_len_arg_list(t_data *data, char *str, int *i)
 	}
 	return (len);
 }
-int ft_check_char_qual(char *str, int k)
+
+int	ft_check_cmd(char *str)
+{
+	if (str)
+		return (ft_strcmp(str, "export"));
+	return (1);
+}
+
+int	ft_check_char_qual(t_data *data, char *str, int k)
 {
 	int i;
-	int l;
+	int export;
 
 	i = k;
-	l = 0;
-	
 	if (k == 0)
 		return (0);
-	while (str[--i] != ' ' && i >= 0)
-		if (ft_isalpha(str[i]))
-			l++;
-	if (!l)
-		return (0);
 	i = k;
+	export = ft_check_cmd(data->arg_list->str); //if (export == 0)
+														//export = true
 	while (str[--i] != ' ' && i >=0)
 	{
-		if (!ft_isalpha(str[i]) && !ft_isdigit(str[i]))
+		if (!ft_isalnum(str[i]) && str[i] != '_' && export != 0)
+			return (0);
+		if (!ft_isalnum(str[i]) && str[i] != '_' && str[i] != '\'' && str[i] != '\"' && export == 0)
 			return (0);
 	}
+	if (ft_isalpha(str[i + 1]) == 0 && str[i + 1] != '_' && export != 0)
+		return (0);
+	if (!ft_isalnum(str[i + 1]) && str[i + 1] != '_' && str[i + 1] != '\'' && str[i + 1] != '\"' && export == 0)
+			return (0);
 	
 	return 1;	
 }
@@ -119,8 +136,8 @@ int	ft_qoutes(t_data *data, char *tmp, char *str, int *l)
 			i += ft_dollar(data, &str[i], tmp, l);
 		else
 		{
-			if (str[i] == '=')
-				(*data->list)->flag_disable_char = 1;
+			if (str[i] == '=' && !ft_check_char_qual(data, str, i))
+				(*data->list)->flag_disable_char = ft_size_list(data->arg_list) + 1;
 			tmp[(*l)++] = str[(i)++];
 		}
 	}
@@ -141,6 +158,9 @@ void ft_parse_arg_loop_list(t_data *data, char *str, char *tmp, int *i)
 				(*data->list)->flag_disable_char = 1;
 			tmp[l++] = str[(*i)++];
 		}
+		else if (str[*i] == '~' && (str[*i + 1] == '\0' || str[*i + 1] == ' '||
+			str[*i + 1] == '/') && ((*i && str[*i - 1] == ' ') || (*i == 0)))
+			*i += ft_dollar(data, "$HOME", tmp, &l);
 		else if (str[*i] == '\'' || str[*i] == '\"')
 			*i += ft_qoutes(data, tmp, &str[*i], &l);
 		else if (str[*i] == '$' && ((i && str[*i-1] != '\\') || i == 0) &&
@@ -150,8 +170,8 @@ void ft_parse_arg_loop_list(t_data *data, char *str, char *tmp, int *i)
 		else
 		{
 			if (str[*i] == '=')
-				if (!ft_check_char_qual(str, *i))
-					(*data->list)->flag_disable_char = 1;
+				if (!ft_check_char_qual(data, str, *i))
+					(*data->list)->flag_disable_char = ft_size_list(data->arg_list) + 1;
 			tmp[l++] = str[(*i)++];
 		}
 	}
@@ -170,19 +190,6 @@ char *ft_parse_arg_list(t_data *data, char *str, int len, int i)
 		exit(0);
 	ft_bzero(tmp, len);
 	ft_parse_arg_loop_list(data, str, tmp, &i);
-	// if (str[i] == '>' || str[i] == ';' || str[i] == '|' || str[i] == '<')
-	// {
-	// 	if (len)
-	// 		ft_add_end(&data->arg_list, ft_add(data, tmp));
-	// 	else
-	// 		ft_flag_add(data, &data->arg_list);
-	// 	data->parser.count_arg = ft_size_list(data->arg_list);
-	// 	tmp2 = make_map(&data->arg_list, data->parser.count_arg);
-	// 	ft_add_lst_end(data->list, ft_add_lst(data, data->arg_list, tmp2));
-	// 	ft_clear_list(&data->arg_list);
-	// 	ft_flag_null(data);
-	// }
-	// else
 	ft_add_end(&data->arg_list, ft_add(data, tmp));
 	free(tmp);
 	return (str);

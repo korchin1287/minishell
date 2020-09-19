@@ -3,14 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   ft_command_unset.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/18 18:11:39 by nofloren          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2020/09/19 18:45:26 by nofloren         ###   ########.fr       */
+=======
+/*   Updated: 2020/09/19 14:00:10 by ndreadno         ###   ########.fr       */
+>>>>>>> 80f84fe127b9b377dafebdd23691515dc1d301ea
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 int	ft_unset(char **str, t_list **list)
 {

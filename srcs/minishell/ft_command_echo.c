@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_command_echo.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/18 17:58:13 by nofloren          #+#    #+#             */
-/*   Updated: 2020/09/18 18:01:52 by nofloren         ###   ########.fr       */
+/*   Updated: 2020/09/19 14:00:29 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 void    ft_command_echo(t_shell *shell)
 {

@@ -3,14 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   ft_command_export.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/18 16:26:17 by nofloren          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2020/09/19 19:15:56 by nofloren         ###   ########.fr       */
+=======
+/*   Updated: 2020/09/19 14:00:38 by ndreadno         ###   ########.fr       */
+>>>>>>> 80f84fe127b9b377dafebdd23691515dc1d301ea
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 int		ft_check_list_for_export(t_shell *shell, t_list **list, char *str)
 {
