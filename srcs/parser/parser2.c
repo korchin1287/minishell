@@ -6,7 +6,7 @@
 /*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/17 10:08:03 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/09/19 17:03:54 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/09/20 04:24:41 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,14 +83,15 @@ int ft_len_arg_list(t_data *data, char *str, int *i)
 	return (len);
 }
 
-int	ft_check_cmd(char *str)
+int	ft_check_cmd(t_tmp_list *list)
 {
-	if (str)
-		return (ft_strcmp(str, "export"));
+	
+	if (list)
+		return (ft_strcmp(list->str, "export"));
 	return (1);
 }
 
-int	ft_check_char_qual(t_data *data, char *str, int k)
+int	ft_check_char_qual(t_data *data, char *str, int k, char flag)
 {
 	int i;
 	int export;
@@ -99,28 +100,52 @@ int	ft_check_char_qual(t_data *data, char *str, int k)
 	if (k == 0)
 		return (0);
 	i = k;
-	export = ft_check_cmd(data->arg_list->str); //if (export == 0)
-														//export = true
+	export = ft_check_cmd(data->arg_list); 
 	while (str[--i] != ' ' && i >=0)
 	{
 		if (!ft_isalnum(str[i]) && str[i] != '_' && export != 0)
 			return (0);
-		if (!ft_isalnum(str[i]) && str[i] != '_' && str[i] != '\'' && str[i] != '\"' && export == 0)
+		if (!ft_isalnum(str[i]) && str[i] != '_' && (str[i] != '\'') && str[i] != '\"' && export == 0)
+			return (0);
+		if (str[i] == '\'' && str[i] != flag)
+			return (0);
+		if (str[i] == '\"' && str[i] != flag)
 			return (0);
 	}
 	if (ft_isalpha(str[i + 1]) == 0 && str[i + 1] != '_' && export != 0)
 		return (0);
 	if (!ft_isalnum(str[i + 1]) && str[i + 1] != '_' && str[i + 1] != '\'' && str[i + 1] != '\"' && export == 0)
 			return (0);
+	if (str[i + 1] == '\'' && str[i + 1] != flag)
+			return (0);
+	if (str[i + 1] == '\"' && str[i + 1] != flag)
+			return (0);
 	
 	return 1;	
 }
+
+int ft_search_char_equal_before_space_or_qoute(char *str, int i, int flag)
+{
+	if (i == 0)
+		return (1);
+	while (--i >= 0)
+	{
+		if (str[i] == '=')
+			return (0);
+		if (str[i] == ' ' && !flag)
+			return (1);	
+	}
+	return (1);
+}
+
 int	ft_qoutes(t_data *data, char *tmp, char *str, int *l)
 {
 	char c;
 	int i;
+	int k;
 
 	i = 1;
+	k = i;
 	c = str[0];
 	while (str[i] != c && str[i] != '\0')
 	{
@@ -136,13 +161,15 @@ int	ft_qoutes(t_data *data, char *tmp, char *str, int *l)
 			i += ft_dollar(data, &str[i], tmp, l);
 		else
 		{
-			if (str[i] == '=' && !ft_check_char_qual(data, str, i))
-				(*data->list)->flag_disable_char = ft_size_list(data->arg_list) + 1;
+			if (str[i] == '=' && ft_search_char_equal_before_space_or_qoute(str, i, 1))
+				if (!ft_check_char_qual(data, str, i, c))
+					(*data->list)->flag_disable_char = ft_size_list(data->arg_list) + 1;
 			tmp[(*l)++] = str[(i)++];
 		}
 	}
 	return (++i);
 }
+
 
 void ft_parse_arg_loop_list(t_data *data, char *str, char *tmp, int *i)
 {
@@ -169,8 +196,8 @@ void ft_parse_arg_loop_list(t_data *data, char *str, char *tmp, int *i)
 			*i += ft_dollar(data, &str[*i], tmp, &l);
 		else
 		{
-			if (str[*i] == '=')
-				if (!ft_check_char_qual(data, str, *i))
+			if (str[*i] == '=' && ft_search_char_equal_before_space_or_qoute(str, *i, 0))
+				if (!ft_check_char_qual(data, str, *i, '\0'))
 					(*data->list)->flag_disable_char = ft_size_list(data->arg_list) + 1;
 			tmp[l++] = str[(*i)++];
 		}
@@ -191,6 +218,7 @@ char *ft_parse_arg_list(t_data *data, char *str, int len, int i)
 	ft_bzero(tmp, len);
 	ft_parse_arg_loop_list(data, str, tmp, &i);
 	ft_add_end(&data->arg_list, ft_add(data, tmp));
+	ft_flag_null(data);
 	free(tmp);
 	return (str);
 }
@@ -208,6 +236,7 @@ char 		**ft_parse_list_line(t_list *lst_before_export, t_list *list_env, t_list_
 	data.list = list;
 	data.env = list_env;
 	data.before_export = lst_before_export;
+	ft_flag_null(&data);
 	while (str[i] != '\0')
 	{
 		k = i;
@@ -231,19 +260,19 @@ void	ft_parse_list(t_list_arg *list, t_list *lst_before_export, t_list *list_env
 
 	i = -1;
 	list->arg = ft_parse_list_line(lst_before_export, list_env, &list, list->arg[0]);
-// 	while (list)
-// 	{
-// 		i = -1;
-// 		while(list->arg[++i])
-// 			printf("%s\n", list->arg[i]);
-// 		printf("pipe              %d\n", list->flag_pipe);
-// 		printf("command end       %d\n", list->flag_end);
-// 		printf("one redirect      %d\n", list->flag_redir_one);
-// 		printf("two redirect 	  %d\n", list->flag_redir_two);
-// 		printf("reverse redirect  %d\n", list->flag_redir_one_left);
-// 		printf("disable char '='  %d\n", list->flag_disable_char);
-// 		printf("disable char '$'  %d\n", list->flag_disable_dollar);
-// 		list = list->next;
-// 	}
-// 	exit(0);
+	while (list)
+	{
+		i = -1;
+		while(list->arg[++i])
+			printf("%s\n", list->arg[i]);
+		printf("pipe              %d\n", list->flag_pipe);
+		printf("command end       %d\n", list->flag_end);
+		printf("one redirect      %d\n", list->flag_redir_one);
+		printf("two redirect 	  %d\n", list->flag_redir_two);
+		printf("reverse redirect  %d\n", list->flag_redir_one_left);
+		printf("disable char '='  %d\n", list->flag_disable_char);
+		printf("disable char '$'  %d\n", list->flag_disable_dollar);
+		list = list->next;
+	}
+	exit(0);
 }

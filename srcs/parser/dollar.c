@@ -6,7 +6,7 @@
 /*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 16:41:37 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/09/19 16:11:30 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/09/20 04:26:50 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,31 +90,20 @@ char	*ft_change_dollar(t_data *data, char *str, char *dst)
 	}
 	return (tmp3);
 }
-int		ft_check_doll_equal(char *str)
-{
-	int i;
-
-	i = 0;
-	if (str)
-	{
-		while (str[i] != '\0')
-			if (str[i] == '=')
-				return (i + 1);
-	}
-	return (0);
-}
 
 int		ft_dollar(t_data *data, char *str, char *out, int *l)
 {
 	char	*tmp;
 	int		i;
+	int ll;
+	char *s;
 
 	i = 0;
 	tmp = ft_change_dollar(data, &str[i + 1], out);
 	if (tmp)
 		*l += ft_strlen(tmp);
-	if (ft_check_doll_equal(tmp))
-		data->parser.flag_disable_char = ft_size_list(data->arg_list) + 1;
+	if (((s = ft_strchr(tmp, '=')) != NULL) && (ll = ft_check_cmd(data->arg_list)))
+		(*data->list)->flag_disable_char = ft_size_list(data->arg_list) + 1;
 	i += ft_count_dollar(&str[i + 1]) + 1;
 	return (i);
 }

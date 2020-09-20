@@ -6,7 +6,7 @@
 /*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/10 13:18:18 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/09/12 18:22:48 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/09/20 02:05:26 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,9 @@
 static char	*ft_trim(char *res, char *str, char trim, int len)
 {
 	int i;
-	int l;
 	int k;
 
 	i = 0;
-	l = -1;
 	k = -1;
 	while(++k < len)
 	{

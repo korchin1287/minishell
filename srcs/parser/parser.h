@@ -6,7 +6,7 @@
 /*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/10 16:28:59 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/09/18 20:52:43 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/09/20 03:50:11 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,12 +80,13 @@ typedef struct s_data
 }				t_data;
 
 size_t		ft_count_dollar(const char *str);
-
+int			ft_check_cmd(t_tmp_list *list);
 int			ft_size_list(t_tmp_list *start);
 int			ft_len_dollars(char *str, t_list *lst_before_export, t_list *list_env, int k);
 int     	ft_check_arg(t_data *data, char *str, char c, int *k);
 char		*ft_check_close_qoutes(t_data *data, char *str, int *i);
 char		**make_map(t_tmp_list **map, int size);
+void 		ft_flag_null(t_data *data);
 void		ft_init(t_data *data);
 void 		ft_clear_list(t_tmp_list **head);
 void		ft_check_open_qoutes(t_data *data, char *str, int *i);
