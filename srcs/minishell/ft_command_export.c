@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_command_export.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/18 16:26:17 by nofloren          #+#    #+#             */
-/*   Updated: 2020/09/20 19:28:09 by nofloren         ###   ########.fr       */
+/*   Updated: 2020/09/20 20:33:35 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ int		ft_check_list_for_export(t_shell *shell, t_list **list, char *str)
 	{
 		if ((ft_strncmp(tmp->content, str, ft_strlen_3(str, '=')) == 0) && (ft_strncmp(tmp->content, str, ft_strlen_3(tmp->content, '=')) == 0))
 		{
+			if (!ft_strchr(str, '='))
+				return (1);
 			tmp_2 = tmp->content;
 			tmp->content = ft_strdup(str);
 			free(tmp_2);
