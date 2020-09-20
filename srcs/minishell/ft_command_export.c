@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_command_export.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/18 16:26:17 by nofloren          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2020/09/19 19:15:56 by nofloren         ###   ########.fr       */
-=======
-/*   Updated: 2020/09/19 14:00:38 by ndreadno         ###   ########.fr       */
->>>>>>> 80f84fe127b9b377dafebdd23691515dc1d301ea
+/*   Updated: 2020/09/20 19:28:09 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +41,7 @@ void	ft_print_export(t_shell *shell)
 	int i;
 	int l;
 	int len;
-	
+
 	tmp = ft_sort_mass(make_str(&shell->list_env, ft_lstsize(shell->list_env)));
 	i = 0;
 	while (tmp[i])
@@ -97,9 +93,7 @@ void    ft_command_export(t_shell *shell)
 	tmp = shell->list_arg->arg;
 	
 	if (!shell->list_arg->arg[shell->j])
-	{
 		ft_print_export(shell);
-	}
 	while (tmp[shell->j])
 	{
 		if (shell->list_arg->flag_disable_char == 0 && ft_isalpha(tmp[shell->j][0]))
@@ -108,42 +102,15 @@ void    ft_command_export(t_shell *shell)
 			{
 				if (!ft_add_env_from_export(shell))
 					ft_lstadd_back(&shell->list_env, ft_lstnew2(tmp[shell->j]));
-				
 			}
 		}
-		if (shell->list_arg->flag_disable_char != 0)
-		{	
+		else if (!ft_isalpha(tmp[shell->j][0] && shell->list_arg->flag_disable_char != 0))
+		{
 			ft_putstr_fd("minishell: ", 2);
-			ft_putnbr_fd(1, 2);
-			ft_putendl_fd(": command not found", 2);
+			ft_putstr_fd("export: \'", 2);
+			ft_putstr_fd(tmp[shell->j], 2);
+			ft_putendl_fd("\': not a valid identifier", 2);
 		}
 		shell->j++;
 	}
-				tmp2 = shell->lst_before_export;
-				while (tmp2)
-				{
-					printf("%s\n", tmp2->content);
-					tmp2 = tmp2->next;
-				}
-	// if (!shell->list_arg->arg[shell->j])
-	// {
-	// 	ft_print_export(shell);
-	// }
-	// else if (shell->list_arg->arg[shell->j])
-	// {
-	// 	while (shell->list_arg->arg[shell->j])
-	// 	{
-	// 		dst = shell->lst_before_export;
-	// 		while (dst)
-	// 		{
-	// 			if (ft_strncmp(shell->list_arg->arg[shell->j], dst->content, ft_strlen_3(dst->content, '=')) == 0)
-	// 			{
-	// 			//	ft_unset(&shell->list_arg->arg[shell->j], &shell->lst_before_export);
-	// 				ft_lstadd_back(&shell->list_env, ft_lstnew2(dst->content));
-	// 			}
-	// 			dst = dst->next;					
-	// 		}
-	// 		shell->j++;
-	// 	}
-	// }
 }

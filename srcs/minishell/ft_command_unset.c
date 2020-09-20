@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_command_unset.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/18 18:11:39 by nofloren          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2020/09/19 18:45:26 by nofloren         ###   ########.fr       */
-=======
-/*   Updated: 2020/09/19 14:00:10 by ndreadno         ###   ########.fr       */
->>>>>>> 80f84fe127b9b377dafebdd23691515dc1d301ea
+/*   Updated: 2020/09/20 16:37:17 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +23,20 @@ int	ft_unset(char **str, t_list **list)
 		return (0);
 	while (str[j])
 	{
-		int count = ft_strlen(str[j]);
+		int count = ft_strlen_3(str[j], '=');
 
 		tmp = *list;
-		if (tmp->next)
+		if (tmp && ft_strnstr(tmp->content, str[j], count))
+		{
+			if (tmp->next)
+				*list = tmp->next;
+			else 
+				*list = NULL;
+			free(tmp->content);
+			free(tmp);
+			break ;
+		}
+		else if (tmp->next)
 		{
 			while (tmp->next)
 			{
@@ -45,13 +51,6 @@ int	ft_unset(char **str, t_list **list)
 				}
 				tmp = tmp->next;
 			}
-		}
-		if (tmp && ft_strnstr(tmp->content, str[j], count))
-		{
-			free(tmp->content);
-			free(tmp);
-			*list = NULL;
-			break ;
 		}
 		j++;
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/17 10:08:03 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/09/20 04:24:41 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/09/20 15:45:04 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -260,19 +260,19 @@ void	ft_parse_list(t_list_arg *list, t_list *lst_before_export, t_list *list_env
 
 	i = -1;
 	list->arg = ft_parse_list_line(lst_before_export, list_env, &list, list->arg[0]);
-	while (list)
-	{
-		i = -1;
-		while(list->arg[++i])
-			printf("%s\n", list->arg[i]);
-		printf("pipe              %d\n", list->flag_pipe);
-		printf("command end       %d\n", list->flag_end);
-		printf("one redirect      %d\n", list->flag_redir_one);
-		printf("two redirect 	  %d\n", list->flag_redir_two);
-		printf("reverse redirect  %d\n", list->flag_redir_one_left);
-		printf("disable char '='  %d\n", list->flag_disable_char);
-		printf("disable char '$'  %d\n", list->flag_disable_dollar);
-		list = list->next;
-	}
-	exit(0);
+	// while (list)
+	// {
+	// 	i = -1;
+	// 	while(list->arg[++i])
+	// 		printf("%s\n", list->arg[i]);
+	// 	printf("pipe              %d\n", list->flag_pipe);
+	// 	printf("command end       %d\n", list->flag_end);
+	// 	printf("one redirect      %d\n", list->flag_redir_one);
+	// 	printf("two redirect 	  %d\n", list->flag_redir_two);
+	// 	printf("reverse redirect  %d\n", list->flag_redir_one_left);
+	// 	printf("disable char '='  %d\n", list->flag_disable_char);
+	// 	printf("disable char '$'  %d\n", list->flag_disable_dollar);
+	// 	list = list->next;
+	// }
+	// exit(0);
 }
