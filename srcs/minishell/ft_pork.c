@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_pork.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/08 17:01:56 by nofloren          #+#    #+#             */
-/*   Updated: 2020/09/21 19:35:35 by nofloren         ###   ########.fr       */
+/*   Updated: 2020/09/21 23:13:32 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,35 +37,36 @@ int		ft_pork(t_shell *shell, char *path, char **env)
 
 	int savefd;
 	int oldfd;
-	if (shell->list_arg->flag_pipe == 1)
-	{
-		pipe(shell->fd1);
-		if (shell->list_arg->back && shell->list_arg->back->flag_pipe == 1)
-			pipe(shell->fd2);
-	}
-	savefd = open("test.txt", O_CREAT | O_RDWR, 0666);
+	// if (shell->list_arg->flag_pipe == 1)
+	// {
+	// 	pipe(shell->fd1);
+	// 	if (shell->list_arg->back && shell->list_arg->back->flag_pipe == 1)
+	// 		pipe(shell->fd2);
+	// }
+	// savefd = open("test.txt", O_CREAT | O_RDWR, 0666);
 	pid = fork();
+	process = pid;
 	char *s2 = ft_strjoin(path, "/");
 	s2 = ft_strjoin(s2, shell->list_arg->arg[shell->j]);
 	if (pid == 0)
 	{
-		if (shell->list_arg->flag_pipe == 1)
-		{
-			dup2(shell->fd1[1], 1);
-			close(shell->fd1[0]);
-		}
-		if (shell->list_arg->flag_pipe == 0 && !shell->list_arg->back)
-		{
-			dup2(shell->fd1[0], 0);
-			close(shell->fd1[1]);
-		}
-		if (shell->list_arg->flag_pipe == 1 && shell->list_arg->back && shell->list_arg->back->flag_pipe == 1)
-		{
-			dup2(shell->fd1[0], 0);
-			close(shell->fd1[1]);
-			dup2(shell->fd2[1], 1);
-			close(shell->fd2[0]);
-		}
+		// if (shell->list_arg->flag_pipe == 1)
+		// {
+		// 	dup2(shell->fd1[1], 1);
+		// 	close(shell->fd1[0]);
+		// }
+		// if (shell->list_arg->flag_pipe == 0 && !shell->list_arg->back)
+		// {
+		// 	dup2(shell->fd1[0], 0);
+		// 	close(shell->fd1[1]);
+		// }
+		// if (shell->list_arg->flag_pipe == 1 && shell->list_arg->back && shell->list_arg->back->flag_pipe == 1)
+		// {
+		// 	dup2(shell->fd1[0], 0);
+		// 	close(shell->fd1[1]);
+		// 	dup2(shell->fd2[1], 1);
+		// 	close(shell->fd2[0]);
+		// }
 		
 		
 		if (execve(s2, &shell->list_arg->arg[shell->j], env) == -1)
@@ -80,9 +81,8 @@ int		ft_pork(t_shell *shell, char *path, char **env)
 	else
 	{
 	//	close(shell->fd1[0]);
-		close(shell->fd1[1]);
+		//close(shell->fd1[1]);
 		wpid = waitpid(pid, &status, WUNTRACED);
 	}
-	
 	return (WEXITSTATUS(status));
 }

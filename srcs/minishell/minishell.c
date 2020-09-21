@@ -6,7 +6,7 @@
 /*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/07 15:46:34 by nofloren          #+#    #+#             */
-/*   Updated: 2020/09/21 19:23:34 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/09/21 23:14:16 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,11 +133,11 @@ int	main(int argc, char **argv, char **env)
 	shell.list_arg = NULL;
 	shell.flag_exit = 0;
 	shell.flag_cd = 1;
+	process = 0;
 
 	ft_list_create(&shell.list_env, env);
-
 	ft_print_name();
-	
+	ft_singnal();
 	while (1)
 	{
 		if ((k = (ft_get_next_line(0, &line)) > 0))

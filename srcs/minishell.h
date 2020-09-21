@@ -6,7 +6,7 @@
 /*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/05 12:06:51 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/09/21 19:46:41 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/09/21 23:06:50 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@
 # include "stdio.h"
 # include "parser/parser.h"
 
+
+pid_t process;
 typedef struct  s_shell
 {
 	t_list *lst_before_export;
@@ -35,8 +37,11 @@ typedef struct  s_shell
 	int flag_cd;
 	int fd1[2];
 	int fd2[2];
+
 }               t_shell;
 
+void ft_singnal();
+void	ft_print_name();
 void ft_add_list_before_export(t_shell *shell);
 t_list	*ft_lstnew2(char *content);
 void    ft_command_export(t_shell *shell);
