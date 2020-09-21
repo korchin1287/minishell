@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/05 12:06:51 by ndreadno          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2020/09/21 18:33:50 by nofloren         ###   ########.fr       */
+=======
+/*   Updated: 2020/09/21 19:23:10 by ndreadno         ###   ########.fr       */
+>>>>>>> saribaev
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,5 +55,4 @@ void 		ft_list_clear_before(t_list **list_before_export);
 int		ft_check_list_for_export(t_shell *shell, t_list **list, char *str);
 int	ft_unset(char **str, t_list **list);
 int		ft_pork(t_shell *shell, char *path, char **env);
-
 #endif
