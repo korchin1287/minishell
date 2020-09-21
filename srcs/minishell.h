@@ -6,9 +6,10 @@
 /*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/05 12:06:51 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/09/21 19:23:10 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/09/21 19:29:40 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
@@ -32,6 +33,8 @@ typedef struct  s_shell
 	int j;
 	int flag_exit;
 	int flag_cd;
+	int fd1[2];
+	int fd2[2];
 }               t_shell;
 
 void ft_add_list_before_export(t_shell *shell);
