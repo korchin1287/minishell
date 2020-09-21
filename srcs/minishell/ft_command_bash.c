@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_command_bash.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/18 18:18:12 by nofloren          #+#    #+#             */
-/*   Updated: 2020/09/19 14:00:21 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/09/21 15:24:54 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void    ft_command_bash(t_shell *shell)
         {
             if ((ft_strcmp(shell->list_arg->arg[shell->j], entry->d_name)) == 0)
             {
-                shell->flag_exit = ft_pork(shell->list_arg->arg[shell->j], str_path[k], &shell->list_arg->arg[shell->j], env);
+                shell->flag_exit = ft_pork(shell, str_path[k], env);
                 flag2 = 1;
                 break ;
             }
@@ -57,7 +57,7 @@ void    ft_command_bash(t_shell *shell)
     }
     if (flag2 == 0)
     {
-        shell->flag_exit = ft_pork(shell->list_arg->arg[shell->j], ".", &shell->list_arg->arg[shell->j], env);
+        shell->flag_exit = ft_pork(shell, ".", env);
         if (shell->flag_exit == 127)
         {
             ft_putstr_fd("minishell: ", 2);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_command_env.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/18 17:34:58 by nofloren          #+#    #+#             */
-/*   Updated: 2020/09/19 14:00:33 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/09/21 15:15:52 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ void    ft_command_env(t_shell *shell)
 		tmp = shell->list_env;
 		while(tmp)
 		{
+			if (!ft_strchr(tmp->content, '='))
+				tmp = tmp->next;
 			if (shell->flag_cd == 1 && (ft_strncmp(tmp->content, "OLDPWD=", 7)) == 0)
 				tmp = tmp->next;
 			ft_putendl_fd(tmp->content, 1);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_pork.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/08 17:01:56 by nofloren          #+#    #+#             */
-/*   Updated: 2020/09/19 14:00:45 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/09/21 15:24:32 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 #include <unistd.h>
 #include <string.h>
 
-int		ft_pork(char *s, char *path, char **str, char **env)
+int		ft_pork(t_shell *shell, char *path, char **env)
 {
 	pid_t pid;
 	pid_t wpid;
@@ -28,12 +28,12 @@ int		ft_pork(char *s, char *path, char **str, char **env)
 
 	pid = fork();
 	char *s2 = ft_strjoin(path, "/");
-	s2 = ft_strjoin(s2, s);
+	s2 = ft_strjoin(s2, shell->list_arg->arg[shell->j]);
 	if (pid == 0)
 	{
-		if (execve(s2, str, env) == -1)
+		if (execve(s2, &shell->list_arg->arg[shell->j], env) == -1)
 		{
-			flag_exit = WEXITSTATUS(status);
+			shell->flag_exit = WEXITSTATUS(status);
 			exit (WEXITSTATUS(status));
 		}
 	}
