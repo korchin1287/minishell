@@ -6,7 +6,7 @@
 /*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/10 16:28:59 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/09/20 03:50:11 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/09/21 19:22:47 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef struct s_list_arg
 	int flag_disable_char;
 	int flag_disable_dollar;
 	struct s_list_arg *next;
+	struct s_list_arg *back;
 }t_list_arg;
 
 typedef struct s_tmp_list
