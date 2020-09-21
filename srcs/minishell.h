@@ -6,7 +6,7 @@
 /*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/05 12:06:51 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/09/21 15:23:13 by nofloren         ###   ########.fr       */
+/*   Updated: 2020/09/21 18:33:50 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ typedef struct  s_shell
 	int j;
 	int flag_exit;
 	int flag_cd;
+	int fd1[2];
+	int fd2[2];
 }               t_shell;
 
 void ft_add_list_before_export(t_shell *shell);
