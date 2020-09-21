@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/07 15:46:34 by nofloren          #+#    #+#             */
-/*   Updated: 2020/09/19 19:54:03 by nofloren         ###   ########.fr       */
+/*   Updated: 2020/09/21 12:21:41 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,7 @@ void	ft_print_name()
 }
 
 int	main(int argc, char **argv, char **env)
-{
+{ 
 	t_shell shell;
 	char *line;
 	int k;
@@ -150,6 +150,11 @@ int	main(int argc, char **argv, char **env)
 			shell.tmp_arg = shell.list_arg;
 			free(line);
 			line = NULL;
+		}
+		if (k == 0)
+		{
+			write(1, "exit\n", 5);
+			exit(0);
 		}
 		while (shell.list_arg)
 		{
