@@ -6,7 +6,7 @@
 /*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/13 12:45:04 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/09/21 19:57:14 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/09/22 10:57:36 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,8 +135,7 @@ void		ft_add_lst_end(t_list_arg **start, t_list_arg *new)
 	while (tmp->next != NULL)
 		tmp = tmp->next;
 	tmp->next = new;
-	tmp->back = tmp;
-	//tmp->back = tmp->back ? tmp : NULL;
+	tmp->next->back = tmp;
 }
 
 int			ft_size_list(t_tmp_list *start)
