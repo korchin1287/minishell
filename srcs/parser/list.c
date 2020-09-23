@@ -6,7 +6,7 @@
 /*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/13 12:45:04 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/09/21 19:22:32 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/09/22 10:57:36 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,6 @@ t_list_arg *ft_add_lst(t_data *data, t_tmp_list *tmp_list, char **str)
 	new->flag_disable_char = data->parser.flag_disable_char;
 	new->flag_disable_dollar = data->parser.flag_disable_dollar;
 	new->next = NULL;
-	new->back = NULL;
 	return (new);
 }
 
@@ -130,13 +129,13 @@ void		ft_add_lst_end(t_list_arg **start, t_list_arg *new)
 	tmp = *start;
 	if (tmp == NULL)
 	{
-		(*start) = new;	
+		(*start) = new;
 		return;
 	}
 	while (tmp->next != NULL)
 		tmp = tmp->next;
 	tmp->next = new;
-	tmp->back = tmp;
+	tmp->next->back = tmp;
 }
 
 int			ft_size_list(t_tmp_list *start)
