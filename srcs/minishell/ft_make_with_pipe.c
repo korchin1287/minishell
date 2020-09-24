@@ -3,18 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_make_with_pipe.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/23 17:31:44 by nofloren          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2020/09/24 16:35:34 by nofloren         ###   ########.fr       */
-=======
-/*   Updated: 2020/09/24 13:17:07 by ndreadno         ###   ########.fr       */
->>>>>>> saribaev
+/*   Updated: 2020/09/24 16:43:36 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "minishell.h"
 
 int    ft_make_with_pipe(t_shell *shell)
 {
