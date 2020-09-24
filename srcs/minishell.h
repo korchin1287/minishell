@@ -6,7 +6,7 @@
 /*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/05 12:06:51 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/09/24 16:40:22 by nofloren         ###   ########.fr       */
+/*   Updated: 2020/09/24 18:59:34 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <errno.h>
 # include <stdio.h>
 # include <signal.h>
+# include <fcntl.h>
 # include <dirent.h>
 # include <unistd.h>
 # include "stdio.h"

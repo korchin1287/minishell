@@ -6,7 +6,7 @@
 /*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/08 17:01:56 by nofloren          #+#    #+#             */
-/*   Updated: 2020/09/24 16:40:19 by nofloren         ###   ########.fr       */
+/*   Updated: 2020/09/24 16:48:56 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int		ft_pork(t_shell *shell, char *path, char **env)
 {
 	pid_t pid;
 	pid_t wpid;
-//	int status;
+	int status;
 
 	pid = fork();
 	process = pid;
@@ -37,13 +37,13 @@ int		ft_pork(t_shell *shell, char *path, char **env)
 	{
 		if (execve(s2, &shell->list_arg->arg[shell->j], env) == -1)
 		{
-			shell->flag_exit = WEXITSTATUS(shell->status);
-			exit (WEXITSTATUS(shell->status));
+			shell->flag_exit = WEXITSTATUS(status);
+			exit (WEXITSTATUS(status));
 		}
 	}
 	else if (pid < 0)
 		perror("lsh");
 	else
-		wpid = waitpid(pid, &shell->status, WUNTRACED);
-	return (WEXITSTATUS(shell->status));
+		wpid = waitpid(pid, &status, WUNTRACED);
+	return (WEXITSTATUS(status));
 }

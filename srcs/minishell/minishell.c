@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/07 15:46:34 by nofloren          #+#    #+#             */
-/*   Updated: 2020/09/24 13:09:57 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/09/24 20:31:49 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
-
 
 int 	ft_cout_mas(char **env)
 {
@@ -96,7 +94,6 @@ void	ft_list_create(t_list **list_env, char **env)
 		ft_lstadd_back(list_env, ft_lstnew2("OLDPWD"));
 	}
 	free(path);
-	
 }
 
 char		**make_str(t_list **list_env, int size)
@@ -146,24 +143,23 @@ void	ft_shell_init(t_shell *shell)
 int		ft_what_command(t_shell *shell)
 {
 	if ((ft_strcmp(shell->list_arg->arg[shell->j], "export")) == 0)
-		return (1);			
+		return (1);
 	else if ((ft_strcmp(shell->list_arg->arg[shell->j], "cd")) == 0)
-		return (1);	
+		return (1);
 	else if ((ft_strcmp(shell->list_arg->arg[shell->j], "pwd")) == 0)
-		return (1);	
+		return (1);
 	else if ((ft_strcmp(shell->list_arg->arg[shell->j], "env")) == 0)
-		return (1);	
+		return (1);
 	else if ((ft_strcmp(shell->list_arg->arg[shell->j], "echo")) == 0)
-		return (1);	
+		return (1);
 	else if ((ft_strcmp(shell->list_arg->arg[shell->j], "$?")) == 0)
-		return (1);	
+		return (1);
 	else if ((ft_strcmp(shell->list_arg->arg[shell->j], "exit")) == 0)
-		return (1);	
+		return (1);
 	else if ((ft_strcmp(shell->list_arg->arg[shell->j], "unset")) == 0)
 		return (1);
 	else
-		return (0);	
-	
+		return (0);
 }
 
 void command_minishell(t_shell *shell)
@@ -215,16 +211,15 @@ int	main(int argc, char **argv, char **env)
 		while (shell.list_arg)
 		{
 			shell.j = 0;
-			ft_parse_list(shell.list_arg, shell.lst_before_export, shell.list_env); 
+			ft_parse_list(shell.list_arg, shell.lst_before_export, shell.list_env);
 			ft_add_list_before_export(&shell);
 			if (shell.list_arg->arg[shell.j])
 			{
-				if (shell.list_arg->flag_pipe == 1 && shell.list_arg->next->arg[0])
+				if (shell.list_arg->flag_pipe == 1 || shell.list_arg->flag_redir_one == 1 || shell.list_arg->flag_redir_two == 1)
 					ft_make_with_pipe(&shell);
 				else
 					command_minishell(&shell);
 			}
-			
 			shell.list_arg = shell.list_arg->next;
 		}
 		dup2(shell.savestdin, 0);
