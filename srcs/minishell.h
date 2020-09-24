@@ -6,7 +6,7 @@
 /*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/05 12:06:51 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/09/24 12:48:24 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/09/24 13:13:12 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@
 # include "parser/parser.h"
 
 
-pid_t process;
+
+
 typedef struct  s_shell
 {
 	t_list *lst_before_export;
@@ -36,11 +37,13 @@ typedef struct  s_shell
 	int j;
 	int flag_exit;
 	int flag_cd;
-	int fd1[2];
-	int fd2[2];
-
+	int fd[2];
+	int savestdin;
+	int sevestdout;
+	int flag_redirect;
+	int status;
 }               t_shell;
-
+pid_t process;
 void ft_singnal();
 void	ft_print_name();
 int		ft_check_name(char *str, char check);
@@ -59,4 +62,10 @@ void 		ft_list_clear_before(t_list **list_before_export);
 int		ft_check_list_for_export(t_shell *shell, t_list **list, char *str);
 int	ft_unset(char **str, t_list **list);
 int		ft_pork(t_shell *shell, char *path, char **env);
+int   ft_read_info(t_shell *shell);
+void ft_execve(t_shell *shell, char *path, char **env);
+int    ft_make_with_pipe(t_shell *shell);
+void command_minishell(t_shell *shell);
+int		ft_what_command(t_shell *shell);
+
 #endif

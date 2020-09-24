@@ -6,7 +6,7 @@
 /*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/07 15:46:34 by nofloren          #+#    #+#             */
-/*   Updated: 2020/09/23 17:50:46 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/09/24 13:09:57 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,80 +130,105 @@ void	ft_print_name()
 	ft_putstr_fd("\e[32m > \e[0m", 1);
 }
 
+void	ft_shell_init(t_shell *shell)
+{
+	shell->lst_before_export = NULL;
+	shell->list_env = NULL;
+	shell->tmp_arg = NULL;
+	shell->list_arg = NULL;
+	shell->flag_exit = 0;
+	shell->flag_cd = 1;
+	shell->savestdin = dup(0);
+	shell->sevestdout = dup(1);
+	shell->flag_redirect = 0;
+}
+
+int		ft_what_command(t_shell *shell)
+{
+	if ((ft_strcmp(shell->list_arg->arg[shell->j], "export")) == 0)
+		return (1);			
+	else if ((ft_strcmp(shell->list_arg->arg[shell->j], "cd")) == 0)
+		return (1);	
+	else if ((ft_strcmp(shell->list_arg->arg[shell->j], "pwd")) == 0)
+		return (1);	
+	else if ((ft_strcmp(shell->list_arg->arg[shell->j], "env")) == 0)
+		return (1);	
+	else if ((ft_strcmp(shell->list_arg->arg[shell->j], "echo")) == 0)
+		return (1);	
+	else if ((ft_strcmp(shell->list_arg->arg[shell->j], "$?")) == 0)
+		return (1);	
+	else if ((ft_strcmp(shell->list_arg->arg[shell->j], "exit")) == 0)
+		return (1);	
+	else if ((ft_strcmp(shell->list_arg->arg[shell->j], "unset")) == 0)
+		return (1);
+	else
+		return (0);	
+	
+}
+
+void command_minishell(t_shell *shell)
+{
+	if ((ft_strcmp(shell->list_arg->arg[shell->j], "export")) == 0)
+		ft_command_export(shell);				
+	else if ((ft_strcmp(shell->list_arg->arg[shell->j], "cd")) == 0)
+		ft_command_cd(shell);
+	else if ((ft_strcmp(shell->list_arg->arg[shell->j], "pwd")) == 0)
+	{
+		ft_putstr_fd(getcwd(NULL, 0), 1);
+		write(1, "\n", 1);
+	}
+	else if ((ft_strcmp(shell->list_arg->arg[shell->j], "env")) == 0)
+		ft_command_env(shell);
+	else if ((ft_strcmp(shell->list_arg->arg[shell->j], "echo")) == 0)
+		ft_command_echo(shell);
+	else if ((ft_strcmp(shell->list_arg->arg[shell->j], "$?")) == 0)
+	{
+		ft_putstr_fd("minishell: ", 2);
+		ft_putnbr_fd(shell->flag_exit, 2);
+		ft_putendl_fd(": command not found", 2);
+	}
+	else if ((ft_strcmp(shell->list_arg->arg[shell->j], "exit")) == 0)
+	{
+		ft_putendl_fd("exit", 2);
+		if (shell->list_arg->arg[shell->j])
+			shell->flag_exit = ft_atoi(shell->list_arg->arg[shell->j + 1]);
+		exit(shell->flag_exit);
+	}
+	else if ((ft_strcmp(shell->list_arg->arg[shell->j], "unset")) == 0)
+		ft_command_unset(shell);
+	else
+		ft_command_bash(shell);
+}
+
 int	main(int argc, char **argv, char **env)
 { 
 	t_shell shell;
-	char *line;
-	int k;
 	
-	line = NULL;
-	shell.lst_before_export = NULL;
-	shell.list_env = NULL;
-	shell.tmp_arg = NULL;
-	shell.list_arg = NULL;
-	shell.flag_exit = 0;
-	shell.flag_cd = 1;
-	process = 0;
-
+	ft_shell_init(&shell);
 	ft_list_create(&shell.list_env, env);
 	ft_print_name();
 	ft_singnal();
 	while (1)
 	{
-		k = ft_get_next_line(0, &line);
-		if (!(ft_parse_line(shell.lst_before_export, shell.list_env, &shell.list_arg, line)))
-		{
-			ft_print_name();
+		if (!ft_read_info(&shell))
 			continue;
-		}
-		if (!k)
-		{
-			write(1, "exit\n",5);
-			exit(0);
-		}
-		shell.tmp_arg = shell.list_arg;
-		free(line);
-		line = NULL;
 		while (shell.list_arg)
 		{
 			shell.j = 0;
-			ft_parse_list(shell.list_arg, shell.lst_before_export, shell.list_env);
+			ft_parse_list(shell.list_arg, shell.lst_before_export, shell.list_env); 
 			ft_add_list_before_export(&shell);
 			if (shell.list_arg->arg[shell.j])
 			{
-				if ((ft_strcmp(shell.list_arg->arg[shell.j], "export")) == 0)
-					ft_command_export(&shell);				
-				else if ((ft_strcmp(shell.list_arg->arg[shell.j], "cd")) == 0)
-					ft_command_cd(&shell);
-				else if ((ft_strcmp(shell.list_arg->arg[shell.j], "pwd")) == 0)
-				{
-					ft_putstr_fd(getcwd(NULL, 0), 1);
-					write(1, "\n", 1);
-				}
-				else if ((ft_strcmp(shell.list_arg->arg[shell.j], "env")) == 0)
-					ft_command_env(&shell);
-				else if ((ft_strcmp(shell.list_arg->arg[shell.j], "echo")) == 0)
-					ft_command_echo(&shell);
-				else if ((ft_strcmp(shell.list_arg->arg[shell.j], "$?")) == 0)
-				{
-					ft_putstr_fd("minishell: ", 2);
-					ft_putnbr_fd(shell.flag_exit, 2);
-					ft_putendl_fd(": command not found", 2);
-				}
-				else if ((ft_strcmp(shell.list_arg->arg[shell.j], "exit")) == 0)
-				{
-					ft_putendl_fd("exit", 2);
-					if (shell.list_arg->arg[shell.j])
-						shell.flag_exit = ft_atoi(shell.list_arg->arg[shell.j + 1]);
-					exit(shell.flag_exit);
-				}
-				else if ((ft_strcmp(shell.list_arg->arg[shell.j], "unset")) == 0)
-					ft_command_unset(&shell);
+				if (shell.list_arg->flag_pipe == 1 && shell.list_arg->next->arg[0])
+					ft_make_with_pipe(&shell);
 				else
-					ft_command_bash(&shell);
+					command_minishell(&shell);
 			}
-			shell.list_arg = shell.list_arg->next;	
+			
+			shell.list_arg = shell.list_arg->next;
 		}
+		dup2(shell.savestdin, 0);
+		dup2(shell.sevestdout, 1);
 		ft_print_name();
 		ft_clear_lst(&shell.tmp_arg);
 	}
