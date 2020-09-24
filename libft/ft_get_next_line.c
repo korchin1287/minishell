@@ -6,37 +6,52 @@
 /*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/04 14:30:49 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/08/26 11:24:33 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/09/23 15:23:08 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft/libft.h"
 
-int				ft_get_next_line(int fd, char **line)
+static char			*join(char **line, char *buf, int *read_size)
+{
+	char *tmp;
+	char *c;
+
+	tmp = *line;
+	c = buf;
+	if (*read_size == 0 && buf[0] != '\0')
+	{
+		(*read_size)++;
+		c = "\0";
+	}
+	if ((*line = ft_strjoin(*line, c)) == NULL)
+	{
+		free(tmp);
+		return (NULL);
+	}
+	free(tmp);
+	return (*line);
+}
+
+int					ft_get_next_line(int fd, char **line)
 {
 	char		buf[2];
 	int			flag;
-	char		*tmp;
 	int			read_size;
 
 	flag = 1;
 	if ((*line = ft_strdup("")) == NULL)
 		return (-1);
-	while (flag == 1 && (read_size = read(fd, buf, 1)))
+	ft_bzero(buf, 1);
+	while (flag == 1 && ((read_size = read(fd, buf, 1)) || buf[0] != '\0'))
 	{
-		buf[read_size] = '\0';
 		if (buf[0] == '\n')
 		{
 			buf[0] = '\0';
 			flag = 0;
 		}
-		tmp = *line;
-		if ((*line = ft_strjoin(*line, buf)) == NULL)
-		{
-			free(tmp);
+		if (join(line, buf, &read_size) == NULL)
 			return (-1);
-		}
-		free(tmp);
 	}
 	return (read_size);
 }

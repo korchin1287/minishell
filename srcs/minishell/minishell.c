@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/07 15:46:34 by nofloren          #+#    #+#             */
-/*   Updated: 2020/09/23 20:22:37 by nofloren         ###   ########.fr       */
+/*   Updated: 2020/09/24 13:09:57 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,10 +72,13 @@ t_list	*ft_lstnew2(char *content)
 
 void	ft_list_create(t_list **list_env, char **env)
 {
-	int i;
-	char *tmp;
-	char *path;
+	int		i;
+	int		flag;
+	char	*tmp;
+	char	*path;
+	char	*old;
 
+	flag = 0;
 	path = getcwd(NULL, 0);
 	path = ft_strjoin(":", path);
 	i = 0;
@@ -83,10 +86,17 @@ void	ft_list_create(t_list **list_env, char **env)
 	{
 		if (ft_strncmp("PATH=", env[i], 5) == 0)
 			env[i] = ft_strjoin(env[i], path);
+		if ((ft_strcmp("OLDPWD", env[i]) == 0) || (ft_strncmp("OLDPWD=", env[i], 7)))
+			flag = 1;
 		ft_lstadd_back(list_env, ft_lstnew2(env[i]));
 		i++;
 	}
+	if (!flag)
+	{
+		ft_lstadd_back(list_env, ft_lstnew2("OLDPWD"));
+	}
 	free(path);
+	
 }
 
 char		**make_str(t_list **list_env, int size)

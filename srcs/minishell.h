@@ -6,7 +6,7 @@
 /*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/05 12:06:51 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/09/24 16:35:10 by nofloren         ###   ########.fr       */
+/*   Updated: 2020/09/24 16:40:22 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef struct  s_shell
 	t_list *list_env;
 	t_list_arg *list_arg;
 	t_list_arg *tmp_arg;
+	char	*HOME;
 	int j;
 	int flag_exit;
 	int flag_cd;
@@ -42,9 +43,10 @@ typedef struct  s_shell
 	int flag_redirect;
 	int status;
 }               t_shell;
-
+pid_t process;
 void ft_singnal();
 void	ft_print_name();
+int		ft_check_name(char *str, char check);
 void ft_add_list_before_export(t_shell *shell);
 t_list	*ft_lstnew2(char *content);
 void    ft_command_export(t_shell *shell);

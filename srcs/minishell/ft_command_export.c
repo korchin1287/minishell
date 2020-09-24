@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_command_export.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/18 16:26:17 by nofloren          #+#    #+#             */
-/*   Updated: 2020/09/21 15:12:17 by nofloren         ###   ########.fr       */
+/*   Updated: 2020/09/24 12:47:23 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,23 @@ int	ft_add_env_from_export(t_shell *shell)
 	return (0);
 }
 
+int		ft_check_name(char *str, char check)
+{
+	int i;
+	int check_before;
+
+	i = 0;
+	check_before = ft_strlen_3(str, check);
+	if (!ft_isalpha(str[i]))
+		return (0);
+	while (str[i] != '\0' && i < check_before)
+	{
+		if (!ft_isalnum(str[i]))
+			return (0);
+		i++;
+	}
+	return (1);
+}
 void    ft_command_export(t_shell *shell)
 {
 	shell->j++;
@@ -98,7 +115,10 @@ void    ft_command_export(t_shell *shell)
 		ft_print_export(shell);
 	while (tmp[shell->j])
 	{
-		if (shell->list_arg->flag_disable_char == 0 && ft_isalpha(tmp[shell->j][0]))
+		int check;
+
+		check = ft_check_name(tmp[shell->j], '=');
+		if (shell->list_arg->flag_disable_char == 0 && check)
 		{
 			if (!ft_check_list_for_export(shell, &shell->list_env, tmp[shell->j]))
 			{
@@ -106,7 +126,7 @@ void    ft_command_export(t_shell *shell)
 					ft_lstadd_back(&shell->list_env, ft_lstnew2(tmp[shell->j]));
 			}
 		}
-		else if (!ft_isalpha(tmp[shell->j][0] && shell->list_arg->flag_disable_char != 0))
+		else if (!check || shell->list_arg->flag_disable_char)
 		{
 			ft_putstr_fd("minishell: ", 2);
 			ft_putstr_fd("export: \'", 2);
