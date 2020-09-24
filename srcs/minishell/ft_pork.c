@@ -6,7 +6,7 @@
 /*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/08 17:01:56 by nofloren          #+#    #+#             */
-/*   Updated: 2020/09/23 19:57:08 by nofloren         ###   ########.fr       */
+/*   Updated: 2020/09/24 16:35:25 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int		ft_pork(t_shell *shell, char *path, char **env)
 //	int status;
 
 	pid = fork();
+	process = pid;
 	char *s2 = ft_strjoin(path, "/");
 	s2 = ft_strjoin(s2, shell->list_arg->arg[shell->j]);
 	if (pid == 0)

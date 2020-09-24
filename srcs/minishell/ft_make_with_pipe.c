@@ -6,7 +6,7 @@
 /*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/23 17:31:44 by nofloren          #+#    #+#             */
-/*   Updated: 2020/09/23 20:46:01 by nofloren         ###   ########.fr       */
+/*   Updated: 2020/09/24 16:35:34 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int    ft_make_with_pipe(t_shell *shell)
 	shell->flag_redirect = 1;
 	pipe(shell->fd);
 	pid = fork();
+	process = pid;
 	if (pid == 0)
 	{
 		close (shell->fd[0]);
