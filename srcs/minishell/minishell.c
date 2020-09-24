@@ -6,7 +6,7 @@
 /*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/07 15:46:34 by nofloren          #+#    #+#             */
-/*   Updated: 2020/09/21 23:14:16 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/09/23 17:50:46 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,10 +72,13 @@ t_list	*ft_lstnew2(char *content)
 
 void	ft_list_create(t_list **list_env, char **env)
 {
-	int i;
-	char *tmp;
-	char *path;
+	int		i;
+	int		flag;
+	char	*tmp;
+	char	*path;
+	char	*old;
 
+	flag = 0;
 	path = getcwd(NULL, 0);
 	path = ft_strjoin(":", path);
 	i = 0;
@@ -83,10 +86,17 @@ void	ft_list_create(t_list **list_env, char **env)
 	{
 		if (ft_strncmp("PATH=", env[i], 5) == 0)
 			env[i] = ft_strjoin(env[i], path);
+		if ((ft_strcmp("OLDPWD", env[i]) == 0) || (ft_strncmp("OLDPWD=", env[i], 7)))
+			flag = 1;
 		ft_lstadd_back(list_env, ft_lstnew2(env[i]));
 		i++;
 	}
+	if (!flag)
+	{
+		ft_lstadd_back(list_env, ft_lstnew2("OLDPWD"));
+	}
 	free(path);
+	
 }
 
 char		**make_str(t_list **list_env, int size)
@@ -140,22 +150,20 @@ int	main(int argc, char **argv, char **env)
 	ft_singnal();
 	while (1)
 	{
-		if ((k = (ft_get_next_line(0, &line)) > 0))
+		k = ft_get_next_line(0, &line);
+		if (!(ft_parse_line(shell.lst_before_export, shell.list_env, &shell.list_arg, line)))
 		{
-			if (!(ft_parse_line(shell.lst_before_export, shell.list_env, &shell.list_arg, line)))
-			{
-				ft_print_name();
-				continue;
-			}
-			shell.tmp_arg = shell.list_arg;
-			free(line);
-			line = NULL;
+			ft_print_name();
+			continue;
 		}
-		if (k == 0)
+		if (!k)
 		{
-			write(1, "exit\n", 5);
+			write(1, "exit\n",5);
 			exit(0);
 		}
+		shell.tmp_arg = shell.list_arg;
+		free(line);
+		line = NULL;
 		while (shell.list_arg)
 		{
 			shell.j = 0;

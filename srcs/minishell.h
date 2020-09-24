@@ -6,7 +6,7 @@
 /*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/05 12:06:51 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/09/21 23:06:50 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/09/24 12:48:24 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ typedef struct  s_shell
 	t_list *list_env;
 	t_list_arg *list_arg;
 	t_list_arg *tmp_arg;
+	char	*HOME;
 	int j;
 	int flag_exit;
 	int flag_cd;
@@ -42,6 +43,7 @@ typedef struct  s_shell
 
 void ft_singnal();
 void	ft_print_name();
+int		ft_check_name(char *str, char check);
 void ft_add_list_before_export(t_shell *shell);
 t_list	*ft_lstnew2(char *content);
 void    ft_command_export(t_shell *shell);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_command_unset.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/18 18:11:39 by nofloren          #+#    #+#             */
-/*   Updated: 2020/09/20 16:37:17 by nofloren         ###   ########.fr       */
+/*   Updated: 2020/09/24 13:04:28 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ int	ft_unset(char **str, t_list **list)
 	t_list *tmp;
 	t_list *tmp_2;
 	int j;
+	int check;
 
 	j = 0;
 	if (!*list)
@@ -24,9 +25,9 @@ int	ft_unset(char **str, t_list **list)
 	while (str[j])
 	{
 		int count = ft_strlen_3(str[j], '=');
-
+		check = ft_check_name(str[j], '\0');
 		tmp = *list;
-		if (tmp && ft_strnstr(tmp->content, str[j], count))
+		if (tmp && ft_strnstr(tmp->content, str[j], count) && check)
 		{
 			if (tmp->next)
 				*list = tmp->next;
@@ -35,6 +36,12 @@ int	ft_unset(char **str, t_list **list)
 			free(tmp->content);
 			free(tmp);
 			break ;
+		}
+		else if (!check)
+		{
+			write(2, "minishell: unset: `", 20);
+			ft_putstr_fd(str[j], 2);
+			write(2, "': not a valid identifier\n", 27);
 		}
 		else if (tmp->next)
 		{

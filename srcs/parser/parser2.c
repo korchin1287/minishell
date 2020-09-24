@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/17 10:08:03 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/09/20 15:45:04 by nofloren         ###   ########.fr       */
+/*   Updated: 2020/09/23 16:03:53 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,8 +181,8 @@ void ft_parse_arg_loop_list(t_data *data, char *str, char *tmp, int *i)
 		if (str[*i] == '\\' && str[*i + 1] != '\0')
 		{
 			*i += 1;
-			if (str[*i] == '=')
-				(*data->list)->flag_disable_char = 1;
+			if (str[*i] == '=' && ft_check_cmd(data->arg_list) && ft_search_char_equal_before_space_or_qoute(str, *i, 0))
+				(*data->list)->flag_disable_char = ft_size_list(data->arg_list) + 1;
 			tmp[l++] = str[(*i)++];
 		}
 		else if (str[*i] == '~' && (str[*i + 1] == '\0' || str[*i + 1] == ' '||
