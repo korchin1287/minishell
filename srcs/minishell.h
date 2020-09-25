@@ -6,7 +6,7 @@
 /*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/05 12:06:51 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/09/24 19:10:30 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/09/25 15:37:32 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,14 @@
 # include <errno.h>
 # include <stdio.h>
 # include <signal.h>
+# include <fcntl.h>
 # include <dirent.h>
 # include <unistd.h>
 # include "stdio.h"
 # include "parser/parser.h"
 
 
-
+pid_t process;
 
 typedef struct  s_shell
 {

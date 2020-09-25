@@ -6,7 +6,7 @@
 /*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/17 10:08:03 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/09/24 21:18:47 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/09/25 16:15:50 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -256,9 +256,25 @@ char 		**ft_parse_list_line(t_list *lst_before_export, t_list *list_env, t_list_
 void	ft_parse_list(t_list_arg *list, t_list *lst_before_export, t_list *list_env)
 {
 	int i;
+	t_list_arg *tmp;
 
 	i = -1;
+	tmp = list->next;
 	list->arg = ft_parse_list_line(lst_before_export, list_env, &list, list->arg[0]);
+	while (tmp)
+	{
+		i = -1;
+		while (tmp->arg[++i])
+		{
+			if ((tmp->arg[i] = ft_strtrim(tmp->arg[i], " ")) == NULL)
+			{
+				write(2, "malloc error\n", 14);
+				exit(1);
+			}
+		}
+		tmp = tmp->next;
+	}
+	
 	// while (list)
 	// {
 	// 	i = -1;
