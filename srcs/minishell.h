@@ -6,7 +6,7 @@
 /*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/05 12:06:51 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/09/25 15:37:32 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/09/25 16:20:35 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,5 +67,6 @@ void ft_execve(t_shell *shell, char *path, char **env);
 int    ft_make_with_pipe(t_shell *shell);
 void command_minishell(t_shell *shell);
 int		ft_what_command(t_shell *shell);
+int    ft_make_with_left_redir(t_shell *shell);
 
 #endif
