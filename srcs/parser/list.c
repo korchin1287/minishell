@@ -6,7 +6,7 @@
 /*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/13 12:45:04 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/09/22 10:57:36 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/09/24 20:19:17 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ void 		ft_clear_list(t_tmp_list **head)
 {
 	t_tmp_list *tmp;
 
-	
 	while (*head)
 	{
 		tmp = *head;

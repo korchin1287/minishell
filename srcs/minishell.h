@@ -6,7 +6,7 @@
 /*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/05 12:06:51 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/09/24 13:13:12 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/09/24 19:10:30 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ t_list	*ft_lstnew2(char *content);
 void    ft_command_export(t_shell *shell);
 char		**make_str(t_list **list_env, int size);
 char 	**ft_sort_mass(char **tmp);
-size_t	ft_strlen_3(const char *str, char c);
 void    ft_command_cd(t_shell *shell);
 void    ft_command_env(t_shell *shell);
 void    ft_command_echo(t_shell *shell);

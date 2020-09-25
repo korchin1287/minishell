@@ -6,7 +6,7 @@
 /*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/10 16:28:59 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/09/23 16:39:45 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/09/24 19:11:12 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ int	ft_check_char_qual(t_data *data, char *str, int k, char flag);
 size_t		ft_count_dollar(const char *str);
 int			ft_check_cmd(t_tmp_list *list);
 int			ft_size_list(t_tmp_list *start);
-int			ft_len_dollars(char *str, t_list *lst_before_export, t_list *list_env, int k);
+int			ft_len_dollars(char *str, t_list *lst_bfe, t_list *list_env, int k);
 int     	ft_check_arg(t_data *data, char *str, char c, int *k);
 char		*ft_check_close_qoutes(t_data *data, char *str, int *i);
 char		**make_map(t_tmp_list **map, int size);
@@ -101,6 +101,7 @@ int			ft_dollar(t_data *data, char *str, char *out, int *l);
 t_list_arg	*ft_add_lst(t_data *data, t_tmp_list *tmp_list, char **str);
 void 		ft_clear_lst(t_list_arg **head);
 void		ft_add_lst_end(t_list_arg **start, t_list_arg *new);
+char		*ft_check_doll(char *str, t_list *lst, int count);
 char 		**ft_parse_line(t_list *lst_before_export, t_list *list_env, t_list_arg **list, char *line);
 
 t_tmp_list	*ft_add(t_data *data, char *str);

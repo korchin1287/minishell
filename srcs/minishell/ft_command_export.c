@@ -6,7 +6,7 @@
 /*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/18 16:26:17 by nofloren          #+#    #+#             */
-/*   Updated: 2020/09/24 12:47:23 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/09/24 20:29:53 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,11 +92,11 @@ int		ft_check_name(char *str, char check)
 
 	i = 0;
 	check_before = ft_strlen_3(str, check);
-	if (!ft_isalpha(str[i]))
+	if (!ft_isalpha(str[i]) && str[i] != '_')
 		return (0);
 	while (str[i] != '\0' && i < check_before)
 	{
-		if (!ft_isalnum(str[i]))
+		if (!ft_isalnum(str[i]) && str[i] != '_')
 			return (0);
 		i++;
 	}

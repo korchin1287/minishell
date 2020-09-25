@@ -6,7 +6,7 @@
 /*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/17 10:08:03 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/09/23 16:03:53 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/09/24 21:18:47 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,9 +103,9 @@ int	ft_check_char_qual(t_data *data, char *str, int k, char flag)
 	export = ft_check_cmd(data->arg_list); 
 	while (str[--i] != ' ' && i >=0)
 	{
-		if (!ft_isalnum(str[i]) && str[i] != '_' && export != 0)
+		if (!ft_isalnum(str[i]) && str[i] != '_' && export)
 			return (0);
-		if (!ft_isalnum(str[i]) && str[i] != '_' && (str[i] != '\'') && str[i] != '\"' && export == 0)
+		if (!ft_isalnum(str[i]) && str[i] != '_' && str[i] != '\'' && str[i] != '\"' && export == 0)
 			return (0);
 		if (str[i] == '\'' && str[i] != flag)
 			return (0);
@@ -120,7 +120,6 @@ int	ft_check_char_qual(t_data *data, char *str, int k, char flag)
 			return (0);
 	if (str[i + 1] == '\"' && str[i + 1] != flag)
 			return (0);
-	
 	return 1;	
 }
 

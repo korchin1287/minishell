@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+         #
+#    By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/05/12 18:43:36 by ndreadno          #+#    #+#              #
-#    Updated: 2020/09/23 18:54:31 by nofloren         ###   ########.fr        #
+#    Updated: 2020/09/24 19:12:10 by ndreadno         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ SRCS = srcs/minishell/ft_pork.c srcs/minishell/minishell.c \
 
 SRCS_PARS = srcs/parser/parser.c srcs/parser/parser2.c srcs/parser/list.c \
 	srcs/parser/open_close_qoutes.c srcs/parser/check_arg.c \
-	srcs/parser/dollar.c
+	srcs/parser/dollar.c srcs/parser/env_dollar.c
 OBJ = $(SRCS:.c=.o)
 OBJ_PARS = $(SRCS_PARS:.c=.o)
 #OBJ  = srcs/minishell.o srcs/parser.o srcs/ft_pork.o

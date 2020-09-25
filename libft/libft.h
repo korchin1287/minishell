@@ -6,7 +6,7 @@
 /*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/12 13:28:21 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/09/19 14:06:17 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/09/24 18:34:08 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ t_list      *ft_lstnew(void *content);
 t_list            *ft_lstlast(t_list *lst);
 t_list            *ft_lstmap(t_list *lst, void *(*f)(void*), void (*del)(void*));
 size_t	ft_strlen(const char *str);
+size_t	ft_strlen_3(const char *str, char c);
 size_t	ft_strlcat(char *dst, const char *src, size_t size);
 size_t	ft_strlcpy(char *dst, const char *src, size_t size);
 
