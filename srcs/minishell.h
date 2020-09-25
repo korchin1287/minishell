@@ -6,7 +6,7 @@
 /*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/05 12:06:51 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/09/24 18:59:34 by nofloren         ###   ########.fr       */
+/*   Updated: 2020/09/25 15:37:00 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,5 +68,6 @@ void ft_execve(t_shell *shell, char *path, char **env);
 int    ft_make_with_pipe(t_shell *shell);
 void command_minishell(t_shell *shell);
 int		ft_what_command(t_shell *shell);
+int    ft_make_with_left_redir(t_shell *shell);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/07 15:46:34 by nofloren          #+#    #+#             */
-/*   Updated: 2020/09/24 20:31:49 by nofloren         ###   ########.fr       */
+/*   Updated: 2020/09/25 16:12:16 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -217,8 +217,15 @@ int	main(int argc, char **argv, char **env)
 			{
 				if (shell.list_arg->flag_pipe == 1 || shell.list_arg->flag_redir_one == 1 || shell.list_arg->flag_redir_two == 1)
 					ft_make_with_pipe(&shell);
+				else if (shell.list_arg->flag_redir_one_left == 1)
+					ft_make_with_left_redir(&shell);
 				else
 					command_minishell(&shell);
+			}
+			if (shell.list_arg->flag_end == 1)
+			{
+				dup2(shell.savestdin, 0);
+				dup2(shell.sevestdout, 1);
 			}
 			shell.list_arg = shell.list_arg->next;
 		}
