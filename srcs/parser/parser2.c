@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/17 10:08:03 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/09/25 16:15:50 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/09/25 17:44:51 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -245,6 +245,10 @@ char 		**ft_parse_list_line(t_list *lst_before_export, t_list *list_env, t_list_
 			return NULL;
 		}
 		i = ft_space(str, i);
+	}
+	if (i == 0)
+	{
+		ft_add_end(&data.arg_list, ft_add(&data, ""));
 	}
 	i = ft_size_list(data.arg_list);
 	out = make_map(&data.arg_list, i);

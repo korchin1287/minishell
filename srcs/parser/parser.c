@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/08 12:47:52 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/09/19 14:04:02 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/09/25 17:28:44 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void ft_flag_add(t_data *data, t_tmp_list **new)
 	if (!*new)
 	{
 		*new = (t_tmp_list *)malloc(sizeof(t_tmp_list));
-		(*new)->str = NULL;
+		(*new)->str = ft_strdup("");
 		(*new)->next = NULL;
 	}
 	(*new)->flag_redir_one = data->parser.flag_redir_one;

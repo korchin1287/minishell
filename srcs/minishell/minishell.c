@@ -6,18 +6,18 @@
 /*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/07 15:46:34 by nofloren          #+#    #+#             */
-/*   Updated: 2020/09/25 16:12:16 by nofloren         ###   ########.fr       */
+/*   Updated: 2020/09/25 20:22:15 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int 	ft_cout_mas(char **env)
+int 	ft_cout_mas(char **str)
 {
 	int i;
 
 	i = 0;
-	while (env[i])
+	while (str[i])
 		i++;
 	return (i);
 }
@@ -53,6 +53,15 @@ char 	**ft_sort_mass(char **tmp)
 	return (tmp);
 }
 
+t_costl	*ft_lstlast3(t_costl *lst)
+{
+	if (!lst)
+		return (NULL);
+	while (lst->next)
+		lst = lst->next;
+	return (lst);
+}
+
 t_list	*ft_lstnew2(char *content)
 {
 	t_list *dst;
@@ -65,6 +74,34 @@ t_list	*ft_lstnew2(char *content)
 	}
 	else
 		return (NULL);
+	return (dst);
+}
+
+void	ft_lstadd_back3(t_costl **lst, t_costl *new)
+{
+	t_costl *dst;
+
+	if (!(*lst))
+	{
+		*lst = new;
+		return ;
+	}
+	dst = ft_lstlast3(*lst);
+	dst->next = new;
+}
+
+t_costl	*ft_lstnew3(char **content)
+{
+	t_costl *dst;
+
+	dst = (t_costl *)malloc(sizeof(t_costl));
+	if (dst)
+	{
+		dst->content = content;
+		dst->next = NULL;
+	}
+	else
+		exit (-1);
 	return (dst);
 }
 
@@ -125,6 +162,7 @@ void	ft_print_name()
 	minishell = ft_strjoin(minishell, "\e[0m");
 	ft_putstr_fd(minishell, 1);
 	ft_putstr_fd("\e[32m > \e[0m", 1);
+	free(minishell);
 }
 
 void	ft_shell_init(t_shell *shell)
@@ -133,6 +171,7 @@ void	ft_shell_init(t_shell *shell)
 	shell->list_env = NULL;
 	shell->tmp_arg = NULL;
 	shell->list_arg = NULL;
+	shell->costl = NULL;
 	shell->flag_exit = 0;
 	shell->flag_cd = 1;
 	shell->savestdin = dup(0);
@@ -208,12 +247,15 @@ int	main(int argc, char **argv, char **env)
 	{
 		if (!ft_read_info(&shell))
 			continue;
+		shell.j = 0;
 		while (shell.list_arg)
 		{
-			shell.j = 0;
+			if (shell.list_arg->flag_end == 1)
+				shell.j = 0;
 			ft_parse_list(shell.list_arg, shell.lst_before_export, shell.list_env);
 			ft_add_list_before_export(&shell);
-			if (shell.list_arg->arg[shell.j])
+			if (shell.list_arg->arg[shell.j] || (!shell.list_arg->arg[shell.j] && 
+				(shell.list_arg->flag_pipe == 1 || shell.list_arg->flag_redir_one == 1 || shell.list_arg->flag_redir_two == 1)))
 			{
 				if (shell.list_arg->flag_pipe == 1 || shell.list_arg->flag_redir_one == 1 || shell.list_arg->flag_redir_two == 1)
 					ft_make_with_pipe(&shell);

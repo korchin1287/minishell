@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/05 12:06:51 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/09/25 16:20:35 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/09/25 20:23:26 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,12 @@
 
 pid_t process;
 
+typedef struct	s_costl
+{
+	char **content;
+	struct s_costl *next;
+}				t_costl;
+
 typedef struct  s_shell
 {
 	t_list *lst_before_export;
@@ -43,6 +49,7 @@ typedef struct  s_shell
 	int sevestdout;
 	int flag_redirect;
 	int status;
+	t_costl *costl;
 }               t_shell;
 pid_t process;
 void ft_singnal();
@@ -68,5 +75,9 @@ int    ft_make_with_pipe(t_shell *shell);
 void command_minishell(t_shell *shell);
 int		ft_what_command(t_shell *shell);
 int    ft_make_with_left_redir(t_shell *shell);
+int 	ft_cout_mas(char **str);
+void	ft_lstadd_back3(t_costl **lst, t_costl *new);
+t_costl	*ft_lstnew3(char **content);
+t_costl	*ft_lstlast3(t_costl *lst);
 
 #endif
