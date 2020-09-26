@@ -6,11 +6,18 @@
 /*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/07 15:46:34 by nofloren          #+#    #+#             */
-/*   Updated: 2020/09/26 16:47:16 by nofloren         ###   ########.fr       */
+/*   Updated: 2020/09/26 18:09:56 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+void	ft_make_wexitstatus(t_shell *shell, int flag_exit)
+{
+	if (!ft_check_list_for_export(shell, &shell->lst_before_export, "?="))
+		ft_lstadd_back(&shell->lst_before_export, ft_lstnew2(ft_strjoin("?=", ft_itoa(flag_exit))));
+	shell->flag_exit = flag_exit;
+}
 
 int 	ft_cout_mas(char **str)
 {
@@ -232,7 +239,7 @@ void command_minishell(t_shell *shell)
 	{
 		ft_putendl_fd("exit", 2);
 		if (shell->list_arg->arg[shell->j])
-			shell->flag_exit = ft_atoi(shell->list_arg->arg[shell->j + 1]);
+			ft_make_wexitstatus(shell, ft_atoi(shell->list_arg->arg[shell->j + 1])) ;
 		exit(shell->flag_exit);
 	}
 	else if ((ft_strcmp(shell->list_arg->arg[shell->j], "unset")) == 0)

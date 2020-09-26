@@ -6,7 +6,7 @@
 /*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/08 17:01:56 by nofloren          #+#    #+#             */
-/*   Updated: 2020/09/25 19:14:41 by nofloren         ###   ########.fr       */
+/*   Updated: 2020/09/26 17:50:28 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ int		ft_pork(t_shell *shell, char *path, char **env)
 	{
 		if (execve(s2, &shell->list_arg->arg[shell->j], env) == -1)
 		{
-			shell->flag_exit = WEXITSTATUS(status);
+		//	shell->flag_exit = WEXITSTATUS(status);
+			ft_make_wexitstatus(shell, WEXITSTATUS(status));
 			exit (WEXITSTATUS(status));
 		}
 	}

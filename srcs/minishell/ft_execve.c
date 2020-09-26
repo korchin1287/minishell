@@ -6,7 +6,7 @@
 /*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/23 17:42:47 by nofloren          #+#    #+#             */
-/*   Updated: 2020/09/25 20:57:10 by nofloren         ###   ########.fr       */
+/*   Updated: 2020/09/26 17:50:36 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ void ft_execve(t_shell *shell, char *path, char **env)
 	s2 = ft_strjoin(s2, shell->list_arg->arg[shell->j]);
     if (execve(s2, &shell->list_arg->arg[shell->j], env) == -1)
 	{
-		shell->flag_exit = WEXITSTATUS(shell->status);
+	//	shell->flag_exit = WEXITSTATUS(shell->status);
+		ft_make_wexitstatus(shell, WEXITSTATUS(shell->status));
 		exit (WEXITSTATUS(shell->status));
 	}
 }

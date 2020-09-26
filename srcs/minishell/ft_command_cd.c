@@ -6,7 +6,7 @@
 /*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/18 17:05:52 by nofloren          #+#    #+#             */
-/*   Updated: 2020/09/26 16:41:33 by nofloren         ###   ########.fr       */
+/*   Updated: 2020/09/26 17:47:31 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,12 @@ void    ft_command_cd(t_shell *shell)
 	}
 	if (shell->list_arg->arg[shell->j] && (k = chdir(shell->list_arg->arg[shell->j])) == -1)
 	{
-		ft_putstr_fd("minishell: cd: ", 2);	ft_putstr_fd(shell->list_arg->arg[shell->j], 2);
+		ft_putstr_fd("minishell: cd: ", 2);	
+		ft_putstr_fd(shell->list_arg->arg[shell->j], 2);
 		ft_putstr_fd(": ", 2);
 		ft_putendl_fd(strerror(errno), 2);
-		shell->flag_exit = 1;
+		ft_make_wexitstatus(shell, 1);
+	
 	}
 	else
 	{
