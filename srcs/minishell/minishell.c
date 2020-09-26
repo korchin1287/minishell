@@ -6,7 +6,7 @@
 /*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/07 15:46:34 by nofloren          #+#    #+#             */
-/*   Updated: 2020/09/25 20:22:15 by nofloren         ###   ########.fr       */
+/*   Updated: 2020/09/26 16:47:16 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,11 +109,13 @@ void	ft_list_create(t_list **list_env, char **env)
 {
 	int		i;
 	int		flag;
+	int		flag_pwd;
 	char	*tmp;
 	char	*path;
 	char	*old;
 
 	flag = 0;
+	flag_pwd = 0;
 	path = getcwd(NULL, 0);
 	path = ft_strjoin(":", path);
 	i = 0;
@@ -123,9 +125,13 @@ void	ft_list_create(t_list **list_env, char **env)
 			env[i] = ft_strjoin(env[i], path);
 		if ((ft_strcmp("OLDPWD", env[i]) == 0) || (ft_strncmp("OLDPWD=", env[i], 7)))
 			flag = 1;
+		if (!(ft_strncmp(env[i], "PWD=", 4)))
+			flag_pwd = 1;
 		ft_lstadd_back(list_env, ft_lstnew2(env[i]));
 		i++;
 	}
+	if (!flag_pwd)
+		ft_lstadd_back(list_env, ft_lstnew2(ft_strjoin("PWD=", getcwd(NULL, 0))));
 	if (!flag)
 	{
 		ft_lstadd_back(list_env, ft_lstnew2("OLDPWD"));
@@ -238,7 +244,7 @@ void command_minishell(t_shell *shell)
 int	main(int argc, char **argv, char **env)
 { 
 	t_shell shell;
-	
+	process = 0;
 	ft_shell_init(&shell);
 	ft_list_create(&shell.list_env, env);
 	ft_print_name();
@@ -250,6 +256,11 @@ int	main(int argc, char **argv, char **env)
 		shell.j = 0;
 		while (shell.list_arg)
 		{
+			if (shell.costl)
+			{
+				free(shell.costl);
+				shell.costl = NULL;
+			}
 			if (shell.list_arg->flag_end == 1)
 				shell.j = 0;
 			ft_parse_list(shell.list_arg, shell.lst_before_export, shell.list_env);

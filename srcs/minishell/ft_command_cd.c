@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_command_cd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/18 17:05:52 by nofloren          #+#    #+#             */
-/*   Updated: 2020/09/23 15:44:30 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/09/26 16:41:33 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,15 +49,19 @@ void    ft_command_cd(t_shell *shell)
 		k = 0;
 		shell->flag_cd = 0;
 		tmp2 = shell->list_env;
+		int flag_pwd = 0;
 		while (tmp2)
 		{
 			if (!(ft_strncmp(tmp2->content, "PWD=", 4)))
 			{
 				tmp2->content = ft_strjoin("PWD=", getcwd(NULL, 0));
+				flag_pwd = 1;
 				break ;
 			}
 			tmp2 = tmp2->next;
 		}
+		if (flag_pwd == 0)
+			ft_lstadd_back(&shell->lst_before_export, ft_lstnew2(ft_strjoin("PWD=", getcwd(NULL, 0))));
 		k = 0;
 		tmp2 = shell->list_env;
 		int flagold = 0;
