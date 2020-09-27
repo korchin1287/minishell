@@ -6,7 +6,7 @@
 /*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 16:41:37 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/09/24 20:22:25 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/09/27 11:59:19 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ size_t	ft_count_dollar(const char *str)
 	while (str[i] != '\0')
 	{
 		k = 0;
-		if (!ft_isalpha(str[i]) && !ft_isdigit(str[i]) && str[i] != '_')
+		if (!ft_isalpha(str[i]) && !ft_isdigit(str[i]) && str[i] != '_' &&
+			str[i] != '?')
 			return (i);
 		i++;
 	}

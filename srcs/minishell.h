@@ -6,7 +6,7 @@
 /*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/05 12:06:51 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/09/27 17:23:23 by nofloren         ###   ########.fr       */
+/*   Updated: 2020/09/27 19:33:52 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,5 +80,7 @@ void	ft_lstadd_back3(t_costl **lst, t_costl *new);
 t_costl	*ft_lstnew3(char **content);
 t_costl	*ft_lstlast3(t_costl *lst);
 void	ft_exitstatus(t_shell *shell, int flag_exit);
+char		*ft_init_parse_line(t_shell *shell, t_data *data, char *line);
+char 		**ft_parse_line(t_shell *shell, char *line);
 
 #endif

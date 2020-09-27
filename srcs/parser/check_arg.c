@@ -6,7 +6,7 @@
 /*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/13 13:07:07 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/09/24 15:09:56 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/09/27 15:06:47 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,10 @@ int		ft_check_redirect(t_data *data, char *str, int l)
 		write(2, "minishell: syntax error near unexpected token `;'\n", 51);
 	else if (str[k] == '<' || str[i] == '<')
 		write(2, "minishell: syntax error near unexpected token `<'\n", 51);
+	else if (str[k] == '|' || str[i] == '|')
+		write(2, "minishell: syntax error near unexpected token `|'\n", 51);
 	return (str[k] == '\0' || str[i] == ';' || str[k] == ';' ||
-			str[i] == '<' ||
+			str[i] == '<' || str[i] == '|' || str[k] == '|' ||
 				str[k] == '<' || i > 2 ? 0 : i);
 }
 

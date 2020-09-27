@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_read_info.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/22 20:30:10 by nofloren          #+#    #+#             */
-/*   Updated: 2020/09/22 20:45:28 by nofloren         ###   ########.fr       */
+/*   Updated: 2020/09/27 13:54:24 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int   ft_read_info(t_shell *shell)
 	line = NULL;
 	if ((k = (ft_get_next_line(0, &line)) > 0))
 		{
-			if (!(ft_parse_line(shell->lst_before_export, shell->list_env, &shell->list_arg, line)))
+			if (!(ft_parse_line(shell, line)))
 			{
 				ft_print_name();
 				return (0);

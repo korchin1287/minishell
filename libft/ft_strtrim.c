@@ -6,7 +6,7 @@
 /*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/13 10:45:53 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/05/25 01:13:21 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/09/27 12:15:46 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,9 +82,9 @@ char			*ft_strtrim(char const *s1, char const *set)
 	i = ft_check(s1, set);
 	k = ft_check_reverse(len - 1, s1, set);
 	if (s1[i] != '\0')
-		dst = (char*)malloc(sizeof(*dst) * (len - (len - k + i) + 2));
+		dst = (char*)ft_malloc(sizeof(*dst), (len - (len - k + i) + 2));
 	else
-		dst = (char*)malloc(sizeof(*dst) * (1));
+		dst = (char*)ft_malloc(sizeof(*dst), (1));
 	if (dst == NULL)
 		return (NULL);
 	dst = ft_trim(s1, dst, i, k);

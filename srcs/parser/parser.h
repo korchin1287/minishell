@@ -6,7 +6,7 @@
 /*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/10 16:28:59 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/09/24 19:11:12 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/09/27 15:46:23 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ typedef struct s_data
 	t_list *env;
 	t_list_arg **list;
 	t_list *before_export;
+	char *out;
 }				t_data;
 
 int	ft_check_char_qual(t_data *data, char *str, int k, char flag);
@@ -85,12 +86,15 @@ int	ft_check_char_qual(t_data *data, char *str, int k, char flag);
 size_t		ft_count_dollar(const char *str);
 int			ft_check_cmd(t_tmp_list *list);
 int			ft_size_list(t_tmp_list *start);
+int			ft_len_arg(t_data *data, char *str, int *i);
+int			ft_parse_redirect_pipe(t_data *data, char *str, int len, int i);
+int			ft_condition_check(t_data *data, char *str, int *i, int flag_cond);
 int			ft_len_dollars(char *str, t_list *lst_bfe, t_list *list_env, int k);
 int     	ft_check_arg(t_data *data, char *str, char c, int *k);
 char		*ft_check_close_qoutes(t_data *data, char *str, int *i);
 char		**make_map(t_tmp_list **map, int size);
 void 		ft_flag_null(t_data *data);
-void		ft_init(t_data *data);
+void		ft_qoutes_null(t_data *data);
 void 		ft_clear_list(t_tmp_list **head);
 void		ft_check_open_qoutes(t_data *data, char *str, int *i);
 void		ft_add_end(t_tmp_list **start, t_tmp_list *new);
@@ -102,7 +106,8 @@ t_list_arg	*ft_add_lst(t_data *data, t_tmp_list *tmp_list, char **str);
 void 		ft_clear_lst(t_list_arg **head);
 void		ft_add_lst_end(t_list_arg **start, t_list_arg *new);
 char		*ft_check_doll(char *str, t_list *lst, int count);
-char 		**ft_parse_line(t_list *lst_before_export, t_list *list_env, t_list_arg **list, char *line);
+char		*ft_until_the_quote_is_closed(t_data *data, char *str, int *i);
+
 
 t_tmp_list	*ft_add(t_data *data, char *str);
 

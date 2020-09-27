@@ -6,7 +6,7 @@
 /*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/07 15:46:34 by nofloren          #+#    #+#             */
-/*   Updated: 2020/09/27 19:30:03 by nofloren         ###   ########.fr       */
+/*   Updated: 2020/09/27 19:45:49 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -231,8 +231,6 @@ int		ft_what_command(t_shell *shell)
 		return (1);
 	else if ((ft_strcmp(shell->list_arg->arg[shell->j], "echo")) == 0)
 		return (1);
-	else if ((ft_strcmp(shell->list_arg->arg[shell->j], "$?")) == 0)
-		return (1);
 	else if ((ft_strcmp(shell->list_arg->arg[shell->j], "exit")) == 0)
 		return (1);
 	else if ((ft_strcmp(shell->list_arg->arg[shell->j], "unset")) == 0)
@@ -257,12 +255,6 @@ void command_minishell(t_shell *shell)
 		ft_command_env(shell);
 	else if ((ft_strcmp(shell->list_arg->arg[shell->j], "echo")) == 0)
 		ft_command_echo(shell);
-	// else if ((ft_strcmp(shell->list_arg->arg[shell->j], "$?")) == 0)
-	// {
-	// 	ft_putstr_fd("minishell: ", 2);
-	// 	ft_putnbr_fd(shell->flag_exit, 2);
-	// 	ft_putendl_fd(": command not found", 2);
-	// }
 	else if ((ft_strcmp(shell->list_arg->arg[shell->j], "exit")) == 0)
 	{
 		ft_exit(shell);
