@@ -6,7 +6,7 @@
 /*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/05 12:06:51 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/09/26 18:08:00 by nofloren         ###   ########.fr       */
+/*   Updated: 2020/09/27 17:23:23 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,10 +67,10 @@ void    ft_command_unset(t_shell *shell);
 void    ft_command_bash(t_shell *shell);
 void 		ft_list_clear_before(t_list **list_before_export);
 int		ft_check_list_for_export(t_shell *shell, t_list **list, char *str);
-int	ft_unset(t_shell *shell, char **str, t_list **list);
+int ft_unset(t_shell *shell, char **str, t_list **list);
 int		ft_pork(t_shell *shell, char *path, char **env);
 int   ft_read_info(t_shell *shell);
-void ft_execve(t_shell *shell, char *path, char **env);
+int ft_execve(t_shell *shell, char *path, char **env);
 int    ft_make_with_pipe(t_shell *shell);
 void command_minishell(t_shell *shell);
 int		ft_what_command(t_shell *shell);
@@ -79,6 +79,6 @@ int 	ft_cout_mas(char **str);
 void	ft_lstadd_back3(t_costl **lst, t_costl *new);
 t_costl	*ft_lstnew3(char **content);
 t_costl	*ft_lstlast3(t_costl *lst);
-void	ft_make_wexitstatus(t_shell *shell, int flag_exit);
+void	ft_exitstatus(t_shell *shell, int flag_exit);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/18 18:18:12 by nofloren          #+#    #+#             */
-/*   Updated: 2020/09/26 17:15:59 by nofloren         ###   ########.fr       */
+/*   Updated: 2020/09/27 16:39:21 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void    ft_command_bash(t_shell *shell)
 			if ((ft_strcmp(shell->list_arg->arg[shell->j], entry->d_name)) == 0)
 			{
 				if (shell->list_arg->flag_pipe == 1)
-					ft_execve(shell, str_path[k], env);
+					shell->flag_exit = ft_execve(shell, str_path[k], env);
 				else
 					shell->flag_exit = ft_pork(shell, str_path[k], env);
 				flag2 = 1;
@@ -62,7 +62,7 @@ void    ft_command_bash(t_shell *shell)
 	{
 		path = shell->list_arg->arg[shell->j][0] == '.' ? "./" : ""; 
 		if (shell->list_arg->flag_pipe == 1)
-			ft_execve(shell, path, env);
+			shell->flag_exit = ft_execve(shell, path, env);
 		else
 			shell->flag_exit = ft_pork(shell, path, env);
 		if ((dir = opendir(shell->list_arg->arg[shell->j])))
@@ -70,6 +70,7 @@ void    ft_command_bash(t_shell *shell)
 			ft_putstr_fd("minishell: ", 2);
 			ft_putstr_fd(shell->list_arg->arg[shell->j], 2);
 			ft_putendl_fd(": is a directory", 2);
+			ft_exitstatus(shell, 126);
 		}
 		else if (shell->flag_exit == 127)
 		{
@@ -78,5 +79,6 @@ void    ft_command_bash(t_shell *shell)
 			ft_putendl_fd(": command not found", 2);
 		}
 	}
+	ft_exitstatus(shell, shell->flag_exit);
 	free(env);
 }
