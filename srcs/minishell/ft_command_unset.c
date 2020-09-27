@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_command_unset.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/18 18:11:39 by nofloren          #+#    #+#             */
-/*   Updated: 2020/09/24 13:04:28 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/09/26 18:07:50 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	ft_unset(char **str, t_list **list)
+int	ft_unset(t_shell *shell, char **str, t_list **list)
 {
 	t_list *tmp;
 	t_list *tmp_2;
@@ -42,6 +42,7 @@ int	ft_unset(char **str, t_list **list)
 			write(2, "minishell: unset: `", 20);
 			ft_putstr_fd(str[j], 2);
 			write(2, "': not a valid identifier\n", 27);
+			ft_make_wexitstatus(shell, 1);
 		}
 		else if (tmp->next)
 		{
@@ -67,6 +68,6 @@ int	ft_unset(char **str, t_list **list)
 void    ft_command_unset(t_shell *shell)
 {
     shell->j++;
-	ft_unset(&shell->list_arg->arg[shell->j], &shell->lst_before_export);
-	ft_unset(&shell->list_arg->arg[shell->j], &shell->list_env);
+	ft_unset(shell, &shell->list_arg->arg[shell->j], &shell->lst_before_export);
+	ft_unset(shell, &shell->list_arg->arg[shell->j], &shell->list_env);
 }

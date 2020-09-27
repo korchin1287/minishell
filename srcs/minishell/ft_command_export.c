@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_command_export.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/18 16:26:17 by nofloren          #+#    #+#             */
-/*   Updated: 2020/09/24 20:29:53 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/09/26 18:11:00 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int	ft_add_env_from_export(t_shell *shell)
 		if ((ft_strncmp(shell->list_arg->arg[shell->j], dst->content, ft_strlen_3(dst->content, '=')) == 0))
 		{
 			ft_lstadd_back(&shell->list_env, ft_lstnew2(dst->content));
-			ft_unset(&shell->list_arg->arg[shell->j], &shell->lst_before_export);
+			ft_unset(shell, &shell->list_arg->arg[shell->j], &shell->lst_before_export);
 			return (1);
 		}
 		dst = dst->next;					
@@ -132,6 +132,7 @@ void    ft_command_export(t_shell *shell)
 			ft_putstr_fd("export: \'", 2);
 			ft_putstr_fd(tmp[shell->j], 2);
 			ft_putendl_fd("\': not a valid identifier", 2);
+			ft_make_wexitstatus(shell, 1);
 		}
 		shell->j++;
 	}

@@ -6,7 +6,7 @@
 /*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/11 10:22:34 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/08/17 19:16:46 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/09/27 12:13:30 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char	*ft_strdup(const char *src)
 	char	*str;
 
 	i = 0;
-	str = (char*)malloc(sizeof(*str) * (ft_strlen(src) + 1));
+	str = (char*)ft_malloc(sizeof(*str), (ft_strlen(src) + 1));
 	if (str == NULL)
 	{
 		return (NULL);

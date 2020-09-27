@@ -3,188 +3,69 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/08 12:47:52 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/09/25 17:28:44 by nofloren         ###   ########.fr       */
+/*   Updated: 2020/09/27 15:50:43 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void ft_flag_add(t_data *data, t_tmp_list **new)
-{
-	if (!*new)
-	{
-		*new = (t_tmp_list *)malloc(sizeof(t_tmp_list));
-		(*new)->str = ft_strdup("");
-		(*new)->next = NULL;
-	}
-	(*new)->flag_redir_one = data->parser.flag_redir_one;
-	(*new)->flag_redir_two = data->parser.flag_redir_two;
-	(*new)->flag_redir_one_left = data->parser.flag_redir_one_left;
-	(*new)->flag_end = data->parser.flag_end;
-	(*new)->flag_pipe = data->parser.flag_pipe;
-	(*new)->flag_disable_char = data->parser.flag_disable_char;
-	(*new)->flag_disable_char = data->parser.flag_disable_dollar;
-}
-
-void ft_qoutes_null(t_data *data)
-{
-	data->parser.flag_close_quotes = 0;
-	data->parser.flag_open_quotes = 0;
-	data->parser.flag_single_quotes = 0;
-	data->parser.flag_double_quotes = 0;
-}
-
-void ft_flag_null(t_data *data)
-{
-	data->parser.flag_close_quotes = 0;
-	data->parser.flag_open_quotes = 0;
-	data->parser.flag_single_quotes = 0;
-	data->parser.flag_double_quotes = 0;
-	
-	data->parser.flag_redir_one = 0;
-	data->parser.flag_redir_two = 0;
-	data->parser.flag_redir_one_left = 0;
-	
-	data->parser.flag_end = 0;
-	data->parser.flag_pipe = 0;
-
-	data->parser.count_arg = 0;
-	data->parser.flag_disable_char = 0;
-	data->parser.flag_disable_dollar = 0;
-}
-
-int	ft_qoutes_line(t_data *data, char *tmp, char *str, int *l)
+int	ft_qoutes_line(t_data *data, char *str, int *l)
 {
 	char c;
 	int i;
 
 	i = 1;
 	c = str[0];
-	tmp[(*l)++] = str[0];
+	data->out[(*l)++] = str[0];
 	while (str[i] != c && str[i] != '\0')
-			tmp[(*l)++] = str[(i)++];
-	tmp[(*l)++] = str[(i)++];
+			data->out[(*l)++] = str[(i)++];
+	data->out[(*l)++] = str[(i)++];
 	return (i);
 }
-void ft_parse_arg_loop(t_data *data, char *str, char *tmp, int *i)
+
+void ft_parse_arg_loop(t_data *data, char *str, int *i)
 {
 	int		l;
 
 	l = 0;
-	while (str[*i] != '\0' && str[*i] != '>' && str[*i] != ';'
-		&& str[*i] != '|' && str[*i] != '<')
+	while (ft_condition_check(data, str, i, 1))
 	{
-		if (str[*i] == '\\' && str[*i + 1] != '\0' &&
-			(str[*i + 1] == '>' || str[*i + 1] == '<' ||
-				str[*i + 1] == '|' || str[*i + 1] == ';') &&
-					(str[*i - 1] != '\'' || str[*i - 1] != '\"'))
+		if (ft_condition_check(data, str, i, 0))
 		{
 			*i += 1;
-			tmp[l++] = str[(*i)++];
+			data->out[l++] = str[(*i)++];
 		}
 		else if (str[*i] == '\'' || str[*i] == '\"')
-			*i += ft_qoutes_line(data, tmp, &str[*i], &l);
+			*i += ft_qoutes_line(data, &str[*i], &l);
 		else
-			tmp[l++] = str[(*i)++];
+			data->out[l++] = str[(*i)++];
 	}
 }
 
 char *ft_parse_arg(t_data *data, char *str, int len, int i)
 {
-	char *tmp;
-	char **tmp2;
-	int l;
+	char	**tmp2;
+	int		l;
 
 	if (len == -1)
 		return (NULL);
 	l = 0;
-	if ((tmp = (char *)malloc(sizeof(char*) * (len + 1))) == NULL)
-		exit(0);
-	ft_bzero(tmp, len);
-	ft_parse_arg_loop(data, str, tmp, &i);
-	if (str[i] == '>' || str[i] == ';' || str[i] == '|' || str[i] == '<')
-	{
-		if (len)
-			ft_add_end(&data->arg_list, ft_add(data, tmp));
-		else
-			ft_flag_add(data, &data->arg_list);
-		data->parser.count_arg = ft_size_list(data->arg_list);
-		tmp2 = make_map(&data->arg_list, data->parser.count_arg);
-		ft_add_lst_end(data->list, ft_add_lst(data, data->arg_list, tmp2));
-		ft_clear_list(&data->arg_list);
-		ft_flag_null(data);
-	}
-	else
+	data->out = (char *)ft_malloc(sizeof(char*), len + 1);
+	ft_bzero(data->out, len);
+	ft_parse_arg_loop(data, str, &i);
+	if (!ft_parse_redirect_pipe(data, str, len, i))
 	{
 		ft_flag_null(data);
-		ft_add_end(&data->arg_list, ft_add(data, tmp));
+		ft_add_end(&data->arg_list, ft_add(data, data->out));
 	}
-	free(tmp);
+	free(data->out);
 	return (str);
 }
 
-
-
-//------------------------len--------------------//
-int ft_len_qoutes(t_data *data, char *str, char c, int *i)
-{
-	int len;
-
-	len = 0;
-	(*i)++;
-	while (str[*i] != c && str[*i] != '\0')
-	{
-			len++;
-			(*i)++;
-	}
-	(*i)++;
-	return (len);
-}
-
-
-
-int ft_len_arg(t_data *data, char *str, int *i)
-{
-	int len;
-	int tmp;
-
-	len = 0;
-	
-
-
-	while (str[*i] != '\0' && str[*i] != '>' &&
-		str[*i] != ';' && str[*i] != '|' && str[*i] != '<')
-	{
-		if (str[*i] == '\\' && str[*i + 1] != '\0' &&
-			(str[*i + 1] == '>' || str[*i + 1] == '<' ||
-				str[*i + 1] == '|' || str[*i + 1] == ';') &&
-					(str[*i - 1] != '\'' || str[*i - 1] != '\"'))
-		{
-			*i += 2;
-			len++;
-		}
-		else if (str[*i] == '\'' || str[*i] == '\"')
-			len += ft_len_qoutes(data, str, str[*i - 1], i) + 1;
-		else
-		{
-			(*i)++;
-			len++;
-		}
-	}
-	if (str[*i] == '>' || str[*i] == '<' || str[*i] == ';' || str[*i] == '|')
-	{
-		if (!(tmp = ft_check_arg(data, str, str[*i], i)))
-			return (-1);
-	}
-	return (len);
-}
-
-
-
-char 		**ft_parse_line(t_list *lst_before_export, t_list *list_env, t_list_arg **list, char *line)
+char 		**ft_parse_line(t_shell *shell, char *line)
 {
 	char *str;
 	char **s;
@@ -194,33 +75,24 @@ char 		**ft_parse_line(t_list *lst_before_export, t_list *list_env, t_list_arg *
 
 	i = 0;
 	k = 0;
-	data.arg_list = NULL;
-	data.list = list;
-	data.env = list_env;
-	data.before_export = lst_before_export;
-	ft_flag_null(&data);
-	str = ft_strtrim(line, " \t");
-	ft_check_open_qoutes(&data, str, &i);
-	str = ft_check_close_qoutes(&data, str, &i);
-	ft_flag_null(&data);
-
-	i = 0;
+	str = ft_init_parse_line(shell, &data, line);
 	while (str[i] != '\0')
 	{
 		k = i;
 		if ((ft_parse_arg(&data, str, ft_len_arg(&data, str, &i), k) == NULL))
 		{
 			ft_clear_list(&data.arg_list);
-			ft_clear_lst(list);
+			ft_clear_lst(data.list);
 			return NULL;
 		}
 		i = ft_space(str, i);
 	}
 	if (data.arg_list)
 	{
-		int q = ft_size_list(data.arg_list);
-		s = make_map(&data.arg_list, q);
-		ft_add_lst_end(list, ft_add_lst(&data, data.arg_list, s));
+		ft_add_lst_end(data.list,
+			ft_add_lst(&data, data.arg_list,
+			make_map(&data.arg_list,
+				ft_size_list(data.arg_list))));
 		ft_clear_list(&data.arg_list);
 		ft_flag_null(&data);
 	}

@@ -6,7 +6,7 @@
 /*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/19 14:59:28 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/05/27 10:40:59 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/09/27 12:12:44 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ char			**ft_split(char const *s, char c)
 	if (!s)
 		return (NULL);
 	count_separator = ft_separator(s, c);
-	res = (char **)malloc(sizeof(char*) * (count_separator + 1));
+	res = (char **)ft_malloc(sizeof(char*), (count_separator + 1));
 	if (res == NULL)
 		return (NULL);
 	res[count_separator] = NULL;

@@ -6,7 +6,7 @@
 /*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/13 10:26:12 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/08/26 11:27:18 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/09/27 12:13:40 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char				*ft_strjoin(char const *s1, char const *s2)
 	ii = 0;
 	if (s1 == NULL || s2 == NULL)
 		return (NULL);
-	if ((dest = (char*)malloc(sizeof(*dest) * (len + 1))) == NULL)
+	if ((dest = (char*)ft_malloc(sizeof(*dest), (len + 1))) == NULL)
 		return (NULL);
 	while (s1[i] != '\0')
 	{

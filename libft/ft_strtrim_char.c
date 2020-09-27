@@ -6,7 +6,7 @@
 /*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/10 13:18:18 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/09/20 02:05:26 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/09/27 12:15:20 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ char		*ft_strtrim_char(char *str, char trim, int size)
 		while (str[i++] == trim)
 			count++;
 	len = ft_strlen(str) - count;
-	if (!(res = (char *)malloc(sizeof(res) * (len + 1))))
+	if (!(res = (char *)ft_malloc(sizeof(res), (len + 1))))
 		return (NULL);
 	res = ft_trim(res, str, trim, len);
 	return (res);

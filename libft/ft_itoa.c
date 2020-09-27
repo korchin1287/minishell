@@ -6,7 +6,7 @@
 /*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/20 19:30:27 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/05/26 16:51:23 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/09/27 12:09:39 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,7 @@ char			*ft_itoa(int n)
 	}
 	if (n <= 0)
 		i++;
-	res = (char*)malloc(sizeof(*res) * (i + 1));
-	if (res == NULL)
-		return (NULL);
+	res = (char*)ft_malloc(sizeof(*res), i + 1);
 	ft_nb(n, res, i);
 	return (res);
 }
