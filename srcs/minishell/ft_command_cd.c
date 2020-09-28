@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_command_cd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/18 17:05:52 by nofloren          #+#    #+#             */
-/*   Updated: 2020/09/26 18:16:10 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/09/27 19:31:57 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,11 @@ void    ft_command_cd(t_shell *shell)
 			tmp2 = tmp2->next;
 		}
 		if (!flag)
+		{
 			write(1, "minishell: cd: HOME not set\n", 29);
+			ft_exitstatus(shell, 1);
+			return;
+		}
 	}
 	if (shell->list_arg->arg[shell->j] && (k = chdir(shell->list_arg->arg[shell->j])) == -1)
 	{
@@ -43,8 +47,8 @@ void    ft_command_cd(t_shell *shell)
 		ft_putstr_fd(shell->list_arg->arg[shell->j], 2);
 		ft_putstr_fd(": ", 2);
 		ft_putendl_fd(strerror(errno), 2);
-		ft_make_wexitstatus(shell, 1);
-	
+		ft_exitstatus(shell, 1);
+		return;
 	}
 	else
 	{
@@ -74,4 +78,5 @@ void    ft_command_cd(t_shell *shell)
 			tmp2 = tmp2->next;
 		}
 	}
+	ft_exitstatus(shell, 0);
 }

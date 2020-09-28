@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/07 15:46:34 by nofloren          #+#    #+#             */
-/*   Updated: 2020/09/26 18:16:29 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/09/27 19:45:49 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	ft_make_wexitstatus(t_shell *shell, int flag_exit)
+void	ft_exitstatus(t_shell *shell, int flag_exit)
 {
-	if (!ft_check_list_for_export(shell, &shell->lst_before_export, "?="))
+	if (!ft_check_list_for_export(shell, &shell->lst_before_export, ft_strjoin("?=", ft_itoa(flag_exit))))
 		ft_lstadd_back(&shell->lst_before_export, ft_lstnew2(ft_strjoin("?=", ft_itoa(flag_exit))));
 	shell->flag_exit = flag_exit;
 }
@@ -166,6 +166,33 @@ char		**make_str(t_list **list_env, int size)
 	return (str);
 }
 
+void	ft_exit(t_shell *shell)
+{
+	ft_putendl_fd("exit", 2);
+	if (shell->list_arg->arg[shell->j + 1])
+	{	
+		int i = 0;
+		while (shell->list_arg->arg[shell->j + 1][i] != '\0')
+		{
+			if (!ft_isdigit(shell->list_arg->arg[shell->j + 1][i++]))
+			{
+				ft_putstr_fd("minishell: exit: ", 2);
+				ft_putstr_fd(shell->list_arg->arg[shell->j + 1], 2);
+				ft_putendl_fd(": numeric argument required", 2);
+				exit(255);
+			}
+		}
+		ft_exitstatus(shell, ft_atoi(shell->list_arg->arg[shell->j + 1]));
+	}
+	if (shell->list_arg->arg[shell->j + 1] && shell->list_arg->arg[shell->j + 2])
+	{
+		ft_putendl_fd("minishell: exit: too many arguments", 2);
+		ft_exitstatus(shell, 1);
+		return;
+	}
+	exit(shell->flag_exit);
+}
+
 void	ft_print_name()
 {
 	char *minishell;
@@ -204,8 +231,6 @@ int		ft_what_command(t_shell *shell)
 		return (1);
 	else if ((ft_strcmp(shell->list_arg->arg[shell->j], "echo")) == 0)
 		return (1);
-	else if ((ft_strcmp(shell->list_arg->arg[shell->j], "$?")) == 0)
-		return (1);
 	else if ((ft_strcmp(shell->list_arg->arg[shell->j], "exit")) == 0)
 		return (1);
 	else if ((ft_strcmp(shell->list_arg->arg[shell->j], "unset")) == 0)
@@ -224,23 +249,15 @@ void command_minishell(t_shell *shell)
 	{
 		ft_putstr_fd(getcwd(NULL, 0), 1);
 		write(1, "\n", 1);
+		ft_exitstatus(shell, 0);
 	}
 	else if ((ft_strcmp(shell->list_arg->arg[shell->j], "env")) == 0)
 		ft_command_env(shell);
 	else if ((ft_strcmp(shell->list_arg->arg[shell->j], "echo")) == 0)
 		ft_command_echo(shell);
-	else if ((ft_strcmp(shell->list_arg->arg[shell->j], "$?")) == 0)
-	{
-		ft_putstr_fd("minishell: ", 2);
-		ft_putnbr_fd(shell->flag_exit, 2);
-		ft_putendl_fd(": command not found", 2);
-	}
 	else if ((ft_strcmp(shell->list_arg->arg[shell->j], "exit")) == 0)
 	{
-		ft_putendl_fd("exit", 2);
-		if (shell->list_arg->arg[shell->j])
-			ft_make_wexitstatus(shell, ft_atoi(shell->list_arg->arg[shell->j + 1])) ;
-		exit(shell->flag_exit);
+		ft_exit(shell);
 	}
 	else if ((ft_strcmp(shell->list_arg->arg[shell->j], "unset")) == 0)
 		ft_command_unset(shell);
@@ -250,12 +267,14 @@ void command_minishell(t_shell *shell)
 
 int	main(int argc, char **argv, char **env)
 { 
+	t_list *tmp;
 	t_shell shell;
 	process = 0;
 	ft_shell_init(&shell);
 	ft_list_create(&shell.list_env, env);
 	ft_print_name();
 	ft_singnal();
+	ft_exitstatus(&shell, shell.flag_exit);
 	while (1)
 	{
 		if (!ft_read_info(&shell))
@@ -286,6 +305,12 @@ int	main(int argc, char **argv, char **env)
 			{
 				dup2(shell.savestdin, 0);
 				dup2(shell.sevestdout, 1);
+			}
+			tmp = shell.lst_before_export;
+			while (tmp)
+			{
+				printf("%s\n", tmp->content);
+				tmp = tmp->next;
 			}
 			shell.list_arg = shell.list_arg->next;
 		}

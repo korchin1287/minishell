@@ -6,28 +6,30 @@
 /*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/18 18:11:39 by nofloren          #+#    #+#             */
-/*   Updated: 2020/09/26 18:07:50 by nofloren         ###   ########.fr       */
+/*   Updated: 2020/09/27 18:14:50 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	ft_unset(t_shell *shell, char **str, t_list **list)
+int ft_unset(t_shell *shell, char **str, t_list **list)
 {
 	t_list *tmp;
 	t_list *tmp_2;
 	int j;
 	int check;
+	char c;
 
 	j = 0;
 	if (!*list)
 		return (0);
 	while (str[j])
 	{
-		int count = ft_strlen_3(str[j], '=');
+		int count = ft_strlen(str[j]);
 		check = ft_check_name(str[j], '\0');
 		tmp = *list;
-		if (tmp && ft_strnstr(tmp->content, str[j], count) && check)
+		c = tmp->content[count];
+		if (tmp && ft_strnstr(tmp->content, str[j], count) && check && (tmp->content[count] == '\0' || tmp->content[count] == '='))
 		{
 			if (tmp->next)
 				*list = tmp->next;
@@ -42,13 +44,14 @@ int	ft_unset(t_shell *shell, char **str, t_list **list)
 			write(2, "minishell: unset: `", 20);
 			ft_putstr_fd(str[j], 2);
 			write(2, "': not a valid identifier\n", 27);
-			ft_make_wexitstatus(shell, 1);
+			ft_exitstatus(shell, 1);
+			str[j][0] = '\0';
 		}
 		else if (tmp->next)
 		{
 			while (tmp->next)
 			{
-				if (ft_strnstr(tmp->next->content, str[j], count))
+				if (ft_strnstr(tmp->next->content, str[j], count) && (tmp->next->content[count] == '\0' || tmp->next->content[count] == '='))
 				{
 					tmp_2 = tmp->next;
 					tmp->next = tmp->next->next;
@@ -67,7 +70,10 @@ int	ft_unset(t_shell *shell, char **str, t_list **list)
 
 void    ft_command_unset(t_shell *shell)
 {
+	int  *flag_notvalid;
+
     shell->j++;
+	ft_exitstatus(shell, 0);
 	ft_unset(shell, &shell->list_arg->arg[shell->j], &shell->lst_before_export);
 	ft_unset(shell, &shell->list_arg->arg[shell->j], &shell->list_env);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/05 12:06:51 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/09/27 14:53:49 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/09/27 19:33:52 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,10 +67,10 @@ void    ft_command_unset(t_shell *shell);
 void    ft_command_bash(t_shell *shell);
 void 		ft_list_clear_before(t_list **list_before_export);
 int		ft_check_list_for_export(t_shell *shell, t_list **list, char *str);
-int	ft_unset(t_shell *shell, char **str, t_list **list);
+int ft_unset(t_shell *shell, char **str, t_list **list);
 int		ft_pork(t_shell *shell, char *path, char **env);
 int   ft_read_info(t_shell *shell);
-void ft_execve(t_shell *shell, char *path, char **env);
+int ft_execve(t_shell *shell, char *path, char **env);
 int    ft_make_with_pipe(t_shell *shell);
 void command_minishell(t_shell *shell);
 int		ft_what_command(t_shell *shell);
@@ -79,7 +79,7 @@ int 	ft_cout_mas(char **str);
 void	ft_lstadd_back3(t_costl **lst, t_costl *new);
 t_costl	*ft_lstnew3(char **content);
 t_costl	*ft_lstlast3(t_costl *lst);
-void	ft_make_wexitstatus(t_shell *shell, int flag_exit);
+void	ft_exitstatus(t_shell *shell, int flag_exit);
 char		*ft_init_parse_line(t_shell *shell, t_data *data, char *line);
 char 		**ft_parse_line(t_shell *shell, char *line);
 

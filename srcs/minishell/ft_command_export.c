@@ -6,7 +6,7 @@
 /*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/18 16:26:17 by nofloren          #+#    #+#             */
-/*   Updated: 2020/09/26 18:11:00 by nofloren         ###   ########.fr       */
+/*   Updated: 2020/09/27 18:19:09 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ int		ft_check_name(char *str, char check)
 
 	i = 0;
 	check_before = ft_strlen_3(str, check);
-	if (!ft_isalpha(str[i]) && str[i] != '_')
+	if (!ft_isalpha(str[i]) && str[i] != '_' && str[i] != '\0')
 		return (0);
 	while (str[i] != '\0' && i < check_before)
 	{
@@ -111,6 +111,7 @@ void    ft_command_export(t_shell *shell)
 	int i;
 	tmp = shell->list_arg->arg;
 	
+	ft_exitstatus(shell, 0);
 	if (!shell->list_arg->arg[shell->j])
 		ft_print_export(shell);
 	while (tmp[shell->j])
@@ -132,7 +133,7 @@ void    ft_command_export(t_shell *shell)
 			ft_putstr_fd("export: \'", 2);
 			ft_putstr_fd(tmp[shell->j], 2);
 			ft_putendl_fd("\': not a valid identifier", 2);
-			ft_make_wexitstatus(shell, 1);
+			ft_exitstatus(shell, 1);
 		}
 		shell->j++;
 	}
