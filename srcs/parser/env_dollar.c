@@ -6,11 +6,11 @@
 /*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/24 18:36:22 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/09/26 17:44:40 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/09/27 16:54:40 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
+#include "../minishell.h"
 
 int		ft_len_dollars(char *str, t_list *lst_bfe, t_list *list_env, int k)
 {

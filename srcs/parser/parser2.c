@@ -6,7 +6,7 @@
 /*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/17 10:08:03 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/09/26 18:15:44 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/09/27 16:55:23 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ int ft_len_arg_list(t_data *data, char *str, int *i)
 	int tmp;
 
 	len = 0;
-
 	while (str[*i] != ' ' && str[*i] != '\0')
 	{
 		if (str[*i] == '\\' && str[*i + 1] != '\0')
