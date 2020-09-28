@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+         #
+#    By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/05/12 18:43:36 by ndreadno          #+#    #+#              #
-#    Updated: 2020/09/27 15:37:50 by ndreadno         ###   ########.fr        #
+#    Updated: 2020/09/28 18:12:36 by nofloren         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,7 @@ SRCS = srcs/minishell/ft_pork.c srcs/minishell/minishell.c\
 	srcs/minishell/ft_command_echo.c srcs/minishell/ft_command_unset.c\
 	srcs/minishell/ft_command_bash.c srcs/minishell/signal.c srcs/minishell/ft_read_info.c\
 	srcs/minishell/ft_make_with_pipe.c srcs/minishell/ft_execve.c srcs/minishell/ft_make_with_left_redir.c\
+	srcs/minishell/ft_make_with_redir.c srcs/minishell/ft_command_bash_help1.c
 	
 
 SRCS_PARS = srcs/parser/parser.c srcs/parser/parser2.c srcs/parser/list.c\

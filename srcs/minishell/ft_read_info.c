@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_read_info.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/22 20:30:10 by nofloren          #+#    #+#             */
-/*   Updated: 2020/09/27 13:54:24 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/09/28 18:23:41 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 int   ft_read_info(t_shell *shell)
 {

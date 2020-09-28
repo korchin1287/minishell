@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_command_echo.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/18 17:58:13 by nofloren          #+#    #+#             */
-/*   Updated: 2020/09/19 14:00:29 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/09/27 20:07:54 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,4 +40,5 @@ void    ft_command_echo(t_shell *shell)
     }
     else
         write (1, "\n", 1);
+    ft_exitstatus(shell, 0);
 }
