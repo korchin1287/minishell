@@ -6,7 +6,7 @@
 /*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/27 15:24:23 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/09/27 15:24:46 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/09/28 17:29:38 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int ft_len_qoutes(t_data *data, char *str, char c, int *i)
 	return (len);
 }
 
-int ft_len_arg(t_data *data, char *str, int *i)
+int ft_len_arg(t_shell *shell, t_data *data, char *str, int *i)
 {
 	int len;
 	int tmp;
@@ -54,7 +54,10 @@ int ft_len_arg(t_data *data, char *str, int *i)
 	if (str[*i] == '>' || str[*i] == '<' || str[*i] == ';' || str[*i] == '|')
 	{
 		if (!(tmp = ft_check_arg(data, str, str[*i], i)))
+		{
+			ft_exitstatus(shell, 258);
 			return (-1);
+		}
 	}
 	return (len);
 }

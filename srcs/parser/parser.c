@@ -6,13 +6,29 @@
 /*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/08 12:47:52 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/09/27 15:50:43 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/09/28 18:49:45 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	ft_qoutes_line(t_data *data, char *str, int *l)
+static void	ft_end_parser_line(t_data *data)
+{
+	char  **var;
+	int count;
+	t_list_arg *tmp_struct;
+	if (data->arg_list)
+	{
+		count = ft_size_list(data->arg_list);
+		var = make_map(&data->arg_list, count);
+		tmp_struct = ft_add_lst(data, data->arg_list, var);
+		ft_add_lst_end(data->list, tmp_struct);
+		ft_clear_list(&data->arg_list);
+		ft_flag_null(data);
+	}
+}
+
+int			ft_qoutes_line(t_data *data, char *str, int *l)
 {
 	char c;
 	int i;
@@ -26,7 +42,7 @@ int	ft_qoutes_line(t_data *data, char *str, int *l)
 	return (i);
 }
 
-void ft_parse_arg_loop(t_data *data, char *str, int *i)
+void		ft_parse_arg_loop(t_data *data, char *str, int *i)
 {
 	int		l;
 
@@ -45,7 +61,7 @@ void ft_parse_arg_loop(t_data *data, char *str, int *i)
 	}
 }
 
-char *ft_parse_arg(t_data *data, char *str, int len, int i)
+char		*ft_parse_arg(t_data *data, char *str, int len, int i)
 {
 	char	**tmp2;
 	int		l;
@@ -65,7 +81,7 @@ char *ft_parse_arg(t_data *data, char *str, int len, int i)
 	return (str);
 }
 
-char 		**ft_parse_line(t_shell *shell, char *line)
+char		**ft_parse_line(t_shell *shell, char *line)
 {
 	char *str;
 	char **s;
@@ -79,7 +95,7 @@ char 		**ft_parse_line(t_shell *shell, char *line)
 	while (str[i] != '\0')
 	{
 		k = i;
-		if ((ft_parse_arg(&data, str, ft_len_arg(&data, str, &i), k) == NULL))
+		if ((ft_parse_arg(&data, str, ft_len_arg(shell, &data, str, &i), k) == NULL))
 		{
 			ft_clear_list(&data.arg_list);
 			ft_clear_lst(data.list);
@@ -87,33 +103,6 @@ char 		**ft_parse_line(t_shell *shell, char *line)
 		}
 		i = ft_space(str, i);
 	}
-	if (data.arg_list)
-	{
-		ft_add_lst_end(data.list,
-			ft_add_lst(&data, data.arg_list,
-			make_map(&data.arg_list,
-				ft_size_list(data.arg_list))));
-		ft_clear_list(&data.arg_list);
-		ft_flag_null(&data);
-	}
-	i = -1;
-	
-	// while (*list)
-	// {
-	// 	i = -1;
-	// 	while((*list)->arg[++i])
-	// 		printf("%s\n", (*list)->arg[i]);
-	// 	printf("pipe              %d\n", (*list)->flag_pipe);
-	// 	printf("command end       %d\n", (*list)->flag_end);
-	// 	printf("one redirect      %d\n", (*list)->flag_redir_one);
-	// 	printf("two redirect 	  %d\n", (*list)->flag_redir_two);
-	// 	printf("reverse redirect  %d\n", (*list)->flag_redir_one_left);
-	// 	printf("disable char '='  %d\n", (*list)->flag_disable_char);
-	// 	printf("disable char '$'  %d\n", (*list)->flag_disable_dollar);
-	// 	*list = (*list)->next;
-	// }
-	// exit(0);
-	// // printf("%s\n", s[0]);
-	//ft_clear_list(&data.arg_list);
+	ft_end_parser_line(&data);
 	return (s);
 }

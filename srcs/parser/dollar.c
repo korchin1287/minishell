@@ -6,7 +6,7 @@
 /*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 16:41:37 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/09/27 16:54:24 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/09/28 18:34:31 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,10 @@ char	*ft_check_doll(char *str, t_list *lst, int count)
 	tmp = lst;
 	while (tmp)
 	{
-		if (ft_strncmp(tmp->content, str, count) == 0)
+		if (ft_strncmp(tmp->content, str, count) == 0 &&
+			(tmp->content[count] == '=' || tmp->content[count] == '\0'))
 		{
-			count = ft_strlen_3(tmp->content, '=');
-			if (ft_strncmp(tmp->content, str, count) == 0)
-				return (&tmp->content[count + 1]);
+			return (&tmp->content[count + 1]);
 		}
 		tmp = tmp->next;
 	}

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_make_with_left_redir.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/25 15:35:30 by nofloren          #+#    #+#             */
-/*   Updated: 2020/09/25 20:20:27 by nofloren         ###   ########.fr       */
+/*   Updated: 2020/09/28 15:35:17 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 int    ft_make_with_left_redir(t_shell *shell)
 {

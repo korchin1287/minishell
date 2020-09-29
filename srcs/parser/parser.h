@@ -6,7 +6,7 @@
 /*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/10 16:28:59 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/09/27 15:46:23 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/09/28 17:28:09 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,6 @@ int	ft_check_char_qual(t_data *data, char *str, int k, char flag);
 size_t		ft_count_dollar(const char *str);
 int			ft_check_cmd(t_tmp_list *list);
 int			ft_size_list(t_tmp_list *start);
-int			ft_len_arg(t_data *data, char *str, int *i);
 int			ft_parse_redirect_pipe(t_data *data, char *str, int len, int i);
 int			ft_condition_check(t_data *data, char *str, int *i, int flag_cond);
 int			ft_len_dollars(char *str, t_list *lst_bfe, t_list *list_env, int k);

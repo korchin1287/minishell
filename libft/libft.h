@@ -6,7 +6,7 @@
 /*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/12 13:28:21 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/09/27 12:08:35 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/09/28 15:12:18 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ char	*ft_strnstr(const char *big, const char *little, size_t len);
 void	ft_putchar_fd(char c, int fd);
 void	ft_putstr_fd(char *s, int fd);
 void	ft_bzero(char *s, int n);
+void	ft_free_null(void *var);
 void	ft_putnbr_fd(int n, int fd);
 void	*ft_malloc(size_t type_size, size_t size);
 void	ft_putendl_fd(char *s, int fd);

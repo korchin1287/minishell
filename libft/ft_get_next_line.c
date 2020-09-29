@@ -6,7 +6,7 @@
 /*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/04 14:30:49 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/09/23 15:23:08 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/09/28 15:23:30 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,10 @@ static char			*join(char **line, char *buf, int *read_size)
 	}
 	if ((*line = ft_strjoin(*line, c)) == NULL)
 	{
-		free(tmp);
+		ft_free_null(tmp);
 		return (NULL);
 	}
-	free(tmp);
+	ft_free_null(tmp);
 	return (*line);
 }
 

@@ -6,7 +6,7 @@
 #    By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/05/12 18:43:36 by ndreadno          #+#    #+#              #
-#    Updated: 2020/09/27 12:57:55 by ndreadno         ###   ########.fr        #
+#    Updated: 2020/09/28 15:11:10 by ndreadno         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ OBJ  = ft_memcmp.o ft_memset.o ft_memcpy.o ft_memmove.o ft_isalnum.o ft_isalpha.
 	ft_get_next_line.o ft_space.o ft_skip_digit.o ft_strcmp.o\
 	ft_strtrim_char.o ft_lstadd_back.o ft_lstadd_front.o ft_lstclear.o ft_lstdelone.o\
 	ft_lstiter.o ft_lstlast.o ft_lstmap.o ft_lstnew.o ft_lstsize.o ft_strlen2.o \
-	ft_malloc.o
+	ft_malloc.o ft_free_null.o
 
 
 INCLUDES = ./

@@ -3,14 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   ft_command_bash.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/18 18:18:12 by nofloren          #+#    #+#             */
-/*   Updated: 2020/09/27 19:31:55 by nofloren         ###   ########.fr       */
+/*   Updated: 2020/09/28 18:16:09 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+int ft_check_status(t_shell *shell)
+{
+	struct stat buf;
+	
+}
 
 void    ft_command_bash(t_shell *shell)
 {
@@ -22,6 +28,7 @@ void    ft_command_bash(t_shell *shell)
 	char **env;
 	int k;
 
+	// check_status(shell);
 	env = make_str(&shell->list_env, ft_lstsize(shell->list_env));
 	flag2 = 0;
 	k = 0;

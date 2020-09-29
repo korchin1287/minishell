@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/07 15:46:34 by nofloren          #+#    #+#             */
-/*   Updated: 2020/09/27 19:45:49 by nofloren         ###   ########.fr       */
+/*   Updated: 2020/09/28 14:58:57 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -306,12 +306,12 @@ int	main(int argc, char **argv, char **env)
 				dup2(shell.savestdin, 0);
 				dup2(shell.sevestdout, 1);
 			}
-			tmp = shell.lst_before_export;
-			while (tmp)
-			{
-				printf("%s\n", tmp->content);
-				tmp = tmp->next;
-			}
+			// tmp = shell.lst_before_export;
+			// while (tmp)
+			// {
+			// 	printf("%s\n", tmp->content);
+			// 	tmp = tmp->next;
+			// }
 			shell.list_arg = shell.list_arg->next;
 		}
 		dup2(shell.savestdin, 0);

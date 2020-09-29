@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/05 12:06:51 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/09/27 19:33:52 by nofloren         ###   ########.fr       */
+/*   Updated: 2020/09/28 18:13:09 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <sys/errno.h>
 # include <string.h>
 # include <sys/types.h>
+# include <sys/stat.h>
 # include <errno.h>
 # include <stdio.h>
 # include <signal.h>
@@ -27,6 +28,7 @@
 
 
 pid_t process;
+char *g_line;
 
 typedef struct	s_costl
 {
@@ -66,6 +68,7 @@ void    ft_command_echo(t_shell *shell);
 void    ft_command_unset(t_shell *shell);
 void    ft_command_bash(t_shell *shell);
 void 		ft_list_clear_before(t_list **list_before_export);
+int			ft_len_arg(t_shell *sherll, t_data *data, char *str, int *i);
 int		ft_check_list_for_export(t_shell *shell, t_list **list, char *str);
 int ft_unset(t_shell *shell, char **str, t_list **list);
 int		ft_pork(t_shell *shell, char *path, char **env);
