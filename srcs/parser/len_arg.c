@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   len_arg.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/27 15:24:23 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/09/27 15:24:46 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/09/29 16:41:10 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int ft_len_qoutes(t_data *data, char *str, char c, int *i)
 		(*i)++;
 	}
 	(*i)++;
-	return (len);
+	return (len); 
 }
 
 int ft_len_arg(t_data *data, char *str, int *i)
@@ -44,7 +44,7 @@ int ft_len_arg(t_data *data, char *str, int *i)
 			len++;
 		}
 		else if (str[*i] == '\'' || str[*i] == '\"')
-			len += ft_len_qoutes(data, str, str[*i - 1], i) + 1;
+			len += ft_len_qoutes(data, str, str[*i], i) + 1;
 		else
 		{
 			(*i)++;
