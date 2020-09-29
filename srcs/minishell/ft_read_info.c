@@ -6,7 +6,7 @@
 /*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/22 20:30:10 by nofloren          #+#    #+#             */
-/*   Updated: 2020/09/28 18:23:41 by nofloren         ###   ########.fr       */
+/*   Updated: 2020/09/29 18:10:03 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,19 @@ int   ft_read_info(t_shell *shell)
 {
 	char *line;
 	int k;
-	
+
 	line = NULL;
-	if ((k = (ft_get_next_line(0, &line)) > 0))
+	if ((k = ft_get_next_line(0, &line)) > 0)
+	{
+		if (!(ft_parse_line(shell, line)))
 		{
-			if (!(ft_parse_line(shell, line)))
-			{
-				ft_print_name();
-				return (0);
-			}
-			shell->tmp_arg = shell->list_arg;
-			free(line);
-			line = NULL;
+			ft_print_name();
+			return (0);
 		}
+		shell->tmp_arg = shell->list_arg;
+		free(line);
+		line = NULL;
+	}
 	if (k == 0)
 	{
 		write(1, "exit\n", 5);
