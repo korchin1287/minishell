@@ -6,7 +6,7 @@
 /*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/10 16:28:59 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/09/28 17:28:09 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/09/29 17:26:42 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,9 +97,12 @@ void		ft_qoutes_null(t_data *data);
 void 		ft_clear_list(t_tmp_list **head);
 void		ft_check_open_qoutes(t_data *data, char *str, int *i);
 void		ft_add_end(t_tmp_list **start, t_tmp_list *new);
-void		ft_parse_list(t_list_arg *list, t_list *lst_before_export, t_list *list_env);
 char		*ft_change_dollar(t_data *data, char *str, char *dst);
 int			ft_dollar(t_data *data, char *str, char *out, int *l);
+int			ft_check_char_qual(t_data *data, char *str, int k, char flag);
+int			ft_check_cmd(t_tmp_list *list);
+int 		ft_search_char_equal_before_space_or_qoute(char *str, int i, int flag);
+int			ft_len_arg_list(t_data *data, char *str, int *i);
 
 t_list_arg	*ft_add_lst(t_data *data, t_tmp_list *tmp_list, char **str);
 void 		ft_clear_lst(t_list_arg **head);

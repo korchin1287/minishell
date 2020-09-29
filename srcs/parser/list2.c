@@ -6,7 +6,7 @@
 /*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/24 20:20:50 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/09/27 12:43:31 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/09/29 11:31:41 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ void		ft_clear_lst(t_list_arg **head)
 		tmp = *head;
 		*head = (*head)->next;
 		while (tmp->arg[++i])
-			free(tmp->arg[i]);
-		free(tmp);
+			ft_free_null(tmp->arg[i]);
+		ft_free_null(tmp);
 		tmp = NULL;
 	}
 }
@@ -57,9 +57,9 @@ void		ft_clear_list(t_tmp_list **head)
 	{
 		tmp = *head;
 		*head = (*head)->next;
-		free(tmp->str);
+		ft_free_null(tmp->str);
 		tmp->str = NULL;
-		free(tmp);
+		ft_free_null(tmp);
 		tmp = NULL;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/25 15:35:30 by nofloren          #+#    #+#             */
-/*   Updated: 2020/09/28 15:35:17 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/09/29 12:07:21 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,10 @@ int    ft_make_with_left_redir(t_shell *shell)
 	i = 0;
 	shell->flag_redirect = 1;
 	tmp = shell->list_arg;
+	fd_file = -1;
 	while (tmp->flag_redir_one_left == 1)
 	{
-		ft_parse_list(tmp->next, shell->lst_before_export, shell->list_env);
+		ft_parse_list_line(shell, tmp->next);
 		fd_file = open(tmp->next->arg[0], O_RDWR, 0666);
 		i++;
 		if (tmp->next->arg[1])
@@ -35,11 +36,17 @@ int    ft_make_with_left_redir(t_shell *shell)
 		}
 		tmp = tmp->next;
 	}
-	if (fd_file == -1 && (tmp->flag_redir_one == 1 || tmp->flag_redir_two == 1))
-    {
-        shell->flag_exit = 1;
-        return (0);
-    }
+	if (fd_file == -1)
+	{
+		while (i-- > 0)
+			shell->list_arg = shell->list_arg->next;
+		ft_putstr_fd("minishell: ", 2);
+		ft_putstr_fd(tmp->arg[0], 2);
+		ft_putstr_fd(": ", 2);
+		ft_putendl_fd(strerror(errno), 2);
+		ft_exitstatus(shell, 1);
+		return (0);
+	}
 	pid = fork();
 	process = pid;
 	if (pid == 0)
@@ -54,11 +61,8 @@ int    ft_make_with_left_redir(t_shell *shell)
 		perror("lsh");
 	else
 	{
-		while (i > 0)
-		{
-			i--;
+		while (i-- > 0)
 			shell->list_arg = shell->list_arg->next;
-		}
 		wpid = waitpid(pid, &status, WUNTRACED);
 	}
 	return (WEXITSTATUS(status));

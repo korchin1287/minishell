@@ -6,7 +6,7 @@
 /*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/07 15:46:34 by nofloren          #+#    #+#             */
-/*   Updated: 2020/09/28 14:58:57 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/09/29 12:08:36 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -211,6 +211,7 @@ void	ft_shell_init(t_shell *shell)
 	shell->list_env = NULL;
 	shell->tmp_arg = NULL;
 	shell->list_arg = NULL;
+	shell->flag_command_bash_not = 0;
 	shell->costl = NULL;
 	shell->flag_exit = 0;
 	shell->flag_cd = 1;
@@ -271,7 +272,7 @@ int	main(int argc, char **argv, char **env)
 	t_shell shell;
 	process = 0;
 	ft_shell_init(&shell);
-	ft_list_create(&shell.list_env, env);
+	ft_list_create(&shell. list_env, env);
 	ft_print_name();
 	ft_singnal();
 	ft_exitstatus(&shell, shell.flag_exit);
@@ -289,15 +290,29 @@ int	main(int argc, char **argv, char **env)
 			}
 			if (shell.list_arg->flag_end == 1)
 				shell.j = 0;
-			ft_parse_list(shell.list_arg, shell.lst_before_export, shell.list_env);
+			ft_parse_list_line(&shell, shell.list_arg);
 			ft_add_list_before_export(&shell);
 			if (shell.list_arg->arg[shell.j] || (!shell.list_arg->arg[shell.j] && 
 				(shell.list_arg->flag_pipe == 1 || shell.list_arg->flag_redir_one == 1 || shell.list_arg->flag_redir_two == 1)))
 			{
-				if (shell.list_arg->flag_pipe == 1 || shell.list_arg->flag_redir_one == 1 || shell.list_arg->flag_redir_two == 1)
-					ft_make_with_pipe(&shell);
+				if (shell.list_arg->flag_pipe == 1)
+				{
+					shell.flag_exit = ft_make_with_pipe(&shell);
+					ft_exitstatus(&shell, shell.flag_exit);
+				}
+				else if (shell.list_arg->flag_redir_one == 1 || shell.list_arg->flag_redir_two == 1)
+				{
+					shell.flag_exit = ft_make_with_redir(&shell);
+					ft_exitstatus(&shell, shell.flag_exit);
+					// if (shell.list_arg->flag_pipe == 1)
+					// 	shell.list_arg = shell.list_arg->next;
+				}
 				else if (shell.list_arg->flag_redir_one_left == 1)
+				{
 					ft_make_with_left_redir(&shell);
+					// if (shell.list_arg->flag_pipe == 1)
+					// 	shell.list_arg = shell.list_arg->next;
+				}
 				else
 					command_minishell(&shell);
 			}

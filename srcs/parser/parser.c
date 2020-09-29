@@ -6,7 +6,7 @@
 /*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/08 12:47:52 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/09/28 18:49:45 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/09/29 20:12:53 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,10 @@
 
 static void	ft_end_parser_line(t_data *data)
 {
-	char  **var;
-	int count;
-	t_list_arg *tmp_struct;
+	char		**var;
+	int			count;
+	t_list_arg	*tmp_struct;
+
 	if (data->arg_list)
 	{
 		count = ft_size_list(data->arg_list);
@@ -30,21 +31,31 @@ static void	ft_end_parser_line(t_data *data)
 
 int			ft_qoutes_line(t_data *data, char *str, int *l)
 {
-	char c;
-	int i;
+	char	c;
+	char	q;
+	int		i;
 
 	i = 1;
 	c = str[0];
 	data->out[(*l)++] = str[0];
 	while (str[i] != c && str[i] != '\0')
+	{
+		q = str[i];
+		if (str[i] == '\\' && (str[i + 1] == '$' || str[i + 1] == '\"' || str[i + 1] == '`' || str[i + 1] == '\\') && c != '\'')
+		{
 			data->out[(*l)++] = str[(i)++];
+			data->out[(*l)++] = str[(i)++];	
+		}
+		else
+			data->out[(*l)++] = str[(i)++];
+	}
 	data->out[(*l)++] = str[(i)++];
 	return (i);
 }
 
 void		ft_parse_arg_loop(t_data *data, char *str, int *i)
 {
-	int		l;
+	int	l;
 
 	l = 0;
 	while (ft_condition_check(data, str, i, 1))
@@ -77,32 +88,33 @@ char		*ft_parse_arg(t_data *data, char *str, int len, int i)
 		ft_flag_null(data);
 		ft_add_end(&data->arg_list, ft_add(data, data->out));
 	}
-	free(data->out);
+	ft_free_null(data->out);
 	return (str);
 }
 
-char		**ft_parse_line(t_shell *shell, char *line)
+char		*ft_parse_line(t_shell *shell, char *line)
 {
-	char *str;
-	char **s;
-	int i;
-	int k;
-	t_data data;
+	int		i;
+	int		k;
+	int		len;
+	t_data	data;
 
 	i = 0;
 	k = 0;
-	str = ft_init_parse_line(shell, &data, line);
-	while (str[i] != '\0')
+	len = 0;
+	line = ft_init_parse_line(shell, &data, line, 0);
+	while (line[i] != '\0')
 	{
 		k = i;
-		if ((ft_parse_arg(&data, str, ft_len_arg(shell, &data, str, &i), k) == NULL))
+		len = ft_len_arg(shell, &data, line, &i);
+		if ((ft_parse_arg(&data, line, len, k) == NULL))
 		{
 			ft_clear_list(&data.arg_list);
 			ft_clear_lst(data.list);
-			return NULL;
+			return (NULL);
 		}
-		i = ft_space(str, i);
+		i = ft_space(line, i);
 	}
 	ft_end_parser_line(&data);
-	return (s);
+	return (line);
 }

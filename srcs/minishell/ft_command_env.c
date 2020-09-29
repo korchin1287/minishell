@@ -6,7 +6,7 @@
 /*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/18 17:34:58 by nofloren          #+#    #+#             */
-/*   Updated: 2020/09/27 18:20:44 by nofloren         ###   ########.fr       */
+/*   Updated: 2020/09/27 20:07:16 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,8 @@
 void    ft_command_env(t_shell *shell)
 {
 	t_list *tmp;
-	int k;
+	DIR *dir;
 
-	k = 0;
 	if (!shell->list_arg->arg[shell->j + 1])
 	{
 		tmp = shell->list_env;
@@ -36,5 +35,6 @@ void    ft_command_env(t_shell *shell)
 			ft_putendl_fd(tmp->content, 1);
 			tmp = tmp->next;
 		}
-	}   
+		ft_exitstatus(shell, 0);
+	} 
 }

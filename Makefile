@@ -6,7 +6,7 @@
 #    By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/05/12 18:43:36 by ndreadno          #+#    #+#              #
-#    Updated: 2020/09/27 15:37:50 by ndreadno         ###   ########.fr        #
+#    Updated: 2020/09/29 17:27:54 by ndreadno         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,13 +17,15 @@ SRCS = srcs/minishell/ft_pork.c srcs/minishell/minishell.c\
 	srcs/minishell/ft_command_echo.c srcs/minishell/ft_command_unset.c\
 	srcs/minishell/ft_command_bash.c srcs/minishell/signal.c srcs/minishell/ft_read_info.c\
 	srcs/minishell/ft_make_with_pipe.c srcs/minishell/ft_execve.c srcs/minishell/ft_make_with_left_redir.c\
+	srcs/minishell/ft_make_with_redir.c srcs/minishell/ft_command_bash_help1.c
 	
 
 SRCS_PARS = srcs/parser/parser.c srcs/parser/parser2.c srcs/parser/list.c\
 	srcs/parser/list2.c srcs/parser/open_close_qoutes.c srcs/parser/check_arg.c\
 	srcs/parser/dollar.c srcs/parser/env_dollar.c srcs/parser/ft_until_the_quote_is_closed.c\
 	srcs/parser/init_and_null_parser1.c srcs/parser/condition_check.c srcs/parser/len_arg.c\
-	srcs/parser/parse_redirect_and_pipe.c
+	srcs/parser/parse_redirect_and_pipe.c srcs/parser/char_qual.c srcs/parser/len_arg_list_line.c
+
 OBJ = $(SRCS:.c=.o)
 OBJ_PARS = $(SRCS_PARS:.c=.o)
 #OBJ  = srcs/minishell.o srcs/parser.o srcs/ft_pork.o
