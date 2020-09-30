@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_redirect_and_pipe.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/27 15:27:46 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/09/29 11:35:38 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/09/30 17:03:22 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	ft_flag_add(t_data *data, t_tmp_list **new)
 	{
 		*new = (t_tmp_list *)ft_malloc(sizeof(t_tmp_list), 1);
 		(*new)->str = ft_strdup("");
+		data->parser.flag_disable_char = 1;
 		(*new)->next = NULL;
 	}
 	(*new)->flag_redir_one = data->parser.flag_redir_one;

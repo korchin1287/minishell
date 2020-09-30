@@ -6,19 +6,43 @@
 /*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/18 17:05:52 by nofloren          #+#    #+#             */
-/*   Updated: 2020/09/27 19:31:57 by nofloren         ###   ########.fr       */
+/*   Updated: 2020/09/30 19:58:24 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void    ft_command_cd(t_shell *shell)
+void		ft_command_cd_help2(t_shell *shell, char **tmp)
 {
-	int k = 0;
-	int flag = 0;
-	char *tmp = getcwd(NULL, 0);
-	shell->j++;
+	int flag_pwd = 0;
 	t_list *tmp2;
+	
+	tmp2 = shell->list_env;
+	while (tmp2)
+	{
+		if (!(ft_strncmp(tmp2->content, "PWD=", 4)))
+		{
+			tmp2->content = ft_strjoin("PWD=", getcwd(NULL, 0));
+			flag_pwd = 1;
+			break ;
+		}
+		tmp2 = tmp2->next;
+	}
+	if (flag_pwd == 0)
+		ft_lstadd_back(&shell->lst_before_export, ft_lstnew2(ft_strjoin("PWD=", getcwd(NULL, 0))));
+	tmp2 = shell->list_env;
+	while (tmp2)
+	{
+		if (((ft_strncmp(tmp2->content, "OLDPWD=", 7)) == 0) || (ft_strcmp("OLDPWD", tmp2->content) == 0))
+			tmp2->content = ft_strjoin("OLDPWD=", (*tmp));
+		tmp2 = tmp2->next;
+	}
+}
+
+int		ft_command_cd_help1(t_shell *shell, t_list *tmp2)
+{
+	int flag = 0;
+
 	tmp2 = shell->list_env;
 	if (!shell->list_arg->arg[shell->j])
 	{
@@ -36,11 +60,25 @@ void    ft_command_cd(t_shell *shell)
 		}
 		if (!flag)
 		{
-			write(1, "minishell: cd: HOME not set\n", 29);
+			write(2, "minishell: cd: HOME not set\n", 29);
 			ft_exitstatus(shell, 1);
-			return;
+			return (1);
 		}
 	}
+	return (0);
+}
+
+void    ft_command_cd(t_shell *shell)
+{
+	int k;
+	char *tmp;
+	t_list tmp2;
+
+	k = 0;
+	tmp = getcwd(NULL, 0);
+	shell->j++;
+	if ((ft_command_cd_help1(shell, &tmp2) == 1))
+		return;
 	if (shell->list_arg->arg[shell->j] && (k = chdir(shell->list_arg->arg[shell->j])) == -1)
 	{
 		ft_putstr_fd("minishell: cd: ", 2);	
@@ -52,31 +90,8 @@ void    ft_command_cd(t_shell *shell)
 	}
 	else
 	{
-		k = 0;
 		shell->flag_cd = 0;
-		tmp2 = shell->list_env;
-		int flag_pwd = 0;
-		while (tmp2)
-		{
-			if (!(ft_strncmp(tmp2->content, "PWD=", 4)))
-			{
-				tmp2->content = ft_strjoin("PWD=", getcwd(NULL, 0));
-				flag_pwd = 1;
-				break ;
-			}
-			tmp2 = tmp2->next;
-		}
-		if (flag_pwd == 0)
-			ft_lstadd_back(&shell->lst_before_export, ft_lstnew2(ft_strjoin("PWD=", getcwd(NULL, 0))));
-		k = 0;
-		tmp2 = shell->list_env;
-		int flagold = 0;
-		while (tmp2)
-		{
-			if (((ft_strncmp(tmp2->content, "OLDPWD=", 7)) == 0) || (ft_strcmp("OLDPWD", tmp2->content) == 0))
-				tmp2->content = ft_strjoin("OLDPWD=", tmp);
-			tmp2 = tmp2->next;
-		}
+		ft_command_cd_help2(shell, &tmp);
 	}
 	ft_exitstatus(shell, 0);
 }

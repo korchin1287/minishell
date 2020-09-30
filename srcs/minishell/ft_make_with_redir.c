@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_make_with_redir.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/28 16:33:06 by nofloren          #+#    #+#             */
-/*   Updated: 2020/09/29 20:31:27 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/09/30 19:25:26 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ void	ft_make_with_redir_help(t_shell *shell, t_list_arg **tmp)
 void	ft_make_with_redir_help2(t_shell *shell)
 {
 	shell->flag_command_bash_not = 1;
-	ft_command_bash(shell);
+	if (shell->list_arg->arg[shell->j][0])
+		ft_command_bash(shell);
 	while (shell->count-- > 0)
 		shell->list_arg = shell->list_arg->next;
 }
@@ -73,7 +74,7 @@ int    ft_make_with_redir(t_shell *shell)
 	if (pid == 0)
 		ft_pid_help_this(shell, &tmp);
 	else if (pid < 0)
-		perror("lsh");
+		ft_putendl_fd(strerror(errno), 2);
 	else
 	{
 		ft_pid_close_help_this(shell, &tmp);

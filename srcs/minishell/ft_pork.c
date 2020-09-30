@@ -6,11 +6,28 @@
 /*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/08 17:01:56 by nofloren          #+#    #+#             */
-/*   Updated: 2020/09/29 18:10:53 by nofloren         ###   ########.fr       */
+/*   Updated: 2020/09/30 19:25:34 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+int		ft_check_stat(t_shell *shell, char **s2)
+{
+	struct stat buf;
+	int result;
+
+	stat((*s2), &buf);
+	result = buf.st_mode;
+	if ((result & S_IXUSR) == 0)
+	{
+		ft_putstr_fd("minishell: ", 2);
+		ft_putstr_fd(shell->list_arg->arg[shell->j], 2);
+		ft_putendl_fd(": command not found", 2);
+		return (127);
+	}
+	return (0);
+}
 
 int		ft_pork(t_shell *shell, char *path, char **env)
 {
@@ -19,16 +36,18 @@ int		ft_pork(t_shell *shell, char *path, char **env)
 	int status;
 	char *s2;
 
+	s2 = ft_strjoin(ft_strjoin(path, "/"), shell->list_arg->arg[shell->j]);
+	if (ft_check_stat(shell, &s2))
+		return (127);
 	pid = fork();
 	process = pid;
-	s2 = ft_strjoin(ft_strjoin(path, "/"), shell->list_arg->arg[shell->j]);
 	if (pid == 0)
 	{
 		if (execve(s2, &shell->list_arg->arg[shell->j], env) == -1)
 			exit (WEXITSTATUS(status));
 	}
 	else if (pid < 0)
-		perror("lsh");
+		ft_putendl_fd(strerror(errno), 2);
 	else
 		wpid = waitpid(pid, &status, WUNTRACED);
 	free(s2);

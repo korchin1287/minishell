@@ -6,7 +6,7 @@
 /*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/17 17:26:44 by nofloren          #+#    #+#             */
-/*   Updated: 2020/09/19 18:23:23 by nofloren         ###   ########.fr       */
+/*   Updated: 2020/09/30 16:58:41 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,5 @@ void ft_add_list_before_export(t_shell *shell)
 	if (x == 0 && shell->list_arg->flag_disable_char != 0)
 		shell->j = shell->list_arg->flag_disable_char - 1;
 	else if (x != 0)
-		shell->j = --x;
-	
+		shell->j = --x;	
 }
