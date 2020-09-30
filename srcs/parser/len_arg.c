@@ -6,7 +6,7 @@
 /*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/27 15:24:23 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/09/29 17:53:10 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/09/30 14:00:58 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static int	ft_len_qoutes(t_data *data, char *str, char c, int *i)
 		q = str[*i];
 	}
 	(*i)++;
-	return (len);
+	return (len); 
 }
 
 static int	ft_len_arg_loop(t_shell *shell, t_data *data, char *str, int *i)
@@ -52,10 +52,10 @@ static int	ft_len_arg_loop(t_shell *shell, t_data *data, char *str, int *i)
 		if (ft_condition_check(data, str, i, 0))
 		{
 			*i += 2;
-			len++;
+			len += 2;
 		}
 		else if (str[*i] == '\'' || str[*i] == '\"')
-			len += ft_len_qoutes(data, str, str[*i], i) + 1;
+			len += ft_len_qoutes(data, str, str[*i], i) + 2;
 		else
 		{
 			(*i)++;

@@ -6,7 +6,7 @@
 /*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/21 21:49:33 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/09/28 15:28:19 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/09/29 20:32:06 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,9 @@ void ft_sigquit(int signal)
 		write(1, "Quit: 3\n", 8);
 		ft_print_name();
 	}
-	// if (process == 0)
-	// {
-	// 	write(1, "\n", 1);
-	// 	ft_print_name();
-	// }
 	process = 0;
 }
+
 void ft_singnal(t_shell *shell)
 {
 	signal(SIGINT, &ft_sigint);

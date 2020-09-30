@@ -6,7 +6,7 @@
 /*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/17 10:08:03 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/09/29 20:16:39 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/09/30 15:17:37 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,4 +126,13 @@ void	ft_parse_list_line(t_shell *shell, t_list_arg *list)
 	ft_clear_list(&data.arg_list);
 	ft_free_null(list->arg[0]);
 	list->arg = out;
+// 		i = -1;
+// 		while (list->arg[++i])
+// 			printf("%s\n", list->arg[i]);
+// 		printf("%d\n",list->flag_end);
+// 		printf("%d\n",list->flag_pipe);
+// 		printf("%d\n",list->flag_redir_one);
+// 		printf("%d\n",list->flag_redir_two);
+// 		printf("%d\n",list->flag_redir_one_left);
+// 		printf("%d\n",list->flag_disable_char);
 }
