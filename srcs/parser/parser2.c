@@ -6,7 +6,7 @@
 /*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/17 10:08:03 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/09/30 15:17:37 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/09/30 20:49:35 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,6 @@ void	ft_parse_list_line(t_shell *shell, t_list_arg *list)
 	int k;
 	char **out;
 
-	char *c;
 	i = 0;
 	k = 0;
 	list->arg[0] = ft_init_parse_line(shell, &data, list->arg[0], 1);
@@ -112,12 +111,7 @@ void	ft_parse_list_line(t_shell *shell, t_list_arg *list)
 	{
 		k = i;
 		ft_parse_arg_list(&data, list->arg[0], ft_len_arg_list(&data, list->arg[0], &i), k);
-		if (i == 17)
-			c = &list->arg[0][i];
 		i = ft_space(list->arg[0], i);
-		c = &list->arg[0][i];
-
-		
 	}
 	if (i == 0)
 		ft_add_end(&data.arg_list, ft_add(&data, ""));

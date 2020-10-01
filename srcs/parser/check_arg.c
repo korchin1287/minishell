@@ -6,7 +6,7 @@
 /*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/13 13:07:07 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/09/28 17:34:31 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/09/30 20:25:15 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,17 +69,15 @@ int		ft_check_redirect(t_data *data, char *str, int l)
 		write(2, "minishell: syntax error near unexpected token `>'\n", 51);
 	else if (i > 3)
 		write(2, "minishell: syntax error near unexpected token `>>'\n", 52);
-	else if (str[k] == '\0')
+	else if (str[k] == '\0' || (str[i] == '|' && str[i + 1] == '\0'))
 		write(2, "minishell: syntax error near unexpected token `newline'\n",57);
 	else if (str[k] == ';' || str[i] == ';')
 		write(2, "minishell: syntax error near unexpected token `;'\n", 51);
 	else if (str[k] == '<' || str[i] == '<')
 		write(2, "minishell: syntax error near unexpected token `<'\n", 51);
-	else if (str[k] == '|' || str[i] == '|')
+	else if ((str[k] == '|' || str[i] == '|' ) && i > 1)
 		write(2, "minishell: syntax error near unexpected token `|'\n", 51);
-	return (str[k] == '\0' || str[i] == ';' || str[k] == ';' ||
-			str[i] == '<' || str[i] == '|' || str[k] == '|' ||
-				str[k] == '<' || i > 2 ? 0 : i);
+	return (str[k] == '\0' || str[i] == ';' || str[k] == ';' || str[i] == '<' || ((str[i] == '|' || str[k] == '|') && (i > 1 || str[i + 1] == '\0')) || str[k] == '<' || i > 2 ? 0 : i);
 }
 
 int		ft_check_pipe(t_data *data, char *str, int l)

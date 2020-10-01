@@ -1,0 +1,15 @@
+total 160
+drwxr-xr-x   14 ndreadno  student    476 30 сен 19:52 .
+drwxr-xr-x   39 ndreadno  student   1394 30 сен 13:53 ..
+-rw-r--r--    1 ndreadno  student   6148 28 сен 14:57 .DS_Store
+drwxr-xr-x   15 ndreadno  student    510 30 сен 16:06 .git
+drwxr-xr-x    3 ndreadno  student    102 28 сен 14:57 .vscode
+-rw-r--r--    1 ndreadno  student   2459 29 сен 20:33 Makefile
+-rw-r--r--    1 ndreadno  student      0 30 сен 17:38 asd
+drwxr-xr-x  110 ndreadno  student   3740 30 сен 17:33 libft
+-rwxr-xr-x    1 ndreadno  student  66368 30 сен 19:48 minishell
+drwxr-xr-x    3 ndreadno  student    102 30 сен 15:55 minishell.dSYM
+-rw-r--r--    1 ndreadno  student      0 30 сен 17:32 s
+drwxr-xr-x    5 ndreadno  student    170 29 сен 20:30 srcs
+-rw-r--r--    1 ndreadno  student      0 30 сен 19:52 test
+-rw-r--r--    1 ndreadno  student      0 30 сен 19:52 test1

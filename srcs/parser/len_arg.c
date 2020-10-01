@@ -6,7 +6,7 @@
 /*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/27 15:24:23 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/09/30 14:00:58 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/09/30 20:51:29 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,26 +15,23 @@
 static int	ft_len_qoutes(t_data *data, char *str, char c, int *i)
 {
 	int len;
-	char q;
 
 	len = 0;
 	(*i)++;
 	while (str[*i] != c && str[*i] != '\0')
 	{
-		q = str[*i];
-		if (str[*i] == '\\' && (str[*i + 1] == '$' || str[*i + 1] == '\"' || str[*i + 1] == '`' || str[*i + 1] == '\\') && c != '\'')
+		if (str[*i] == '\\' && (str[*i + 1] == '$' ||
+			str[*i + 1] == '\"' || str[*i + 1] == '`' ||
+				str[*i + 1] == '\\') && c != '\'')
 		{
-			
 			len++;
 			*i += 2;
-			
 		}
 		else
 		{
 			len++;
 			(*i)++;
 		}
-		q = str[*i];
 	}
 	(*i)++;
 	return (len); 
@@ -43,12 +40,10 @@ static int	ft_len_qoutes(t_data *data, char *str, char c, int *i)
 static int	ft_len_arg_loop(t_shell *shell, t_data *data, char *str, int *i)
 {
 	int len;
-	char c;
 
 	len = 0;
 	while (ft_condition_check(data, str, i, 1))
 	{
-		c = str[*i];
 		if (ft_condition_check(data, str, i, 0))
 		{
 			*i += 2;
@@ -61,9 +56,7 @@ static int	ft_len_arg_loop(t_shell *shell, t_data *data, char *str, int *i)
 			(*i)++;
 			len++;
 		}
-		c = str[*i];
 	}
-	c = str[*i];
 	return (len);
 }
 
@@ -81,5 +74,7 @@ int			ft_len_arg(t_shell *shell, t_data *data, char *str, int *i)
 			return (-1);
 		}
 	}
+	if (str[*i] == '|' && str[*i + 1] != '|')
+		(*i)++;
 	return (len);
 }
