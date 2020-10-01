@@ -6,7 +6,7 @@
 /*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/17 17:26:44 by nofloren          #+#    #+#             */
-/*   Updated: 2020/10/01 15:21:35 by nofloren         ###   ########.fr       */
+/*   Updated: 2020/10/01 18:17:32 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void			ft_add_list_before_export_help(t_shell *shell, int x)
 
 static void		ft_help_a_l_b_e(t_shell *shell, char **tmp)
 {
-	if (!ft_check_list_for_export(shell, &shell->list_env, tmp[shell->j]))
+	if (!ft_check_list_for_export(&shell->list_env, tmp[shell->j]))
 		ft_lstadd_back(&shell->lst_before_export, ft_lstnew2(tmp[shell->j]));
 }
 

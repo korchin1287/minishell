@@ -6,7 +6,7 @@
 /*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/18 16:26:17 by nofloren          #+#    #+#             */
-/*   Updated: 2020/10/01 15:35:36 by nofloren         ###   ########.fr       */
+/*   Updated: 2020/10/01 18:17:59 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,8 +101,7 @@ void		ft_command_export(t_shell *shell)
 		check = ft_check_name(tmp[shell->j], '=');
 		if (shell->list_arg->flag_disable_char == 0 && check)
 		{
-			if (!ft_check_list_for_export(shell, &shell->list_env,
-				tmp[shell->j]))
+			if (!ft_check_list_for_export(&shell->list_env, tmp[shell->j]))
 				if (!ft_add_env_from_export(shell))
 					ft_lstadd_back(&shell->list_env, ft_lstnew2(tmp[shell->j]));
 		}
