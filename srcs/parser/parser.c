@@ -6,7 +6,7 @@
 /*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/08 12:47:52 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/09/30 15:23:46 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/10/01 16:27:26 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,12 @@ int			ft_qoutes_line(t_data *data, char *str, int *l)
 	while (str[i] != c && str[i] != '\0')
 	{
 		q = str[i];
-		if (str[i] == '\\' && (str[i + 1] == '$' || str[i + 1] == '\"' || str[i + 1] == '`' || str[i + 1] == '\\') && c != '\'')
+		if (str[i] == '\\' && (str[i + 1] == '$' ||
+			str[i + 1] == '\"' || str[i + 1] == '`' ||
+				str[i + 1] == '\\') && c != '\'')
 		{
 			data->out[(*l)++] = str[(i)++];
-			data->out[(*l)++] = str[(i)++];	
+			data->out[(*l)++] = str[(i)++];
 		}
 		else
 			data->out[(*l)++] = str[(i)++];
@@ -58,9 +60,9 @@ void		ft_parse_arg_loop(t_data *data, char *str, int *i)
 	int	l;
 
 	l = 0;
-	while (ft_condition_check(data, str, i, 1))
+	while (ft_condition_check(str, i, 1))
 	{
-		if (ft_condition_check(data, str, i, 0))
+		if (ft_condition_check(str, i, 0))
 		{
 			data->out[l++] = str[(*i)++];
 			data->out[l++] = str[(*i)++];
@@ -103,11 +105,6 @@ char		*ft_parse_line(t_shell *shell, char *line)
 	k = 0;
 	len = 0;
 	line = ft_init_parse_line(shell, &data, line, 0);
-	int w = ft_strlen(line);
-	int a = ft_strlen("echo hello ");
-	int d = ft_strlen(" t2 world ");
-	int x = ft_strlen(" t3 \"echo dhjsfjh ' \\' \"\\\"\" \"$PWD~\\; echo -e");
-	int z = ft_strlen("");
 	while (line[i] != '\0')
 	{
 		k = i;
@@ -123,17 +120,5 @@ char		*ft_parse_line(t_shell *shell, char *line)
 		i = ft_space(line, i);
 	}
 	ft_end_parser_line(&data);
-	// while (shell->list_arg)
-	// {
-	// 	printf("%s\n", shell->list_arg->arg[0]);
-	// 	printf("%d\n",shell->list_arg->flag_end);
-	// 	printf("%d\n",shell->list_arg->flag_pipe);
-	// 	printf("%d\n",shell->list_arg->flag_redir_one);
-	// 	printf("%d\n",shell->list_arg->flag_redir_two);
-	// 	printf("%d\n",shell->list_arg->flag_redir_one_left);
-	// 	printf("%d\n",shell->list_arg->flag_disable_char);
-	// 	shell->list_arg = shell->list_arg->next;
-	// }
-	// exit(0);
 	return (line);
 }
