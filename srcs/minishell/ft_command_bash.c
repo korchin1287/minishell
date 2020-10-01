@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_command_bash.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/18 18:18:12 by nofloren          #+#    #+#             */
-/*   Updated: 2020/09/29 11:09:24 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/09/30 19:35:22 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,7 @@ int	ft_command_bash_help(t_shell *shell, char **env)
 	{
 		dir = opendir(shell->str_path[k]);
 		if (!dir)
-		{
-			perror("diropen");
-			exit(1);
-		}
+			ft_putendl_fd("Invalid path", 2);
 		while ((entry = readdir(dir)) != NULL)
 		{
 			if ((ft_strcmp(shell->list_arg->arg[shell->j], entry->d_name)) == 0)

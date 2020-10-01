@@ -6,7 +6,7 @@
 /*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/18 16:26:17 by nofloren          #+#    #+#             */
-/*   Updated: 2020/09/27 18:19:09 by nofloren         ###   ########.fr       */
+/*   Updated: 2020/09/30 20:11:00 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ int		ft_check_list_for_export(t_shell *shell, t_list **list, char *str)
 		return (0);
 	while (tmp)
 	{
-		if ((ft_strncmp(tmp->content, str, ft_strlen_3(str, '=')) == 0) && (ft_strncmp(tmp->content, str, ft_strlen_3(tmp->content, '=')) == 0))
+		if ((ft_strncmp(tmp->content, str, ft_strlen_3(str, '=')) == 0) && 
+			(ft_strncmp(tmp->content, str, ft_strlen_3(tmp->content, '=')) == 0))
 		{
 			if (!ft_strchr(str, '='))
 				return (1);
@@ -56,10 +57,7 @@ void	ft_print_export(t_shell *shell)
 			l = len;
 			write(1, "\"", 1);
 			while (tmp[i][l] != '\0')
-			{
-				write (1, &tmp[i][l], 1);
-				l++;
-			}
+				write (1, &tmp[i][l++], 1);
 			write(1, "\"", 1);
 		}
 		write(1, "\n", 1);
@@ -102,22 +100,30 @@ int		ft_check_name(char *str, char check)
 	}
 	return (1);
 }
+
+void	ft_command_export_error(t_shell *shell, char **tmp)
+{
+	ft_putstr_fd("minishell: ", 2);
+	ft_putstr_fd("export: \'", 2);
+	ft_putstr_fd(tmp[shell->j], 2);
+	ft_putendl_fd("\': not a valid identifier", 2);
+	ft_exitstatus(shell, 1);
+}
+
 void    ft_command_export(t_shell *shell)
 {
-	shell->j++;
 	char **tmp;
 	t_list *tmp2;
 	char *s1;
-	int i;
+	int check;
+
+	shell->j++;
 	tmp = shell->list_arg->arg;
-	
 	ft_exitstatus(shell, 0);
 	if (!shell->list_arg->arg[shell->j])
 		ft_print_export(shell);
 	while (tmp[shell->j])
 	{
-		int check;
-
 		check = ft_check_name(tmp[shell->j], '=');
 		if (shell->list_arg->flag_disable_char == 0 && check)
 		{
@@ -128,13 +134,7 @@ void    ft_command_export(t_shell *shell)
 			}
 		}
 		else if (!check || shell->list_arg->flag_disable_char)
-		{
-			ft_putstr_fd("minishell: ", 2);
-			ft_putstr_fd("export: \'", 2);
-			ft_putstr_fd(tmp[shell->j], 2);
-			ft_putendl_fd("\': not a valid identifier", 2);
-			ft_exitstatus(shell, 1);
-		}
+			ft_command_export_error(shell, tmp);
 		shell->j++;
 	}
 }

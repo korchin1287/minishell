@@ -6,11 +6,20 @@
 /*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/18 18:11:39 by nofloren          #+#    #+#             */
-/*   Updated: 2020/09/27 18:14:50 by nofloren         ###   ########.fr       */
+/*   Updated: 2020/10/01 12:13:34 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+void	ft_unset_help1(t_shell *shell, char **str, int j)
+{
+	write(2, "minishell: unset: `", 20);
+	ft_putstr_fd(str[j], 2);
+	write(2, "': not a valid identifier\n", 27);
+	ft_exitstatus(shell, 1);
+	str[j][0] = '\0';
+}
 
 int ft_unset(t_shell *shell, char **str, t_list **list)
 {
@@ -40,13 +49,7 @@ int ft_unset(t_shell *shell, char **str, t_list **list)
 			break ;
 		}
 		else if (!check)
-		{
-			write(2, "minishell: unset: `", 20);
-			ft_putstr_fd(str[j], 2);
-			write(2, "': not a valid identifier\n", 27);
-			ft_exitstatus(shell, 1);
-			str[j][0] = '\0';
-		}
+			ft_unset_help1(shell, str, j);
 		else if (tmp->next)
 		{
 			while (tmp->next)
