@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+         #
+#    By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/05/12 18:43:36 by ndreadno          #+#    #+#              #
-#    Updated: 2020/09/29 20:33:00 by ndreadno         ###   ########.fr        #
+#    Updated: 2020/10/01 15:31:48 by nofloren         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,10 @@ SRCS = srcs/minishell/ft_pork.c srcs/minishell/minishell.c\
 	srcs/minishell/ft_command_bash.c srcs/minishell/signal.c srcs/minishell/ft_read_info.c\
 	srcs/minishell/ft_make_with_pipe.c srcs/minishell/ft_execve.c srcs/minishell/ft_make_with_left_redir.c\
 	srcs/minishell/ft_make_with_redir.c srcs/minishell/ft_command_bash_help1.c \
-	srcs/minishell/ft_make_with_redir_2.c
+	srcs/minishell/ft_make_with_redir_2.c srcs/minishell/ft_command_export_2.c \
+	srcs/minishell/ft_list_create.c srcs/minishell/ft_sort_mass.c \
+	srcs/minishell/ft_command_exit.c srcs/minishell/ft_minishell_help.c \
+	srcs/minishell/ft_minishell_help_2.c
 	
 
 SRCS_PARS = srcs/parser/parser.c srcs/parser/parser2.c srcs/parser/list.c\
@@ -32,7 +35,7 @@ OBJ_PARS = $(SRCS_PARS:.c=.o)
 #OBJ  = srcs/minishell.o srcs/parser.o srcs/ft_pork.o
 LIB = libft/libft.a
 INCLUDES = ./srcs
-FLAGS = -g 
+FLAGS = -Wall -Wextra -Werror -g 
 all: $(NAME)
 
 $(NAME):$(OBJ) $(OBJ_PARS) $(LIB)

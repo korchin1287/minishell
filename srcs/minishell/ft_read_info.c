@@ -3,19 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   ft_read_info.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/22 20:30:10 by nofloren          #+#    #+#             */
-/*   Updated: 2020/09/29 20:37:53 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/10/01 15:11:32 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int   ft_read_info(t_shell *shell)
+int		ft_read_info(t_shell *shell)
 {
-	
-	int k;
+	int	k;
 
 	g_line = NULL;
 	if ((k = ft_get_next_line(0, &g_line)) > 0)

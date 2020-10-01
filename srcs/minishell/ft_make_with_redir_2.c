@@ -3,27 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   ft_make_with_redir_2.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/29 20:06:34 by nofloren          #+#    #+#             */
-/*   Updated: 2020/09/30 15:55:24 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/10/01 15:44:38 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void ft_help_this(t_shell *shell)
+void		ft_help_this(t_shell *shell)
 {
 	if (shell->costl)
 		ft_make_first_argv(shell);
 }
 
-void	ft_make_first_argv_help(t_shell *shell, char **str)
+void		ft_make_first_argv_help(t_shell *shell, char **str)
 {
-	t_costl *tmp;
-	int i;
-	int k;
-	
+	t_costl	*tmp;
+	int		i;
+	int		k;
+
 	i = -1;
 	k = 0;
 	while (shell->list_arg->arg[++i])
@@ -37,11 +37,11 @@ void	ft_make_first_argv_help(t_shell *shell, char **str)
 		tmp = tmp->next;
 	}
 	str[i] = NULL;
-	free(shell->list_arg->arg);
+	ft_free_null(shell->list_arg->arg);
 	shell->list_arg->arg = str;
 }
 
-void	ft_make_first_argv(t_shell *shell)
+void		ft_make_first_argv(t_shell *shell)
 {
 	int		count;
 	char	**str;
@@ -59,7 +59,7 @@ void	ft_make_first_argv(t_shell *shell)
 	ft_make_first_argv_help(shell, str);
 }
 
-void	ft_open_file_redir(t_shell *shell, t_list_arg **tmp)
+void		ft_open_file_redir(t_shell *shell, t_list_arg **tmp)
 {
 	shell->flag_redirect = 1;
 	shell->fd_file = -1;
@@ -67,9 +67,11 @@ void	ft_open_file_redir(t_shell *shell, t_list_arg **tmp)
 	{
 		ft_parse_list_line(shell, (*tmp)->next);
 		if ((*tmp)->flag_redir_one == 1)
-			shell->fd_file = open((*tmp)->next->arg[0], O_CREAT | O_RDWR | O_TRUNC, 0666);
+			shell->fd_file = open((*tmp)->next->arg[0], O_CREAT | O_RDWR |
+			O_TRUNC, 0666);
 		else if ((*tmp)->flag_redir_two == 1)
-			shell->fd_file = open((*tmp)->next->arg[0], O_CREAT | O_RDWR| O_APPEND, 0666);
+			shell->fd_file = open((*tmp)->next->arg[0], O_CREAT | O_RDWR |
+			O_APPEND, 0666);
 		if (shell->fd_file == -1)
 		{
 			ft_putstr_fd("minishell: ", 2);
