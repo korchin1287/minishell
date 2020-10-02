@@ -6,7 +6,7 @@
 /*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/29 13:51:56 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/10/01 17:40:56 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/10/02 14:12:26 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ static void	ft_return_len(t_data *data, char *str, int *i, int *len)
 		*len += ft_len_qoutes_list(data, str, str[*i], i);
 	else if (ft_condition_check(str, i, 2))
 	{
-		len += ft_len_dollars(str, data->before_export, data->env, *i);
+		*len += ft_len_dollars(str, data->before_export, data->env, *i);
 		*i += ft_count_dollar(&str[*i + 1]) + 1;
 	}
 	else
