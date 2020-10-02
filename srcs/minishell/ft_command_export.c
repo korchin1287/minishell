@@ -6,44 +6,18 @@
 /*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/18 16:26:17 by nofloren          #+#    #+#             */
-/*   Updated: 2020/09/30 20:11:00 by nofloren         ###   ########.fr       */
+/*   Updated: 2020/10/01 18:17:59 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int		ft_check_list_for_export(t_shell *shell, t_list **list, char *str)
+static void	ft_print_export(t_shell *shell)
 {
-	t_list *tmp;
-	char *tmp_2;
-
-	tmp = *list;
-	if (!tmp)
-		return (0);
-	while (tmp)
-	{
-		if ((ft_strncmp(tmp->content, str, ft_strlen_3(str, '=')) == 0) && 
-			(ft_strncmp(tmp->content, str, ft_strlen_3(tmp->content, '=')) == 0))
-		{
-			if (!ft_strchr(str, '='))
-				return (1);
-			tmp_2 = tmp->content;
-			tmp->content = ft_strdup(str);
-			free(tmp_2);
-			tmp_2= NULL;
-			return (1);
-		}
-		tmp = tmp->next;
-	}
-	return (0);
-}
-
-void	ft_print_export(t_shell *shell)
-{
-	char **tmp;
-	int i;
-	int l;
-	int len;
+	char	**tmp;
+	int		i;
+	int		l;
+	int		len;
 
 	tmp = ft_sort_mass(make_str(&shell->list_env, ft_lstsize(shell->list_env)));
 	i = 0;
@@ -51,13 +25,13 @@ void	ft_print_export(t_shell *shell)
 	{
 		len = ft_strlen_3(&tmp[i][0], '=');
 		ft_putstr_fd("declare -x ", 1);
-		write (1, &tmp[i][0], ++len);
+		write(1, &tmp[i][0], ++len);
 		if (tmp[i][len - 1] == '=')
 		{
 			l = len;
 			write(1, "\"", 1);
 			while (tmp[i][l] != '\0')
-				write (1, &tmp[i][l++], 1);
+				write(1, &tmp[i][l++], 1);
 			write(1, "\"", 1);
 		}
 		write(1, "\n", 1);
@@ -65,28 +39,30 @@ void	ft_print_export(t_shell *shell)
 	}
 }
 
-int	ft_add_env_from_export(t_shell *shell)
+static int	ft_add_env_from_export(t_shell *shell)
 {
 	t_list *dst;
-	
+
 	dst = shell->lst_before_export;
 	while (dst)
 	{
-		if ((ft_strncmp(shell->list_arg->arg[shell->j], dst->content, ft_strlen_3(dst->content, '=')) == 0))
+		if ((ft_strncmp(shell->list_arg->arg[shell->j], dst->content,
+			ft_strlen_3(dst->content, '=')) == 0))
 		{
 			ft_lstadd_back(&shell->list_env, ft_lstnew2(dst->content));
-			ft_unset(shell, &shell->list_arg->arg[shell->j], &shell->lst_before_export);
+			ft_unset(shell, &shell->list_arg->arg[shell->j],
+				&shell->lst_before_export);
 			return (1);
 		}
-		dst = dst->next;					
+		dst = dst->next;
 	}
 	return (0);
 }
 
-int		ft_check_name(char *str, char check)
+int			ft_check_name(char *str, char check)
 {
-	int i;
-	int check_before;
+	int	i;
+	int	check_before;
 
 	i = 0;
 	check_before = ft_strlen_3(str, check);
@@ -101,7 +77,7 @@ int		ft_check_name(char *str, char check)
 	return (1);
 }
 
-void	ft_command_export_error(t_shell *shell, char **tmp)
+static void	ft_command_export_error(t_shell *shell, char **tmp)
 {
 	ft_putstr_fd("minishell: ", 2);
 	ft_putstr_fd("export: \'", 2);
@@ -110,12 +86,10 @@ void	ft_command_export_error(t_shell *shell, char **tmp)
 	ft_exitstatus(shell, 1);
 }
 
-void    ft_command_export(t_shell *shell)
+void		ft_command_export(t_shell *shell)
 {
-	char **tmp;
-	t_list *tmp2;
-	char *s1;
-	int check;
+	char	**tmp;
+	int		check;
 
 	shell->j++;
 	tmp = shell->list_arg->arg;
@@ -127,11 +101,9 @@ void    ft_command_export(t_shell *shell)
 		check = ft_check_name(tmp[shell->j], '=');
 		if (shell->list_arg->flag_disable_char == 0 && check)
 		{
-			if (!ft_check_list_for_export(shell, &shell->list_env, tmp[shell->j]))
-			{
+			if (!ft_check_list_for_export(&shell->list_env, tmp[shell->j]))
 				if (!ft_add_env_from_export(shell))
 					ft_lstadd_back(&shell->list_env, ft_lstnew2(tmp[shell->j]));
-			}
 		}
 		else if (!check || shell->list_arg->flag_disable_char)
 			ft_command_export_error(shell, tmp);

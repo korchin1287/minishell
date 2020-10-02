@@ -1,40 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_command_env.c                                   :+:      :+:    :+:   */
+/*   ft_command_export_2.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/09/18 17:34:58 by nofloren          #+#    #+#             */
-/*   Updated: 2020/10/01 15:35:52 by nofloren         ###   ########.fr       */
+/*   Created: 2020/10/01 12:42:49 by nofloren          #+#    #+#             */
+/*   Updated: 2020/10/01 15:50:51 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	ft_command_env(t_shell *shell)
+int		ft_check_list_for_export(t_list **list, char *str)
 {
 	t_list	*tmp;
+	char	*tmp_2;
 
-	if (!shell->list_arg->arg[shell->j + 1])
+	tmp = *list;
+	if (!tmp)
+		return (0);
+	while (tmp)
 	{
-		tmp = shell->list_env;
-		while (tmp)
+		if ((ft_strncmp(tmp->content, str, ft_strlen_3(str, '=')) == 0) &&
+			!(ft_strncmp(tmp->content, str, ft_strlen_3(tmp->content, '='))))
 		{
-			if (!ft_strchr(tmp->content, '='))
-			{
-				tmp = tmp->next;
-				continue;
-			}
-			if (tmp && shell->flag_cd == 1 &&
-				(ft_strncmp(tmp->content, "OLDPWD=", 7)) == 0)
-			{
-				tmp = tmp->next;
-				continue;
-			}
-			ft_putendl_fd(tmp->content, 1);
-			tmp = tmp->next;
+			if (!ft_strchr(str, '='))
+				return (1);
+			tmp_2 = tmp->content;
+			tmp->content = ft_strdup(str);
+			ft_free_null(tmp_2);
+			tmp_2 = NULL;
+			return (1);
 		}
-		ft_exitstatus(shell, 0);
+		tmp = tmp->next;
 	}
+	return (0);
 }
