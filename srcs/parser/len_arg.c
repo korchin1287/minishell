@@ -6,13 +6,13 @@
 /*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/27 15:24:23 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/10/01 16:19:18 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/10/02 14:23:57 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-static int	ft_len_qoutes(t_data *data, char *str, char c, int *i)
+static int	ft_len_qoutes(char *str, char c, int *i)
 {
 	int len;
 
@@ -37,7 +37,7 @@ static int	ft_len_qoutes(t_data *data, char *str, char c, int *i)
 	return (len);
 }
 
-static int	ft_len_arg_loop(t_shell *shell, t_data *data, char *str, int *i)
+static int	ft_len_arg_loop(char *str, int *i)
 {
 	int len;
 
@@ -50,7 +50,7 @@ static int	ft_len_arg_loop(t_shell *shell, t_data *data, char *str, int *i)
 			len += 2;
 		}
 		else if (str[*i] == '\'' || str[*i] == '\"')
-			len += ft_len_qoutes(data, str, str[*i], i) + 2;
+			len += ft_len_qoutes(str, str[*i], i) + 2;
 		else
 		{
 			(*i)++;
@@ -65,10 +65,10 @@ int			ft_len_arg(t_shell *shell, t_data *data, char *str, int *i)
 	int len;
 	int tmp;
 
-	len = ft_len_arg_loop(shell, data, str, i);
+	len = ft_len_arg_loop(str, i);
 	if (str[*i] == '>' || str[*i] == '<' || str[*i] == ';' || str[*i] == '|')
 	{
-		if (!(tmp = ft_check_arg(data, str, str[*i], i)))
+		if (!(tmp = ft_check_arg(data, str, i)))
 		{
 			ft_exitstatus(shell, 258);
 			return (-1);

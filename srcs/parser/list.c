@@ -6,7 +6,7 @@
 /*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/13 12:45:04 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/09/27 12:41:23 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/10/02 14:18:27 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void		ft_add_end(t_tmp_list **start, t_tmp_list *new)
 	tmp->next = new;
 }
 
-t_list_arg	*ft_add_lst(t_data *data, t_tmp_list *tmp_list, char **str)
+t_list_arg	*ft_add_lst(t_data *data, char **str)
 {
 	t_list_arg *new;
 

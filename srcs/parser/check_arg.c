@@ -6,7 +6,7 @@
 /*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/13 13:07:07 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/10/01 14:19:03 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/10/02 14:19:30 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ int		ft_check_pipe(char *str, int l)
 			|| i > 1 || j == 0 ? 0 : i);
 }
 
-int		ft_check_arg(t_data *data, char *str, char c, int *k)
+int		ft_check_arg(t_data *data, char *str, int *k)
 {
 	int i;
 

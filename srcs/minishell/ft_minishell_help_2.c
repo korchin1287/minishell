@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_minishell_help_2.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/01 13:38:22 by nofloren          #+#    #+#             */
-/*   Updated: 2020/10/01 15:51:05 by nofloren         ###   ########.fr       */
+/*   Updated: 2020/10/02 15:45:22 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,16 @@ t_costl	*ft_lstlast3(t_costl *lst)
 void	ft_print_name(void)
 {
 	char *minishell;
+	char *tmp;
 
-	minishell = getcwd(NULL, 0);
+	if ((minishell = getcwd(NULL, 0)) == NULL)
+		exit(2);
+	tmp = minishell;
 	minishell = ft_strjoin("\e[32mminishell > ", minishell);
+	ft_free_null(tmp);
+	tmp = minishell;
 	minishell = ft_strjoin(minishell, "\e[0m");
+	ft_free_null(tmp);
 	ft_putstr_fd(minishell, 1);
 	ft_putstr_fd("\e[32m > \e[0m", 1);
 	ft_free_null(minishell);

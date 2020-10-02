@@ -6,7 +6,7 @@
 /*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/10 16:28:59 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/10/01 17:49:51 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/10/02 15:43:05 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ int				ft_condition_check(char *str, int *i, int flag_cond);
 int				ft_condition_check2(char *str, int i, char c, int flag);
 int				ft_len_dollars(char *str, t_list *lst_bfe,
 					t_list *list_env, int k);
-int				ft_check_arg(t_data *data, char *str, char c, int *k);
+int				ft_check_arg(t_data *data, char *str, int *k);
 char			*ft_check_close_qoutes(t_data *data, char *str, int *i);
 char			**make_map(t_tmp_list **map, int size);
 void			ft_flag_null(t_data *data);
@@ -101,7 +101,7 @@ int				ft_search_char_equal_before_space_or_qoute(char *str,
 int				ft_len_arg_list(t_data *data, char *str, int *i);
 int				ft_check_redirect(char *str, int l);
 int				ft_len_qoutes_list(t_data *data, char *str, char c, int *i);
-t_list_arg		*ft_add_lst(t_data *data, t_tmp_list *tmp_list, char **str);
+t_list_arg		*ft_add_lst(t_data *data, char **str);
 void			ft_clear_lst(t_list_arg **head);
 void			ft_add_lst_end(t_list_arg **start, t_list_arg *new);
 void			ft_parse_arg_loop_list(t_data *data, char *str, int *i);

@@ -6,7 +6,7 @@
 /*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/27 15:27:46 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/10/01 12:16:06 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/10/02 14:22:45 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int		ft_parse_redirect_pipe(t_data *data, char *str, int len, int i)
 			ft_flag_add(data, &data->arg_list);
 		data->parser.count_arg = ft_size_list(data->arg_list);
 		tmp = make_map(&data->arg_list, data->parser.count_arg);
-		ft_add_lst_end(data->list, ft_add_lst(data, data->arg_list, tmp));
+		ft_add_lst_end(data->list, ft_add_lst(data, tmp));
 		ft_clear_list(&data->arg_list);
 		ft_flag_null(data);
 		return (1);

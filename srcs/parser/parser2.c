@@ -6,7 +6,7 @@
 /*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/17 10:08:03 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/10/01 17:37:03 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/10/02 15:40:38 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,6 @@ static void	ft_end_parse2(t_data *data, t_list_arg *list)
 
 char		*ft_parse_arg_list(t_data *data, char *str, int len, int i)
 {
-	char	*out;
-	char	**tmp2;
 	int		l;
 
 	l = 0;
