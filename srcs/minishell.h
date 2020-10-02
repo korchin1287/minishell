@@ -6,7 +6,7 @@
 /*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/05 12:06:51 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/10/01 15:46:01 by nofloren         ###   ########.fr       */
+/*   Updated: 2020/10/01 19:32:03 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ typedef struct	s_shell
 {
 	char		**str_path;
 	int			j;
+	int			flag_stat;
 	int			fd_file;
 	int			flag_exit;
 	int			flag_cd;

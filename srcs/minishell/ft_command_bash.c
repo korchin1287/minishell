@@ -6,7 +6,7 @@
 /*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/18 18:18:12 by nofloren          #+#    #+#             */
-/*   Updated: 2020/10/01 15:22:06 by nofloren         ###   ########.fr       */
+/*   Updated: 2020/10/01 19:44:20 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ void	ft_command_bash(t_shell *shell)
 	shell->flag_command_bash = 0;
 	if ((k = ft_command_bash_help(shell, env)) > -1)
 	{
+		shell->flag_stat = 1;
 		if (shell->flag_command_bash_not == 0 &&
 			(shell->list_arg->flag_pipe == 1 ||
 			shell->list_arg->flag_redir_one == 1 ||

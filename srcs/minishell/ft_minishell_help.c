@@ -6,7 +6,7 @@
 /*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/01 13:35:10 by nofloren          #+#    #+#             */
-/*   Updated: 2020/10/01 15:26:04 by nofloren         ###   ########.fr       */
+/*   Updated: 2020/10/01 19:33:25 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ void		ft_shell_init(t_shell *shell)
 	shell->savestdin = dup(0);
 	shell->sevestdout = dup(1);
 	shell->flag_redirect = 0;
+	shell->flag_stat = 0;
 }
 
 int			ft_what_command(t_shell *shell)

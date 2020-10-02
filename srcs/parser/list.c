@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   list.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/13 12:45:04 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/09/27 12:41:23 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/10/01 20:11:06 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,11 @@ t_tmp_list	*ft_add(t_data *data, char *str)
 {
 	t_tmp_list *new;
 
+	printf("5%s\n", str);
 	new = (t_tmp_list *)ft_malloc(sizeof(t_tmp_list), 1);
+	printf("6%s\n", str);
 	new->str = ft_strdup(str);
+	printf("7%s\n", str);
 	new->flag_redir_one = data->parser.flag_redir_one;
 	new->flag_redir_two = data->parser.flag_redir_two;
 	new->flag_redir_one_left = data->parser.flag_redir_one_left;
@@ -26,6 +29,7 @@ t_tmp_list	*ft_add(t_data *data, char *str)
 	new->flag_disable_char = data->parser.flag_disable_char;
 	new->flag_disable_dollar = data->parser.flag_disable_dollar;
 	new->next = NULL;
+	printf("8%s\n", str);
 	return (new);
 }
 
@@ -34,14 +38,17 @@ void		ft_add_end(t_tmp_list **start, t_tmp_list *new)
 	t_tmp_list *tmp;
 
 	tmp = *start;
+	printf ("12345\n");
 	if (tmp == NULL)
 	{
 		(*start) = new;
 		return ;
 	}
+	printf ("12345\n");
 	while (tmp->next != NULL)
 		tmp = tmp->next;
 	tmp->next = new;
+	printf ("12345\n");
 }
 
 t_list_arg	*ft_add_lst(t_data *data, t_tmp_list *tmp_list, char **str)

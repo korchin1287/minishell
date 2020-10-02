@@ -6,7 +6,7 @@
 #    By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/05/12 18:43:36 by ndreadno          #+#    #+#              #
-#    Updated: 2020/10/01 18:16:56 by nofloren         ###   ########.fr        #
+#    Updated: 2020/10/01 18:19:52 by nofloren         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,7 @@ OBJ_PARS = $(SRCS_PARS:.c=.o)
 #OBJ  = srcs/minishell.o srcs/parser.o srcs/ft_pork.o
 LIB = libft/libft.a
 INCLUDES = ./srcs
-FLAGS = -Wall -Wextra -Werror -g 
+FLAGS = -g 
 all: $(NAME)
 
 $(NAME):$(OBJ) $(OBJ_PARS) $(LIB)

@@ -6,7 +6,7 @@
 /*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/08 17:01:56 by nofloren          #+#    #+#             */
-/*   Updated: 2020/10/01 15:26:23 by nofloren         ###   ########.fr       */
+/*   Updated: 2020/10/01 19:45:37 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int	ft_check_stat(t_shell *shell, char **s2)
 
 	stat((*s2), &buf);
 	result = buf.st_mode;
-	if ((result & S_IXUSR) == 0)
+	if ((((result & S_IXUSR) == 0) || (result & S_IFDIR)) && shell->flag_stat)
 	{
 		ft_putstr_fd("minishell: ", 2);
 		ft_putstr_fd(shell->list_arg->arg[shell->j], 2);
