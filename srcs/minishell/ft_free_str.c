@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_free_str.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/02 16:24:20 by nofloren          #+#    #+#             */
-/*   Updated: 2020/10/02 16:51:04 by nofloren         ###   ########.fr       */
+/*   Updated: 2020/10/03 18:41:16 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,6 @@ void	ft_free_str(char ***str)
 		free(tmp);
 		tmp = NULL;
 	}
+	free(*str);
 	*str = NULL;
 }

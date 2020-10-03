@@ -6,7 +6,7 @@
 /*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/24 20:20:50 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/10/03 16:18:30 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/10/03 18:34:15 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,12 @@ char		**make_map(t_tmp_list **map, int size)
 	int			i;
 	t_tmp_list	*tmp;
 
-	str = ft_malloc(sizeof(char *), (size + 1));
+	str = (char **)ft_malloc(sizeof(char *), (size + 1));
 	i = 0;
 	tmp = *map;
 	while (tmp)
 	{
-		str[i] = !tmp->str ? NULL : ft_strdup(tmp->str);
+		str[i] = ft_strdup(tmp->str);
 		tmp = tmp->next;
 		i++;
 	}
