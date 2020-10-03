@@ -6,7 +6,7 @@
 /*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/13 12:51:12 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/09/27 14:05:18 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/10/03 14:07:02 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,11 @@ void		ft_check_open_qoutes(t_data *data, char *str, int *i)
 			continue;
 		if (str[*i] == '\'' && !data->parser.flag_double_quotes)
 		{
+			if (*i && str[*i - 1] == '\\')
+			{
+				(*i)++;
+				continue;
+			}
 			if (!data->parser.flag_single_quotes)
 				k = *i + 1;
 			data->parser.flag_single_quotes =

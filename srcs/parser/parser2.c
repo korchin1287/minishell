@@ -6,7 +6,7 @@
 /*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/17 10:08:03 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/10/02 17:24:31 by nofloren         ###   ########.fr       */
+/*   Updated: 2020/10/03 15:43:10 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	ft_end_parse2(t_data *data, t_list_arg *list)
 	i = ft_size_list(data->arg_list);
 	out = make_map(&data->arg_list, i);
 	ft_clear_list(&data->arg_list);
-	ft_free_null((void **)&list->arg[0]);
+	ft_free_null((void **)&list->arg);
 	list->arg = out;
 }
 

@@ -6,7 +6,7 @@
 /*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/18 18:18:12 by nofloren          #+#    #+#             */
-/*   Updated: 2020/10/03 15:24:01 by nofloren         ###   ########.fr       */
+/*   Updated: 2020/10/03 15:32:02 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int		ft_command_bash_help(t_shell *shell, char **env)
 
 	k = 0;
 	ft_get_path(shell, env);
-	while (shell->str_path[k])
+	while (shell->str_path && shell->str_path[k])
 	{
 		dir = opendir(shell->str_path[k]);
 		if (!dir)

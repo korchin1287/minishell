@@ -6,7 +6,7 @@
 /*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/04 14:30:49 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/10/02 17:25:41 by nofloren         ###   ########.fr       */
+/*   Updated: 2020/10/03 15:36:15 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,22 +35,21 @@ static char			*join(char **line, char *buf, int *read_size)
 
 int					ft_get_next_line(int fd, char **line)
 {
-	char		buf[2];
 	int			flag;
 	int			read_size;
 
 	flag = 1;
 	if ((*line = ft_strdup("")) == NULL)
 		return (-1);
-	ft_bzero(buf, 1);
-	while (flag == 1 && ((read_size = read(fd, buf, 1)) || buf[0] != '\0'))
+	ft_bzero(g_buf, 1);
+	while (flag == 1 && ((read_size = read(fd, g_buf, 1)) || g_buf[0] != '\0'))
 	{
-		if (buf[0] == '\n')
+		if (g_buf[0] == '\n')
 		{
-			buf[0] = '\0';
+			g_buf[0] = '\0';
 			flag = 0;
 		}
-		if (join(line, buf, &read_size) == NULL)
+		if (join(line, g_buf, &read_size) == NULL)
 			return (-1);
 	}
 	return (read_size);

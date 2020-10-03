@@ -6,7 +6,7 @@
 /*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/27 15:24:23 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/10/02 14:23:57 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/10/03 13:59:29 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static int	ft_len_qoutes(char *str, char c, int *i)
 			str[*i + 1] == '\"' || str[*i + 1] == '`' ||
 				str[*i + 1] == '\\') && c != '\'')
 		{
-			len++;
+			len += 2;
 			*i += 2;
 		}
 		else

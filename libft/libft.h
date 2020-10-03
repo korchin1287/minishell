@@ -6,7 +6,7 @@
 /*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/12 13:28:21 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/10/02 17:19:43 by nofloren         ###   ########.fr       */
+/*   Updated: 2020/10/03 15:35:59 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ typedef struct	s_list
 	char *content;
 	struct s_list *next;
 }				t_list;
+char		g_buf[2];
 
 int		ft_tolower(int ch);
 int		ft_toupper(int ch);

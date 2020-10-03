@@ -6,7 +6,7 @@
 /*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/10 16:28:59 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/10/02 15:43:05 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/10/03 14:14:51 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ typedef struct	s_data
 int				ft_check_char_qual(t_data *data, char *str, int k, char flag);
 size_t			ft_count_dollar(const char *str);
 int				ft_check_redirect(char *str, int l);
+int				ft_check_left_redirect(char *str, int l);
 int				ft_check_cmd(t_tmp_list *list);
 int				ft_size_list(t_tmp_list *start);
 int				ft_parse_redirect_pipe(t_data *data, char *str, int len, int i);
