@@ -6,7 +6,7 @@
 /*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/08 12:47:52 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/10/03 13:59:19 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/10/03 17:56:51 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ char		*ft_parse_line(t_shell *shell, char *line)
 	i = 0;
 	k = 0;
 	len = 0;
-	line = ft_init_parse_line(shell, &data, line, 0);
+	line = ft_init_parse_line(shell, &data, line);
 	while (line[i] != '\0')
 	{
 		k = i;

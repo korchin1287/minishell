@@ -3,17 +3,12 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+         #
+#    By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2020/05/12 18:43:36 by ndreadno          #+#    #+#              #
-<<<<<<< HEAD
-#    Updated: 2020/10/02 16:28:51 by nofloren         ###   ########.fr        #
-=======
-#    Updated: 2020/10/01 18:19:52 by nofloren         ###   ########.fr        #
->>>>>>> korchin
+#    Created: 2020/10/03 16:13:20 by ndreadno          #+#    #+#              #
+#    Updated: 2020/10/03 16:13:24 by ndreadno         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
-
 
 NAME = minishell
 SRCS = srcs/minishell/ft_pork.c srcs/minishell/minishell.c\
