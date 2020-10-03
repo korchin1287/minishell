@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_and_null_parser1.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/27 14:39:11 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/10/02 17:37:24 by nofloren         ###   ########.fr       */
+/*   Updated: 2020/10/03 17:52:01 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,20 +35,21 @@ void	ft_flag_null(t_data *data)
 	data->parser.flag_disable_char = 0;
 	data->parser.flag_disable_dollar = 0;
 }
-
-char	*ft_init_parse_line(t_shell *shell, t_data *data, char *line, int flag)
+void	ft_init_parse(t_shell *shell, t_data *data)
 {
-	int		i;
-	char	*tmp;
-
-	i = 0;
 	data->arg_list = NULL;
 	data->list = &shell->list_arg;
 	data->env = shell->list_env;
 	data->before_export = shell->lst_before_export;
 	ft_flag_null(data);
-	if (flag == 1)
-		return (line);
+}
+char	*ft_init_parse_line(t_shell *shell, t_data *data, char *line)
+{
+	int		i;
+	char	*tmp;
+
+	i = 0;
+	ft_init_parse(shell, data);
 	line = ft_strtrim(line, " \t");
 	ft_check_open_qoutes(data, line, &i);
 	tmp = line;

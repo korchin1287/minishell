@@ -6,7 +6,7 @@
 /*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/08 17:01:56 by nofloren          #+#    #+#             */
-/*   Updated: 2020/10/03 16:02:27 by nofloren         ###   ########.fr       */
+/*   Updated: 2020/10/03 18:21:56 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ static int	ft_check_stat(t_shell *shell, char **s2)
 	int	result;
 
 	result = stat((*s2), &buf);
+
 	if (result == 0)
 	{
 		if ((((buf.st_mode & S_IXUSR) == 0) || (buf.st_mode & S_IFDIR)) && shell->flag_stat)

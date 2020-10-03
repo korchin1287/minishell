@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_make_with_left_redir.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/25 15:35:30 by nofloren          #+#    #+#             */
-/*   Updated: 2020/10/01 15:52:06 by nofloren         ###   ########.fr       */
+/*   Updated: 2020/10/03 16:56:13 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int			ft_open_file_redir_left(t_shell *shell, t_list_arg **tmp)
 	shell->fd_file = -1;
 	while ((*tmp)->flag_redir_one_left == 1)
 	{
-		ft_parse_list_line(shell, (*tmp)->next);
+		ft_parse_list_line(shell, &(*tmp)->next);
 		if ((shell->fd_file = open((*tmp)->next->arg[0], O_RDWR, 0666)) < 0)
 			break ;
 		shell->count++;

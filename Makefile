@@ -5,11 +5,10 @@
 #                                                     +:+ +:+         +:+      #
 #    By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2020/05/12 18:43:36 by ndreadno          #+#    #+#              #
-#    Updated: 2020/10/03 16:50:40 by nofloren         ###   ########.fr        #
+#    Created: 2020/10/03 16:13:20 by ndreadno          #+#    #+#              #
+#    Updated: 2020/10/03 18:05:51 by nofloren         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
-
 
 NAME = minishell
 SRCS = srcs/minishell/ft_pork.c srcs/minishell/minishell.c\

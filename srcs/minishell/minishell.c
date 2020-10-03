@@ -6,7 +6,7 @@
 /*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/07 15:46:34 by nofloren          #+#    #+#             */
-/*   Updated: 2020/10/03 16:47:58 by nofloren         ###   ########.fr       */
+/*   Updated: 2020/10/03 18:05:50 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static void	ft_while_help(t_shell *shell)
 		ft_free_null((void **)&shell->costl);
 	if (shell->list_arg->flag_end == 1)
 		shell->j = 0;
-	ft_parse_list_line(shell, shell->list_arg);
+	ft_parse_list_line(shell, &shell->list_arg);
 	ft_add_list_before_export(shell);
 	if (shell->list_arg->arg[shell->j] || (!shell->list_arg->arg[shell->j] &&
 		(shell->list_arg->flag_pipe == 1 || shell->list_arg->flag_redir_one == 1

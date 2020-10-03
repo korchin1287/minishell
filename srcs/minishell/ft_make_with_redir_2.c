@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_make_with_redir_2.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/29 20:06:34 by nofloren          #+#    #+#             */
-/*   Updated: 2020/10/02 17:22:39 by nofloren         ###   ########.fr       */
+/*   Updated: 2020/10/03 16:49:05 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void		ft_open_file_redir(t_shell *shell, t_list_arg **tmp)
 	shell->fd_file = -1;
 	while ((*tmp)->flag_redir_one == 1 || (*tmp)->flag_redir_two == 1)
 	{
-		ft_parse_list_line(shell, (*tmp)->next);
+		ft_parse_list_line(shell, &(*tmp)->next);
 		if ((*tmp)->flag_redir_one == 1)
 			shell->fd_file = open((*tmp)->next->arg[0], O_CREAT | O_RDWR |
 			O_TRUNC, 0666);
