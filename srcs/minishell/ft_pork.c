@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_pork.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/08 17:01:56 by nofloren          #+#    #+#             */
-/*   Updated: 2020/10/03 18:21:56 by nofloren         ###   ########.fr       */
+/*   Updated: 2020/10/03 21:11:05 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ int			ft_pork(t_shell *shell, char *path, char **env)
 	{
 		if ((status = execve(s2, &shell->list_arg->arg[shell->j], env)) == -1)
 			exit(WEXITSTATUS(status));
+		exit(0);
 	}
 	else if (pid < 0)
 		ft_putendl_fd(strerror(errno), 2);
