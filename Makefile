@@ -6,7 +6,7 @@
 #    By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/05/12 18:43:36 by ndreadno          #+#    #+#              #
-#    Updated: 2020/10/01 18:19:52 by nofloren         ###   ########.fr        #
+#    Updated: 2020/10/02 16:28:51 by nofloren         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,8 @@ SRCS = srcs/minishell/ft_pork.c srcs/minishell/minishell.c\
 	srcs/minishell/ft_make_with_redir_2.c srcs/minishell/ft_command_export_2.c \
 	srcs/minishell/ft_list_create.c srcs/minishell/ft_sort_mass.c \
 	srcs/minishell/ft_command_exit.c srcs/minishell/ft_minishell_help.c \
-	srcs/minishell/ft_minishell_help_2.c
+	srcs/minishell/ft_minishell_help_2.c srcs/minishell/ft_getcwd.c \
+	srcs/minishell/ft_free_str.c
 	
 
 SRCS_PARS = srcs/parser/parser.c srcs/parser/parser2.c srcs/parser/list.c\

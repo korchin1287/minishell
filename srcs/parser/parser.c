@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/08 12:47:52 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/10/01 16:27:26 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/10/02 17:43:02 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void	ft_end_parser_line(t_data *data)
 	{
 		count = ft_size_list(data->arg_list);
 		var = make_map(&data->arg_list, count);
-		tmp_struct = ft_add_lst(data, data->arg_list, var);
+		tmp_struct = ft_add_lst(data, var);
 		ft_add_lst_end(data->list, tmp_struct);
 		ft_clear_list(&data->arg_list);
 		ft_flag_null(data);
@@ -76,7 +76,6 @@ void		ft_parse_arg_loop(t_data *data, char *str, int *i)
 
 char		*ft_parse_arg(t_data *data, char *str, int len, int i)
 {
-	char	**tmp2;
 	int		l;
 
 	if (len == -1)
@@ -90,7 +89,7 @@ char		*ft_parse_arg(t_data *data, char *str, int len, int i)
 		ft_flag_null(data);
 		ft_add_end(&data->arg_list, ft_add(data, data->out));
 	}
-	ft_free_null(data->out);
+	ft_free_null((void **)&data->out);
 	return (str);
 }
 
@@ -109,8 +108,6 @@ char		*ft_parse_line(t_shell *shell, char *line)
 	{
 		k = i;
 		len = ft_len_arg(shell, &data, line, &i);
-		if (i == 24)
-			i = i;
 		if ((ft_parse_arg(&data, line, len, k) == NULL))
 		{
 			ft_clear_list(&data.arg_list);

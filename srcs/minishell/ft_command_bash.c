@@ -6,7 +6,7 @@
 /*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/18 18:18:12 by nofloren          #+#    #+#             */
-/*   Updated: 2020/10/01 19:44:20 by nofloren         ###   ########.fr       */
+/*   Updated: 2020/10/03 15:24:01 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,5 +75,6 @@ void	ft_command_bash(t_shell *shell)
 	if (shell->flag_command_bash == 0)
 		ft_command_bash_help1(shell, env);
 	ft_exitstatus(shell, shell->flag_exit);
-	ft_free_null(env);
+	ft_free_str(&env);
+	ft_free_str(&shell->str_path);
 }

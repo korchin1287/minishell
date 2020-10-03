@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_get_next_line.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/04 14:30:49 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/10/01 12:12:08 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/10/02 17:25:41 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,10 @@ static char			*join(char **line, char *buf, int *read_size)
 	}
 	if ((*line = ft_strjoin(*line, c)) == NULL)
 	{
-		ft_free_null(tmp);
+		ft_free_null((void **)&tmp);
 		return (NULL);
 	}
-	ft_free_null(tmp);
+	ft_free_null((void **)&tmp);
 	return (*line);
 }
 

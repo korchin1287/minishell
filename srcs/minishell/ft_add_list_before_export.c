@@ -6,7 +6,7 @@
 /*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/17 17:26:44 by nofloren          #+#    #+#             */
-/*   Updated: 2020/10/01 18:17:32 by nofloren         ###   ########.fr       */
+/*   Updated: 2020/10/02 17:21:40 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ void			ft_list_clear_before(t_list **list_before_export)
 	{
 		tmp = *list_before_export;
 		*list_before_export = (*list_before_export)->next;
-		ft_free_null(tmp->content);
-		ft_free_null(tmp);
+		ft_free_null((void **)&tmp->content);
+		ft_free_null((void **)&tmp);
 		tmp = NULL;
 	}
 }

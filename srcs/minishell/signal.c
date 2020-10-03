@@ -6,7 +6,7 @@
 /*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/21 21:49:33 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/10/01 15:37:43 by nofloren         ###   ########.fr       */
+/*   Updated: 2020/10/02 17:22:05 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void	ft_sigint(int signal)
 	{
 		if (g_line && ft_strlen(g_line))
 		{
-			ft_free_null(g_line);
+			ft_free_null((void **)&g_line);
 			g_line = ft_malloc(sizeof(char), 1);
 			g_line[0] = '\0';
 		}
