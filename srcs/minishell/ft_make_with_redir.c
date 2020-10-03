@@ -6,7 +6,7 @@
 /*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/28 16:33:06 by nofloren          #+#    #+#             */
-/*   Updated: 2020/10/01 15:40:35 by nofloren         ###   ########.fr       */
+/*   Updated: 2020/10/03 16:41:27 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,11 +65,15 @@ int			ft_make_with_redir(t_shell *shell)
 	pid_t		wpid;
 	t_list_arg	*tmp;
 	int			status;
+	char		**str;
 
 	if ((ft_make_with_redir_help(shell, &tmp)) == 0)
 		return (1);
-	if ((ft_command_bash_help(shell, make_str(&shell->list_env,
-		ft_lstsize(shell->list_env)))) > -1)
+	str = make_str(&shell->list_env, ft_lstsize(shell->list_env));
+	int a = ft_command_bash_help(shell, str);
+	ft_free_str(&shell->str_path);
+	ft_free_str(&str);
+	if (a > -1)
 		pid = fork();
 	else
 		return (ft_make_with_redir_help2(shell));

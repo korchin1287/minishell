@@ -6,7 +6,7 @@
 /*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/18 17:05:52 by nofloren          #+#    #+#             */
-/*   Updated: 2020/10/02 18:36:38 by nofloren         ###   ########.fr       */
+/*   Updated: 2020/10/03 17:04:43 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void	ft_command_cd(t_shell *shell)
 	t_list	tmp2;
 
 	k = 0;
-	tmp = getcwd(NULL, 0);
+	tmp = ft_getcwd();
 	shell->j++;
 	if ((ft_command_cd_help1(shell, &tmp2, 0) == 1))
 		return ;
@@ -94,6 +94,7 @@ void	ft_command_cd(t_shell *shell)
 		ft_putstr_fd(shell->list_arg->arg[shell->j], 2);
 		ft_putstr_fd(": ", 2);
 		ft_putendl_fd(strerror(errno), 2);
+		ft_free_null((void **)&tmp);
 		ft_exitstatus(shell, 1);
 		return ;
 	}

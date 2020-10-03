@@ -6,11 +6,32 @@
 /*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/01 13:33:15 by nofloren          #+#    #+#             */
-/*   Updated: 2020/10/01 14:44:05 by nofloren         ###   ########.fr       */
+/*   Updated: 2020/10/03 17:44:44 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+static void		ft_clear_list2(t_list **head)
+{
+	t_list *tmp;
+
+	while (*head)
+	{
+		tmp = *head;
+		*head = (*head)->next;
+		ft_free_null((void **)&tmp->content);
+		tmp->content = NULL;
+		ft_free_null((void **)&tmp);
+		tmp = NULL;
+	}
+}
+
+static void	ft_exit_free(t_shell *shell)
+{
+	ft_clear_list2(&shell->list_env);
+	ft_clear_list2(&shell->lst_before_export);
+}
 
 static void	ft_exit_help(t_shell *shell)
 {
@@ -42,5 +63,6 @@ void		ft_exit(t_shell *shell)
 		ft_exitstatus(shell, 1);
 		return ;
 	}
+	ft_exit_free(shell);
 	exit(shell->flag_exit);
 }
