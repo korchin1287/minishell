@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   list2.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/24 20:20:50 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/10/03 18:34:15 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/10/03 19:39:25 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ void		ft_clear_lst(t_list_arg **head)
 		*head = (*head)->next;
 		while (tmp->arg[++i])
 			ft_free_null((void **)&tmp->arg[i]);
+		ft_free_null((void **)&tmp->arg);
 		ft_free_null((void **)&tmp);
-		tmp = NULL;
 	}
 }
 
