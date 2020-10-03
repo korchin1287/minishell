@@ -6,7 +6,7 @@
 /*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/07 15:46:34 by nofloren          #+#    #+#             */
-/*   Updated: 2020/10/02 19:26:06 by nofloren         ###   ########.fr       */
+/*   Updated: 2020/10/03 16:47:58 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,7 @@ void		command_minishell(t_shell *shell)
 	else if ((ft_strcmp(shell->list_arg->arg[shell->j], "cd")) == 0)
 		ft_command_cd(shell);
 	else if ((ft_strcmp(shell->list_arg->arg[shell->j], "pwd")) == 0)
-	{
-		ft_putstr_fd(getcwd(NULL, 0), 1);
-		write(1, "\n", 1);
-		ft_exitstatus(shell, 0);
-	}
+		ft_command_pwd(shell);
 	else if ((ft_strcmp(shell->list_arg->arg[shell->j], "env")) == 0)
 		ft_command_env(shell);
 	else if ((ft_strcmp(shell->list_arg->arg[shell->j], "echo")) == 0)
