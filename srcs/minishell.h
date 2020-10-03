@@ -6,7 +6,7 @@
 /*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/05 12:06:51 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/10/01 15:46:01 by nofloren         ###   ########.fr       */
+/*   Updated: 2020/10/02 16:51:19 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ typedef struct	s_shell
 {
 	char		**str_path;
 	int			j;
+	int			flag_stat;
 	int			fd_file;
 	int			flag_exit;
 	int			flag_cd;
@@ -117,6 +118,8 @@ void			ft_list_clear_before(t_list **list_before_export);
 void			ft_command_export(t_shell *shell);
 void			ft_add_list_before_export(t_shell *shell);
 void			ft_list_create(t_list **list_env, char **env);
+void			ft_free_str(char ***str);
+char			*ft_getcwd(void);
 char			**ft_sort_mass(char **tmp);
 char			**make_str(t_list **list_env, int size);
 char			**ft_sort_mass(char **tmp);

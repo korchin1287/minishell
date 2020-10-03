@@ -6,36 +6,11 @@
 /*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/13 13:07:07 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/10/02 14:19:30 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/10/03 15:24:24 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
-int		ft_check_left_redirect(char *str, int l)
-{
-	int i;
-	int k;
-
-	i = 0;
-	k = 0;
-	while (str[l++] == '<')
-		i++;
-	k = l - 1;
-	if (str[k] == ' ')
-		k = ft_space(str, k);
-	if (i == 2)
-		write(2, "minishell: syntax error near unexpected token `<'\n", 51);
-	else if (i > 2)
-		write(2, "minishell: syntax error near unexpected token `<<'\n", 52);
-	else if (str[k] == '\0')
-		write(2, "minishell: syntax error near\
-			unexpected token `newline'\n", 57);
-	else if (str[k] == ';' || str[i] == ';')
-		write(2, "minishell: syntax error near unexpected token `;'\n", 51);
-	return (str[k] == ';' || str[i] == ';' ||
-		str[k] == '\0' || i != 1 ? 0 : i);
-}
 
 int		ft_check_end_command(char *str, int l)
 {
@@ -46,7 +21,10 @@ int		ft_check_end_command(char *str, int l)
 	k = 0;
 	while (str[l++] == ';')
 		i++;
-	if (l == 2)
+	k = l - 1;
+	while (str[k] == ' ')
+		k++;
+	if (i == 2 || str[k] == ';')
 		write(2, "minishell: syntax error near unexpected token `;'\n", 51);
 	if (i != 1)
 		write(2, "minishell: syntax error near unexpected token `;;'\n", 52);

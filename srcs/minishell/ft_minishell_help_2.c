@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_minishell_help_2.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/01 13:38:22 by nofloren          #+#    #+#             */
-/*   Updated: 2020/10/02 15:45:22 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/10/02 19:18:40 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,15 @@
 void	ft_exitstatus(t_shell *shell, int flag_exit)
 {
 	char *str1;
+	char *tmp;
 
-	str1 = ft_strjoin("?=", ft_itoa(flag_exit));
+	tmp = ft_itoa(flag_exit);
+	str1 = ft_strjoin("?=", tmp);
 	if (!(ft_check_list_for_export(&shell->lst_before_export, str1)))
 		ft_lstadd_back(&shell->lst_before_export, ft_lstnew2(str1));
 	shell->flag_exit = flag_exit;
+	ft_free_null((void **)&tmp);
+	ft_free_null((void **)&str1);
 }
 
 t_costl	*ft_lstlast3(t_costl *lst)
@@ -36,15 +40,10 @@ void	ft_print_name(void)
 	char *minishell;
 	char *tmp;
 
-	if ((minishell = getcwd(NULL, 0)) == NULL)
-		exit(2);
-	tmp = minishell;
-	minishell = ft_strjoin("\e[32mminishell > ", minishell);
-	ft_free_null(tmp);
-	tmp = minishell;
-	minishell = ft_strjoin(minishell, "\e[0m");
-	ft_free_null(tmp);
+	ft_putstr_fd("\e[32mminishell > ",1);
+	minishell = ft_getcwd(); 
 	ft_putstr_fd(minishell, 1);
+	ft_putstr_fd("\e[0m", 1);
 	ft_putstr_fd("\e[32m > \e[0m", 1);
-	ft_free_null(minishell);
+	ft_free_null((void **)&minishell);
 }

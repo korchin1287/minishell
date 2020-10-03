@@ -6,7 +6,7 @@
 /*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/01 13:25:51 by nofloren          #+#    #+#             */
-/*   Updated: 2020/10/01 15:46:23 by nofloren         ###   ########.fr       */
+/*   Updated: 2020/10/02 19:30:23 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,16 @@ t_list	*ft_lstnew2(char *content)
 
 void	ft_list_create_help(t_list **list_env, char **path, int f_p, int f)
 {
+	char *tmp;
+
+	tmp = ft_getcwd();
 	if (!f_p)
 		ft_lstadd_back(list_env, ft_lstnew2(ft_strjoin("PWD=",
-			getcwd(NULL, 0))));
+			tmp)));
 	if (!f)
 		ft_lstadd_back(list_env, ft_lstnew2("OLDPWD"));
 	free(*path);
+	ft_free_null((void **)&tmp);
 }
 
 void	ft_list_create(t_list **list_env, char **env)
@@ -43,10 +47,13 @@ void	ft_list_create(t_list **list_env, char **env)
 	int		flag;
 	int		flag_pwd;
 	char	*path;
+	char 	*tmp;
 
 	flag = 0;
 	flag_pwd = 0;
-	path = ft_strjoin(":", getcwd(NULL, 0));
+	tmp = ft_getcwd();
+	path = ft_strjoin(":", tmp);
+	ft_free_null((void **)&tmp);
 	i = -1;
 	while (env[++i])
 	{

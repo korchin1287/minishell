@@ -1,21 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_free_null.c                                     :+:      :+:    :+:   */
+/*   ft_check_getcwd.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/09/28 15:07:15 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/10/02 17:13:35 by nofloren         ###   ########.fr       */
+/*   Created: 2020/10/02 16:00:54 by nofloren          #+#    #+#             */
+/*   Updated: 2020/10/02 16:06:02 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../minishell.h"
 
-void	ft_free_null(void **var)
+char	*ft_getcwd(void)
 {
-	void **ptr;
-	ptr = var;
-	free(*ptr);
-	*ptr = NULL;
+	char *ptr;
+
+	if ((ptr = getcwd(NULL, 0)) == NULL)
+		ft_putendl_fd(strerror(errno), 2);
+	return (ptr);
 }

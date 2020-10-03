@@ -6,7 +6,7 @@
 /*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/17 10:08:03 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/10/02 15:40:38 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/10/03 13:59:14 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	ft_end_parse2(t_data *data, t_list_arg *list)
 	i = ft_size_list(data->arg_list);
 	out = make_map(&data->arg_list, i);
 	ft_clear_list(&data->arg_list);
-	ft_free_null(list->arg[0]);
+	ft_free_null((void **)&list->arg[0]);
 	list->arg = out;
 }
 
@@ -36,7 +36,7 @@ char		*ft_parse_arg_list(t_data *data, char *str, int len, int i)
 	ft_parse_arg_loop_list(data, str, &i);
 	ft_add_end(&data->arg_list, ft_add(data, data->out));
 	ft_flag_null(data);
-	ft_free_null(data->out);
+	ft_free_null((void **)&data->out);
 	return (str);
 }
 

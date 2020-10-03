@@ -6,7 +6,7 @@
 /*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/01 12:42:49 by nofloren          #+#    #+#             */
-/*   Updated: 2020/10/01 15:50:51 by nofloren         ###   ########.fr       */
+/*   Updated: 2020/10/02 19:29:10 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int		ft_check_list_for_export(t_list **list, char *str)
 				return (1);
 			tmp_2 = tmp->content;
 			tmp->content = ft_strdup(str);
-			ft_free_null(tmp_2);
+			ft_free_null((void **)&tmp_2);
 			tmp_2 = NULL;
 			return (1);
 		}

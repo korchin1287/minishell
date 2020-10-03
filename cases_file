@@ -1,0 +1,30 @@
+ls | cat -e
+
+ls > t1 -la > t2 | cat -e
+
+cat < qwe
+
+echo "ello ewrqwer" > t1 qweqwe " dffsa" > t2 | cat -e
+
+ls | cat | grep t1
+
+>sdf
+
+
+
+ls | grep m |
+echo "$ "
+ls > file1 | grep m < file1 >file2
+grep m < file1 > file2
+grep m > file2 < file1
+> file2 grep m < file1
+grep e <> file1
+srcs (это папка! Должна быть ошибка и 127)
+unset $PWD
+echo ;    ;   ; echo asda
+echo <  <
+echo |   |
+echo \'
+ echo -n -n -n -n sdfsdf
+ echo " \$USER \' "
+echo     dsf       sdf          dsfsdf

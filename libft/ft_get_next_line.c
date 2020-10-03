@@ -6,7 +6,7 @@
 /*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/04 14:30:49 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/10/01 12:12:08 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/10/03 13:00:10 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,31 +26,30 @@ static char			*join(char **line, char *buf, int *read_size)
 	}
 	if ((*line = ft_strjoin(*line, c)) == NULL)
 	{
-		ft_free_null(tmp);
+		ft_free_null((void **)&tmp);
 		return (NULL);
 	}
-	ft_free_null(tmp);
+	ft_free_null((void **)&tmp);
 	return (*line);
 }
 
 int					ft_get_next_line(int fd, char **line)
 {
-	char		buf[2];
 	int			flag;
 	int			read_size;
 
 	flag = 1;
 	if ((*line = ft_strdup("")) == NULL)
 		return (-1);
-	ft_bzero(buf, 1);
-	while (flag == 1 && ((read_size = read(fd, buf, 1)) || buf[0] != '\0'))
+	ft_bzero(g_buf, 1);
+	while (flag == 1 && ((read_size = read(fd, g_buf, 1)) || g_buf[0] != '\0'))
 	{
-		if (buf[0] == '\n')
+		if (g_buf[0] == '\n')
 		{
-			buf[0] = '\0';
+			g_buf[0] = '\0';
 			flag = 0;
 		}
-		if (join(line, buf, &read_size) == NULL)
+		if (join(line, g_buf, &read_size) == NULL)
 			return (-1);
 	}
 	return (read_size);

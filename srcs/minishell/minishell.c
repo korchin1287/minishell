@@ -6,7 +6,7 @@
 /*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/07 15:46:34 by nofloren          #+#    #+#             */
-/*   Updated: 2020/10/01 15:34:47 by nofloren         ###   ########.fr       */
+/*   Updated: 2020/10/02 19:26:06 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,7 @@ static void	ft_before_while(t_shell *shell, char **env)
 static void	ft_while_help(t_shell *shell)
 {
 	if (shell->costl)
-	{
-		free(shell->costl);
-		shell->costl = NULL;
-	}
+		ft_free_null((void **)&shell->costl);
 	if (shell->list_arg->flag_end == 1)
 		shell->j = 0;
 	ft_parse_list_line(shell, shell->list_arg);
@@ -90,7 +87,7 @@ int			main(int argc, char **argv, char **env)
 	ft_before_while(&shell, env);
 	while (1)
 	{
-		if (!ft_read_info(&shell))
+		if (!ft_read_info(&shell)) 
 			continue;
 		shell.j = 0;
 		while (shell.list_arg)

@@ -6,7 +6,7 @@
 /*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/08 12:47:52 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/10/02 14:23:15 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/10/03 13:59:19 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ char		*ft_parse_arg(t_data *data, char *str, int len, int i)
 		ft_flag_null(data);
 		ft_add_end(&data->arg_list, ft_add(data, data->out));
 	}
-	ft_free_null(data->out);
+	ft_free_null((void **)&data->out);
 	return (str);
 }
 

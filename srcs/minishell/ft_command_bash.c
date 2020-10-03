@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_command_bash.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/18 18:18:12 by nofloren          #+#    #+#             */
-/*   Updated: 2020/10/01 15:22:06 by nofloren         ###   ########.fr       */
+/*   Updated: 2020/10/03 12:58:22 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int		ft_command_bash_help(t_shell *shell, char **env)
 
 	k = 0;
 	ft_get_path(shell, env);
-	while (shell->str_path[k])
+	while (shell->str_path && shell->str_path[k])
 	{
 		dir = opendir(shell->str_path[k]);
 		if (!dir)
@@ -61,6 +61,7 @@ void	ft_command_bash(t_shell *shell)
 	shell->flag_command_bash = 0;
 	if ((k = ft_command_bash_help(shell, env)) > -1)
 	{
+		shell->flag_stat = 1;
 		if (shell->flag_command_bash_not == 0 &&
 			(shell->list_arg->flag_pipe == 1 ||
 			shell->list_arg->flag_redir_one == 1 ||
@@ -74,5 +75,6 @@ void	ft_command_bash(t_shell *shell)
 	if (shell->flag_command_bash == 0)
 		ft_command_bash_help1(shell, env);
 	ft_exitstatus(shell, shell->flag_exit);
-	ft_free_null(env);
+	ft_free_str(&env);
+	ft_free_str(&shell->str_path);
 }

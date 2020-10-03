@@ -6,7 +6,7 @@
 /*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/01 13:35:10 by nofloren          #+#    #+#             */
-/*   Updated: 2020/10/01 15:26:04 by nofloren         ###   ########.fr       */
+/*   Updated: 2020/10/02 19:20:01 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ void		ft_shell_init(t_shell *shell)
 	shell->list_env = NULL;
 	shell->tmp_arg = NULL;
 	shell->list_arg = NULL;
+	shell->str_path = NULL;
 	shell->flag_command_bash_not = 0;
 	shell->costl = NULL;
 	shell->flag_exit = 0;
@@ -73,6 +74,7 @@ void		ft_shell_init(t_shell *shell)
 	shell->savestdin = dup(0);
 	shell->sevestdout = dup(1);
 	shell->flag_redirect = 0;
+	shell->flag_stat = 0;
 }
 
 int			ft_what_command(t_shell *shell)

@@ -6,7 +6,7 @@
 /*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/18 17:05:52 by nofloren          #+#    #+#             */
-/*   Updated: 2020/10/01 14:25:46 by nofloren         ###   ########.fr       */
+/*   Updated: 2020/10/02 18:36:38 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,16 @@
 void	ft_command_cd_help2(t_shell *shell, char **tmp, int flag_pwd)
 {
 	t_list	*tmp2;
+	char	*tmp3;
 
 	tmp2 = shell->list_env;
+	tmp3 = ft_getcwd();
 	while (tmp2)
 	{
 		if (!(ft_strncmp(tmp2->content, "PWD=", 4)))
 		{
-			tmp2->content = ft_strjoin("PWD=", getcwd(NULL, 0));
+			ft_free_null((void **)&tmp2->content);
+			tmp2->content = ft_strjoin("PWD=", tmp3);
 			flag_pwd = 1;
 			break ;
 		}
@@ -29,15 +32,19 @@ void	ft_command_cd_help2(t_shell *shell, char **tmp, int flag_pwd)
 	}
 	if (flag_pwd == 0)
 		ft_lstadd_back(&shell->lst_before_export, ft_lstnew2(ft_strjoin("PWD=",
-			getcwd(NULL, 0))));
+			tmp3)));
 	tmp2 = shell->list_env;
 	while (tmp2)
 	{
 		if (((ft_strncmp(tmp2->content, "OLDPWD=", 7)) == 0) ||
 			(ft_strcmp("OLDPWD", tmp2->content) == 0))
-			tmp2->content = ft_strjoin("OLDPWD=", (*tmp));
+			{
+				ft_free_null((void **)&tmp2->content);
+				tmp2->content = ft_strjoin("OLDPWD=", (*tmp));
+			}
 		tmp2 = tmp2->next;
 	}
+	ft_free_null((void **)&tmp3);
 }
 
 int		ft_command_cd_help1(t_shell *shell, t_list *tmp2, int flag)
@@ -53,6 +60,7 @@ int		ft_command_cd_help1(t_shell *shell, t_list *tmp2, int flag)
 				free(shell->list_arg->arg[shell->j - 1]);
 				shell->list_arg->arg[shell->j - 1] =
 					ft_strdup(&tmp2->content[5]);
+					
 				shell->j--;
 				break ;
 			}
@@ -94,5 +102,6 @@ void	ft_command_cd(t_shell *shell)
 		shell->flag_cd = 0;
 		ft_command_cd_help2(shell, &tmp, 0);
 	}
+	ft_free_null((void **)&tmp);
 	ft_exitstatus(shell, 0);
 }

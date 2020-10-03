@@ -6,7 +6,7 @@
 /*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/18 18:11:39 by nofloren          #+#    #+#             */
-/*   Updated: 2020/10/01 15:52:16 by nofloren         ###   ########.fr       */
+/*   Updated: 2020/10/02 17:27:48 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@ static void		ft_unset_help_3(t_list *tmp, t_list **list)
 		*list = tmp->next;
 	else
 		*list = NULL;
-	ft_free_null(tmp->content);
-	ft_free_null(tmp);
+	ft_free_null((void **)&tmp->content);
+	ft_free_null((void **)&tmp);
 }
 
 int				ft_unset(t_shell *shell, char **str, t_list **list)

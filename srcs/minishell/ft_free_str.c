@@ -1,21 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_free_null.c                                     :+:      :+:    :+:   */
+/*   ft_free_str.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/09/28 15:07:15 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/10/02 17:13:35 by nofloren         ###   ########.fr       */
+/*   Created: 2020/10/02 16:24:20 by nofloren          #+#    #+#             */
+/*   Updated: 2020/10/02 16:51:04 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../minishell.h"
 
-void	ft_free_null(void **var)
+void	ft_free_str(char ***str)
 {
-	void **ptr;
-	ptr = var;
-	free(*ptr);
-	*ptr = NULL;
+	char	*tmp;
+	int		i;
+
+	i = 0;
+	if (!(*str))
+		return ;
+	while ((*str)[i])
+	{
+		tmp = (*str)[i];
+		i++;
+		free(tmp);
+		tmp = NULL;
+	}
+	*str = NULL;
 }
