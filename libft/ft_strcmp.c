@@ -6,7 +6,7 @@
 /*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/08 13:08:30 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/09/08 13:12:55 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/10/04 16:44:04 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,5 @@ int	ft_strcmp(char *s1, char *s2)
 	}
 	if (s1[i] || s2[i])
 		return (s1[i] - s2[i]);
-	return 0;
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/01 14:11:35 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/10/04 16:06:45 by nofloren         ###   ########.fr       */
+/*   Updated: 2020/10/04 18:10:58 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int	ft_return(char *str, int i, int k)
 	return (i);
 }
 
-int		ft_check_left_redirect(char *str, int l)
+int			ft_check_left_redirect(char *str, int l)
 {
 	int i;
 	int k;

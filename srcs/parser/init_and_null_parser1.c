@@ -6,7 +6,7 @@
 /*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/27 14:39:11 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/10/04 16:25:44 by nofloren         ###   ########.fr       */
+/*   Updated: 2020/10/04 18:11:01 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void	ft_flag_null(t_data *data)
 	data->parser.flag_disable_char = 0;
 	data->parser.flag_disable_dollar = 0;
 }
+
 void	ft_init_parse(t_shell *shell, t_data *data)
 {
 	data->arg_list = NULL;
@@ -43,6 +44,7 @@ void	ft_init_parse(t_shell *shell, t_data *data)
 	data->before_export = shell->lst_before_export;
 	ft_flag_null(data);
 }
+
 char	*ft_init_parse_line(t_shell *shell, t_data *data, char *line)
 {
 	int		i;
