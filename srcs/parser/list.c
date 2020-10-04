@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   list.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/13 12:45:04 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/10/03 16:13:38 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/10/04 16:17:25 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ t_list_arg	*ft_add_lst(t_data *data, char **str)
 
 	new = (t_list_arg *)ft_malloc(sizeof(t_list_arg), 1);
 	new->arg = str;
+	new->arg2 = NULL;
 	new->flag_redir_one = data->parser.flag_redir_one;
 	new->flag_redir_two = data->parser.flag_redir_two;
 	new->flag_redir_one_left = data->parser.flag_redir_one_left;

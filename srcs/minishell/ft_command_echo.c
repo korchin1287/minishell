@@ -6,7 +6,7 @@
 /*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/18 17:58:13 by nofloren          #+#    #+#             */
-/*   Updated: 2020/10/01 14:39:01 by nofloren         ###   ########.fr       */
+/*   Updated: 2020/10/04 15:39:03 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ void		ft_command_echo(t_shell *shell)
 	if (shell->list_arg->arg[shell->j])
 	{
 		flag_n = 0;
-		if (shell->list_arg->arg[shell->j] &&
-			(ft_strcmp(shell->list_arg->arg[shell->j], "-n") == 0))
+		while ((shell->list_arg->arg[shell->j] &&
+			(ft_strcmp(shell->list_arg->arg[shell->j], "-n") == 0)))
 		{
 			flag_n = 1;
 			shell->j++;

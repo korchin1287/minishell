@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/07 15:46:34 by nofloren          #+#    #+#             */
-/*   Updated: 2020/10/04 11:56:16 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/10/04 15:37:11 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@ void		command_minishell(t_shell *shell)
 		ft_command_export(shell);
 	else if ((ft_strcmp(shell->list_arg->arg[shell->j], "cd")) == 0)
 		ft_command_cd(shell);
-	else if ((ft_strcmp(shell->list_arg->arg[shell->j], "pwd")) == 0)
+	else if ((ft_strcmp(shell->list_arg->arg2[shell->j], "pwd")) == 0)
 		ft_command_pwd(shell);
-	else if ((ft_strcmp(shell->list_arg->arg[shell->j], "env")) == 0)
+	else if ((ft_strcmp(shell->list_arg->arg2[shell->j], "env")) == 0)
 		ft_command_env(shell);
-	else if ((ft_strcmp(shell->list_arg->arg[shell->j], "echo")) == 0)
+	else if ((ft_strcmp(shell->list_arg->arg2[shell->j], "echo")) == 0)
 		ft_command_echo(shell);
 	else if ((ft_strcmp(shell->list_arg->arg[shell->j], "exit")) == 0)
 		ft_exit(shell);
@@ -44,13 +44,12 @@ static void	ft_before_while(t_shell *shell, char **env)
 
 static void	ft_while_help(t_shell *shell)
 {
-	if (shell->list_arg->flag_end == 1)
-		shell->j = 0;
 	ft_parse_list_line(shell, &shell->list_arg);
 	ft_add_list_before_export(shell);
-	if (shell->list_arg->arg[shell->j] || (!shell->list_arg->arg[shell->j] &&
-		(shell->list_arg->flag_pipe == 1 || shell->list_arg->flag_redir_one == 1
-		|| shell->list_arg->flag_redir_two == 1)))
+	if ((shell->list_arg->arg[shell->j]) ||
+		(!shell->list_arg->arg[shell->j] &&	(shell->list_arg->flag_pipe == 1 || 
+		shell->list_arg->flag_redir_one == 1 ||
+		shell->list_arg->flag_redir_two == 1)))
 	{
 		if (shell->list_arg->flag_pipe == 1)
 			shell->flag_exit = ft_make_with_pipe(shell);
@@ -92,6 +91,7 @@ int			main(int argc, char **argv, char **env)
 			{
 				dup2(shell.savestdin, 0);
 				dup2(shell.sevestdout, 1);
+				shell.j = 0;
 			}
 			shell.list_arg = shell.list_arg->next;
 		}

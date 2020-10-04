@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_arg2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/01 14:11:35 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/10/04 12:40:31 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/10/04 16:06:45 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int		ft_check_left_redirect(char *str, int l)
 	k = l - 1;
 	if (str[k] == ' ')
 		k = ft_space(str, k);
-	if (i == 2 || str[k] == '|')
+	if (i == 2 || str[k] == '<')
 		write(2, "minishell: syntax error near unexpected token `<'\n", 51);
 	else if (i > 2)
 		write(2, "minishell: syntax error near unexpected token `<<'\n", 52);
