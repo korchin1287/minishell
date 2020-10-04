@@ -6,7 +6,7 @@
 /*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/17 10:08:03 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/10/03 17:53:20 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/10/04 14:12:46 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,22 @@ char		*ft_parse_arg_list(t_data *data, char *str, int len, int i)
 	ft_free_null((void **)&data->out);
 	return (str);
 }
+void		ft_change_register(t_list_arg *list)
+{
+	int i;
 
+	i = 0;
+	list->arg2 = ft_two_ar_dup(list->arg);
+	while (list->arg2[0][i])
+	{
+		if (ft_isalpha(list->arg2[0][i]))
+		{
+			list->arg2[0][i] = ft_tolower(list->arg2[0][i]);
+		}
+		i++;
+	}
+	
+}
 void		ft_parse_list_line(t_shell *shell, t_list_arg **list)
 {
 	t_data	data;
@@ -50,11 +65,6 @@ void		ft_parse_list_line(t_shell *shell, t_list_arg **list)
 	i = 0;
 	k = 0;
 	ft_init_parse(shell, &data);
-	// data->arg_list = NULL;
-	// data->list = &shell->list_arg;
-	// data->env = shell->list_env;
-	// data->before_export = shell->lst_before_export;
-	// ft_flag_null(data);
 	data.list = list;
 	while ((*list)->arg[0][i] != '\0')
 	{
@@ -67,4 +77,5 @@ void		ft_parse_list_line(t_shell *shell, t_list_arg **list)
 		ft_add_end(&data.arg_list, ft_add(&data, ""));
 	ft_free_str(&(*list)->arg);
 	(*list)->arg = ft_end_parse2(&data);
+	ft_change_register(*list);
 }

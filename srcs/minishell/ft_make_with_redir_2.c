@@ -6,7 +6,7 @@
 /*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/29 20:06:34 by nofloren          #+#    #+#             */
-/*   Updated: 2020/10/03 16:49:05 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/10/04 11:52:50 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void		ft_make_first_argv_help(t_shell *shell, char **str)
 		tmp = tmp->next;
 	}
 	str[i] = NULL;
-	ft_free_null((void **)&shell->list_arg->arg);
+	ft_free_str(&shell->list_arg->arg);
 	shell->list_arg->arg = str;
 }
 

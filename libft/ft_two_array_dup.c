@@ -1,32 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_free_str.c                                      :+:      :+:    :+:   */
+/*   ft_two_array_dup.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/02 16:24:20 by nofloren          #+#    #+#             */
-/*   Updated: 2020/10/03 20:38:01 by nofloren         ###   ########.fr       */
+/*   Created: 2020/10/04 13:47:03 by ndreadno          #+#    #+#             */
+/*   Updated: 2020/10/04 14:14:23 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "libft.h"
 
-void	ft_free_str(char ***str)
+char	**ft_two_ar_dup(char **str)
 {
-	char	*tmp;
 	int		i;
+	char	**res;
 
 	i = 0;
-	if (!(*str))
-		return ;
-	while ((*str)[i])
-	{
-		tmp = (*str)[i];
+	while (str[i])
 		i++;
-		free(tmp);
-		tmp = NULL;
-	}
-	free(*str);
-	*str = NULL;
+	res = ft_malloc(sizeof(char *), i + 1);
+	i = -1;
+	while (str[++i])
+		res[i] = ft_strdup(str[i]);
+	res[i] = NULL;
+	return (res);
 }

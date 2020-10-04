@@ -6,7 +6,7 @@
 /*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/13 13:07:07 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/10/03 15:24:24 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/10/04 12:35:41 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int		ft_check_end_command(char *str, int l)
 		write(2, "minishell: syntax error near unexpected token `;'\n", 51);
 	if (i != 1)
 		write(2, "minishell: syntax error near unexpected token `;;'\n", 52);
-	return (i != 1 || l == 2 ? 0 : i);
+	return (i != 1 || l == 2 || str[k] == '|' ? 0 : i);
 }
 
 int		ft_check_pipe(char *str, int l)
@@ -45,7 +45,7 @@ int		ft_check_pipe(char *str, int l)
 	k = l - 1;
 	if (str[k] == ' ')
 		k = ft_space(str, k);
-	if ((i > 1 && i <= 3) || j == 0)
+	if ((i > 1 && i <= 3) || j == 0 || str[k] == '|')
 		write(2, "minishell: syntax error near unexpected token `|'\n", 51);
 	else if (i >= 2 && j == 0)
 		write(2, "minishell: syntax error near unexpected token `||'\n", 52);
@@ -54,7 +54,7 @@ int		ft_check_pipe(char *str, int l)
 	else if (str[k] == '\0')
 		write(2, "minishell: syntax error multiline command\n", 43);
 	return (str[k] == '\0' || str[i] == ';' || str[k] == ';'
-			|| i > 1 || j == 0 ? 0 : i);
+			|| i > 1 || j == 0 || str[k] == '|' ? 0 : i);
 }
 
 int		ft_check_arg(t_data *data, char *str, int *k)

@@ -6,7 +6,7 @@
 /*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/01 14:11:35 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/10/03 15:15:49 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/10/04 12:40:31 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static int	ft_return(char *str, int i, int k)
 {
 	if (str[k] == '\0' || str[i] == ';' || str[k] == ';' || str[i] == '<' ||
 		((str[i] == '|' || str[k] == '|') && (i > 1 || str[i + 1] == '\0'))
-			|| str[k] == '<' || i > 2)
+			|| str[k] == '<' || i > 2 || str[k] == '>')
 		return (0);
 	return (i);
 }
@@ -33,7 +33,7 @@ int		ft_check_left_redirect(char *str, int l)
 	k = l - 1;
 	if (str[k] == ' ')
 		k = ft_space(str, k);
-	if (i == 2)
+	if (i == 2 || str[k] == '|')
 		write(2, "minishell: syntax error near unexpected token `<'\n", 51);
 	else if (i > 2)
 		write(2, "minishell: syntax error near unexpected token `<<'\n", 52);
@@ -43,7 +43,7 @@ int		ft_check_left_redirect(char *str, int l)
 	else if (str[k] == ';' || str[i] == ';')
 		write(2, "minishell: syntax error near unexpected token `;'\n", 51);
 	return (str[k] == ';' || str[i] == ';' ||
-		str[k] == '\0' || i != 1 ? 0 : i);
+		str[k] == '\0' || i != 1 || str[k] == '<' ? 0 : i);
 }
 
 int			ft_check_redirect(char *str, int l)
@@ -58,7 +58,7 @@ int			ft_check_redirect(char *str, int l)
 	k = l - 1;
 	if (str[k] == ' ')
 		k = ft_space(str, k);
-	if (i == 3)
+	if (i == 3 || str[k] == '>')
 		write(2, "minishell: syntax error near unexpected token `>'\n", 51);
 	else if (i > 3)
 		write(2, "minishell: syntax error near unexpected token `>>'\n", 52);

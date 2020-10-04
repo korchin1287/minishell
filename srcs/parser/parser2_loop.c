@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser2_loop.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/01 15:16:07 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/10/01 20:27:13 by nofloren         ###   ########.fr       */
+/*   Updated: 2020/10/04 12:52:31 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,7 @@ static int	ft_loop_qoutes(t_data *data, char *str, int *l, char c)
 			i += 1;
 			data->out[(*l)++] = str[(i)++];
 		}
-		else if (str[i] == '$' && ((i && str[i - 1] != '\\') || i == 0) &&
-			str[i + 1] != '\0' &&
-			str[i + 1] != '\\' && str[i + 1] != '\"' && c != '\'')
+		else if (ft_condition_check(str, &i, 2) && c != '\'')
 			i += ft_dollar(data, &str[i], data->out, l);
 		else
 		{

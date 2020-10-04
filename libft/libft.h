@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/12 13:28:21 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/10/03 15:35:59 by nofloren         ###   ########.fr       */
+/*   Updated: 2020/10/04 14:02:01 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ int		ft_strncmp(const char *str1, const char *str2, size_t n);
 char	*ft_itoa(int n);
 char	*ft_strdup(const char *src);
 char	**ft_split(char const *s, char c);
+char	**ft_two_ar_dup(char **str);
 char	*ft_strchr(const char *str, int ch);
 char	*ft_strrchr(const char *str, int ch);
 char	*ft_strjoin(char const *s1, char const *s2);

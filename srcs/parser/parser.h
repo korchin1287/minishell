@@ -6,7 +6,7 @@
 /*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/10 16:28:59 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/10/03 17:50:05 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/10/04 13:04:38 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 typedef struct	s_list_arg
 {
 	char				**arg;
+	char				**arg2;
 	int					flag_redir_one;
 	int					flag_redir_two;
 	int					flag_redir_one_left;

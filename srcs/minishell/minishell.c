@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/07 15:46:34 by nofloren          #+#    #+#             */
-/*   Updated: 2020/10/03 18:05:50 by nofloren         ###   ########.fr       */
+/*   Updated: 2020/10/04 11:56:16 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,6 @@ static void	ft_before_while(t_shell *shell, char **env)
 
 static void	ft_while_help(t_shell *shell)
 {
-	if (shell->costl)
-		ft_free_null((void **)&shell->costl);
 	if (shell->list_arg->flag_end == 1)
 		shell->j = 0;
 	ft_parse_list_line(shell, &shell->list_arg);
@@ -71,6 +69,7 @@ static void	ft_end_while(t_shell *shell)
 	dup2(shell->savestdin, 0);
 	dup2(shell->sevestdout, 1);
 	ft_print_name();
+	ft_free_null((void **)&shell->costl);
 	ft_clear_lst(&shell->tmp_arg);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_command_bash.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/18 18:18:12 by nofloren          #+#    #+#             */
-/*   Updated: 2020/10/03 16:12:49 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/10/03 20:39:55 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,10 @@ int		ft_command_bash_help(t_shell *shell, char **env)
 		while ((entry = readdir(dir)) != NULL)
 		{
 			if ((ft_strcmp(shell->list_arg->arg[shell->j], entry->d_name)) == 0)
+			{
+				closedir(dir);
 				return (k);
+			}
 		}
 		closedir(dir);
 		k++;

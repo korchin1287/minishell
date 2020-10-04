@@ -6,7 +6,7 @@
 /*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/27 15:10:46 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/10/01 16:13:37 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/10/04 12:51:41 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	ft_condition_check(char *str, int *i, int flag_cond)
 		return (1);
 	if (flag_cond == 2 && str[*i] == '$' &&
 		((i && str[*i - 1] != '\\') || i == 0) && str[*i + 1] != '\0' &&
-			str[*i + 1] != '\'' && str[*i + 1] != '\"' && str[*i + 1])
+			str[*i + 1] != '\'' && str[*i + 1] != '\"' && str[*i + 1] != ' ')
 		return (1);
 	if (flag_cond == 3 && str[*i] == '~' &&
 		(str[*i + 1] == '\0' || str[*i + 1] == ' ' || str[*i + 1] == '/') &&

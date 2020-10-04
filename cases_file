@@ -28,3 +28,5 @@ echo \'
  echo -n -n -n -n sdfsdf
  echo " \$USER \' "
 echo     dsf       sdf          dsfsdf
+echo $PWD; cd ..; $PWD
+echo ; ls

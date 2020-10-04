@@ -6,7 +6,7 @@
 /*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/28 17:26:06 by nofloren          #+#    #+#             */
-/*   Updated: 2020/10/03 16:12:45 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/10/04 14:24:54 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,19 +26,5 @@ void	ft_command_bash_help1(t_shell *shell, char **env)
 		shell->flag_exit = ft_execve(shell, path, env);
 	else
 		shell->flag_exit = ft_pork(shell, path, env);
-	if ((dir = opendir(shell->list_arg->arg[shell->j])))
-	{
-		ft_putstr_fd("minishell: ", 2);
-		ft_putstr_fd(shell->list_arg->arg[shell->j], 2);
-		ft_putendl_fd(": is a directory", 2);
-		ft_exitstatus(shell, 126);
-		closedir(dir);
-	}
-	else if (shell->flag_exit == 255|| shell->flag_stat == 1)
-	{
-		shell->flag_exit = 127;
-		ft_putstr_fd("minishell: ", 2);
-		ft_putstr_fd(shell->list_arg->arg[shell->j], 2);
-		ft_putendl_fd(": command not found", 2);
-	}
+	ft_exitstatus(shell, shell->flag_exit);
 }
