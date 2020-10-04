@@ -6,7 +6,7 @@
 /*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/18 16:26:17 by nofloren          #+#    #+#             */
-/*   Updated: 2020/10/04 15:36:38 by nofloren         ###   ########.fr       */
+/*   Updated: 2020/10/04 17:08:49 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ static void	ft_print_export(t_shell *shell)
 	map = make_str(&shell->list_env, ft_lstsize(shell->list_env));
 	tmp = ft_sort_mass(map);
 	ft_free_str(&map);
-	i = 0;
-	while (tmp[i])
+	i = -1;
+	while (tmp[++i])
 	{
 		len = ft_strlen_3(&tmp[i][0], '=');
 		ft_putstr_fd("declare -x ", 1);
@@ -38,7 +38,6 @@ static void	ft_print_export(t_shell *shell)
 			write(1, "\"", 1);
 		}
 		write(1, "\n", 1);
-		i++;
 	}
 }
 

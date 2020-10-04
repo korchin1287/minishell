@@ -6,7 +6,7 @@
 /*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/22 20:30:10 by nofloren          #+#    #+#             */
-/*   Updated: 2020/10/04 15:50:14 by nofloren         ###   ########.fr       */
+/*   Updated: 2020/10/04 16:43:34 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int		ft_read_info(t_shell *shell)
 {
-	int	k;
-	char *tmp;
+	int		k;
+	char	*tmp;
 
 	g_line = NULL;
 	if ((k = ft_get_next_line(0, &g_line)) > 0)

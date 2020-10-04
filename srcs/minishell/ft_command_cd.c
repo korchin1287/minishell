@@ -6,13 +6,27 @@
 /*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/18 17:05:52 by nofloren          #+#    #+#             */
-/*   Updated: 2020/10/03 17:04:43 by nofloren         ###   ########.fr       */
+/*   Updated: 2020/10/04 17:07:45 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	ft_command_cd_help2(t_shell *shell, char **tmp, int flag_pwd)
+static void	ft_command_cd_help3(t_shell *shell, t_list *tmp2, char **tmp)
+{
+	while (tmp2)
+	{
+		if (((ft_strncmp(tmp2->content, "OLDPWD=", 7)) == 0) ||
+			(ft_strcmp("OLDPWD", tmp2->content) == 0))
+		{
+			ft_free_null((void **)&tmp2->content);
+			tmp2->content = ft_strjoin("OLDPWD=", (*tmp));
+		}
+		tmp2 = tmp2->next;
+	}
+}
+
+void		ft_command_cd_help2(t_shell *shell, char **tmp, int flag_pwd)
 {
 	t_list	*tmp2;
 	char	*tmp3;
@@ -34,20 +48,11 @@ void	ft_command_cd_help2(t_shell *shell, char **tmp, int flag_pwd)
 		ft_lstadd_back(&shell->lst_before_export, ft_lstnew2(ft_strjoin("PWD=",
 			tmp3)));
 	tmp2 = shell->list_env;
-	while (tmp2)
-	{
-		if (((ft_strncmp(tmp2->content, "OLDPWD=", 7)) == 0) ||
-			(ft_strcmp("OLDPWD", tmp2->content) == 0))
-			{
-				ft_free_null((void **)&tmp2->content);
-				tmp2->content = ft_strjoin("OLDPWD=", (*tmp));
-			}
-		tmp2 = tmp2->next;
-	}
+	ft_command_cd_help3(shell, tmp2, tmp);
 	ft_free_null((void **)&tmp3);
 }
 
-int		ft_command_cd_help1(t_shell *shell, t_list *tmp2, int flag)
+int			ft_command_cd_help1(t_shell *shell, t_list *tmp2, int flag)
 {
 	tmp2 = shell->list_env;
 	if (!shell->list_arg->arg[shell->j])
@@ -60,7 +65,6 @@ int		ft_command_cd_help1(t_shell *shell, t_list *tmp2, int flag)
 				free(shell->list_arg->arg[shell->j - 1]);
 				shell->list_arg->arg[shell->j - 1] =
 					ft_strdup(&tmp2->content[5]);
-					
 				shell->j--;
 				break ;
 			}
@@ -76,7 +80,17 @@ int		ft_command_cd_help1(t_shell *shell, t_list *tmp2, int flag)
 	return (0);
 }
 
-void	ft_command_cd(t_shell *shell)
+static void	ft_command_cd_help(t_shell *shell, char **tmp)
+{
+	ft_putstr_fd("minishell: cd: ", 2);
+	ft_putstr_fd(shell->list_arg->arg[shell->j], 2);
+	ft_putstr_fd(": ", 2);
+	ft_putendl_fd(strerror(errno), 2);
+	ft_free_null((void **)&(*tmp));
+	ft_exitstatus(shell, 1);
+}
+
+void		ft_command_cd(t_shell *shell)
 {
 	int		k;
 	char	*tmp;
@@ -90,12 +104,7 @@ void	ft_command_cd(t_shell *shell)
 	if (shell->list_arg->arg[shell->j] &&
 		(k = chdir(shell->list_arg->arg[shell->j])) == -1)
 	{
-		ft_putstr_fd("minishell: cd: ", 2);
-		ft_putstr_fd(shell->list_arg->arg[shell->j], 2);
-		ft_putstr_fd(": ", 2);
-		ft_putendl_fd(strerror(errno), 2);
-		ft_free_null((void **)&tmp);
-		ft_exitstatus(shell, 1);
+		ft_command_cd_help(shell, &tmp);
 		return ;
 	}
 	else

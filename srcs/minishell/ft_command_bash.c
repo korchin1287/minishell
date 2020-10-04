@@ -6,7 +6,7 @@
 /*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/18 18:18:12 by nofloren          #+#    #+#             */
-/*   Updated: 2020/10/04 15:22:56 by nofloren         ###   ########.fr       */
+/*   Updated: 2020/10/04 16:41:34 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,8 @@ int		ft_command_bash_help(t_shell *shell, char **env)
 		while ((entry = readdir(dir)) != NULL)
 		{
 			if ((ft_strcmp(shell->list_arg->arg[shell->j], entry->d_name)) == 0
-				|| (ft_strcmp(shell->list_arg->arg2[shell->j], entry->d_name)) == 0)
+				|| (ft_strcmp(shell->list_arg->arg2[shell->j], entry->d_name))
+				== 0)
 			{
 				closedir(dir);
 				return (k);

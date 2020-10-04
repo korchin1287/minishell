@@ -6,7 +6,7 @@
 /*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/01 13:25:51 by nofloren          #+#    #+#             */
-/*   Updated: 2020/10/03 17:58:29 by nofloren         ###   ########.fr       */
+/*   Updated: 2020/10/04 16:43:14 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	ft_list_create(t_list **list_env, char **env)
 	int		flag;
 	int		flag_pwd;
 	char	*path;
-	char 	*tmp;
+	char	*tmp;
 
 	flag = 0;
 	flag_pwd = 0;

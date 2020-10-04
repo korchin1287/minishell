@@ -6,7 +6,7 @@
 /*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/07 15:46:34 by nofloren          #+#    #+#             */
-/*   Updated: 2020/10/04 15:37:11 by nofloren         ###   ########.fr       */
+/*   Updated: 2020/10/04 16:39:51 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ static void	ft_while_help(t_shell *shell)
 {
 	ft_parse_list_line(shell, &shell->list_arg);
 	ft_add_list_before_export(shell);
-	if ((shell->list_arg->arg[shell->j]) ||
-		(!shell->list_arg->arg[shell->j] &&	(shell->list_arg->flag_pipe == 1 || 
+	if (shell->list_arg->arg[shell->j] || (!shell->list_arg->arg[shell->j]
+		&& (shell->list_arg->flag_pipe == 1 ||
 		shell->list_arg->flag_redir_one == 1 ||
 		shell->list_arg->flag_redir_two == 1)))
 	{
@@ -81,7 +81,7 @@ int			main(int argc, char **argv, char **env)
 	ft_before_while(&shell, env);
 	while (1)
 	{
-		if (!ft_read_info(&shell)) 
+		if (!ft_read_info(&shell))
 			continue;
 		shell.j = 0;
 		while (shell.list_arg)

@@ -6,13 +6,13 @@
 /*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/01 13:33:15 by nofloren          #+#    #+#             */
-/*   Updated: 2020/10/03 17:44:44 by nofloren         ###   ########.fr       */
+/*   Updated: 2020/10/04 16:40:58 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-static void		ft_clear_list2(t_list **head)
+static void	ft_clear_list2(t_list **head)
 {
 	t_list *tmp;
 
