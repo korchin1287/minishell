@@ -30,3 +30,5 @@ echo \'
 echo     dsf       sdf          dsfsdf
 echo $PWD; cd ..; $PWD
 echo ; ls
+
+pwd ;;

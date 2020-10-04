@@ -6,7 +6,7 @@
 /*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/21 21:49:33 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/10/03 15:31:36 by nofloren         ###   ########.fr       */
+/*   Updated: 2020/10/04 19:36:39 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,10 @@
 static void	ft_sigint(int signal)
 {
 	if (g_process != 0)
+	{
+		write(1, "\n", 1);
 		kill(g_process, signal);
+	}
 	if (g_process == 0)
 	{
 		if (g_line && ft_strlen(g_line))
@@ -37,8 +40,9 @@ static void	ft_sigquit(int signal)
 	{
 		kill(g_process, signal);
 		write(1, "Quit: 3\n", 8);
-		ft_print_name();
 	}
+	if (g_process == 0)
+		write(1, "\b\b", 2);
 	g_process = 0;
 }
 
