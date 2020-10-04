@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_arg.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/13 13:07:07 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/10/04 12:35:41 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/10/04 15:58:37 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int		ft_check_end_command(char *str, int l)
 		write(2, "minishell: syntax error near unexpected token `;'\n", 51);
 	if (i != 1)
 		write(2, "minishell: syntax error near unexpected token `;;'\n", 52);
-	return (i != 1 || l == 2 || str[k] == '|' ? 0 : i);
+	return (i != 1 || l == 2 || str[k] == ';' ? 0 : i);
 }
 
 int		ft_check_pipe(char *str, int l)

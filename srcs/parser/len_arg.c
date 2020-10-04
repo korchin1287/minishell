@@ -6,7 +6,7 @@
 /*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/27 15:24:23 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/10/03 13:59:29 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/10/04 16:41:22 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int			ft_len_arg(t_shell *shell, t_data *data, char *str, int *i)
 			return (-1);
 		}
 	}
-	if (str[*i] == '|' && str[*i + 1] != '|')
+	if (str[*i] == '|' && str[*i + 1] != '|' && str[*i + 1])
 		(*i)++;
 	return (len);
 }

@@ -6,7 +6,7 @@
 /*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/17 10:08:03 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/10/04 14:12:46 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/10/04 16:42:21 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ char		*ft_parse_arg_list(t_data *data, char *str, int len, int i)
 	ft_free_null((void **)&data->out);
 	return (str);
 }
+
 void		ft_change_register(t_list_arg *list)
 {
 	int i;
@@ -52,8 +53,8 @@ void		ft_change_register(t_list_arg *list)
 		}
 		i++;
 	}
-	
 }
+
 void		ft_parse_list_line(t_shell *shell, t_list_arg **list)
 {
 	t_data	data;

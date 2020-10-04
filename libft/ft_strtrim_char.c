@@ -6,7 +6,7 @@
 /*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/10 13:18:18 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/09/27 12:15:20 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/10/04 16:49:16 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ static char	*ft_trim(char *res, char *str, char trim, int len)
 
 	i = 0;
 	k = -1;
-	while(++k < len)
+	while (++k < len)
 	{
 		while (str[i] == trim)
-				i++;
+			i++;
 		res[k] = str[i++];
 	}
 	res[k] = '\0';
@@ -31,10 +31,10 @@ static char	*ft_trim(char *res, char *str, char trim, int len)
 
 char		*ft_strtrim_char(char *str, char trim, int size)
 {
-	char *res;
-	int i;
-	int len;
-	int count;
+	char	*res;
+	int		i;
+	int		len;
+	int		count;
 
 	i = 0;
 	count = 0;

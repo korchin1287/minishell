@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/08 12:47:52 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/10/03 17:56:51 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/10/04 16:26:33 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,7 @@ char		*ft_parse_line(t_shell *shell, char *line)
 		{
 			ft_clear_list(&data.arg_list);
 			ft_clear_lst(data.list);
+			ft_free_null((void **)&line);
 			return (NULL);
 		}
 		i = ft_space(line, i);
