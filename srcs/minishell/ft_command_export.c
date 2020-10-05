@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_command_export.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/18 16:26:17 by nofloren          #+#    #+#             */
-/*   Updated: 2020/10/04 15:36:38 by nofloren         ###   ########.fr       */
+/*   Updated: 2020/10/05 15:20:15 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,8 @@ static void	ft_print_export(t_shell *shell)
 
 	map = make_str(&shell->list_env, ft_lstsize(shell->list_env));
 	tmp = ft_sort_mass(map);
-	ft_free_str(&map);
-	i = 0;
-	while (tmp[i])
+	i = -1;
+	while (tmp[++i])
 	{
 		len = ft_strlen_3(&tmp[i][0], '=');
 		ft_putstr_fd("declare -x ", 1);
@@ -38,8 +37,8 @@ static void	ft_print_export(t_shell *shell)
 			write(1, "\"", 1);
 		}
 		write(1, "\n", 1);
-		i++;
 	}
+	ft_free_str(&map);
 }
 
 static int	ft_add_env_from_export(t_shell *shell)
@@ -102,7 +101,8 @@ void		ft_command_export(t_shell *shell)
 	while (tmp[shell->j])
 	{
 		check = ft_check_name(tmp[shell->j], '=');
-		if (shell->list_arg->flag_disable_char == 0 && check)
+		if ((shell->list_arg->flag_disable_char &&
+			shell->list_arg->flag_disable_char  - 1 != shell->j)  && check)
 		{
 			if (!ft_check_list_for_export(&shell->list_env, tmp[shell->j]))
 				if (!ft_add_env_from_export(shell))

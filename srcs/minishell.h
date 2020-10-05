@@ -6,7 +6,7 @@
 /*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/05 12:06:51 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/10/04 15:24:52 by nofloren         ###   ########.fr       */
+/*   Updated: 2020/10/04 17:18:50 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ int				ft_check_list_for_export(t_list **list, char *str);
 int				ft_cout_mas(char **str);
 int				ft_what_command(t_shell *shell);
 int				ft_check_stat(t_shell *shell, char **s2);
+int				ft_make_with_redir_help3(t_shell *shell);
 void			ft_command_pwd(t_shell *shell);
 void			ft_exitstatus(t_shell *shell, int flag_exit);
 void			ft_print_name();

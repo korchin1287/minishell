@@ -6,7 +6,7 @@
 /*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/01 13:38:22 by nofloren          #+#    #+#             */
-/*   Updated: 2020/10/02 19:18:40 by nofloren         ###   ########.fr       */
+/*   Updated: 2020/10/04 16:42:45 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ void	ft_print_name(void)
 	char *minishell;
 	char *tmp;
 
-	ft_putstr_fd("\e[32mminishell > ",1);
-	minishell = ft_getcwd(); 
+	ft_putstr_fd("\e[32mminishell > ", 1);
+	minishell = ft_getcwd();
 	ft_putstr_fd(minishell, 1);
 	ft_putstr_fd("\e[0m", 1);
 	ft_putstr_fd("\e[32m > \e[0m", 1);
