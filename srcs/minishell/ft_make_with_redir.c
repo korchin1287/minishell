@@ -6,7 +6,7 @@
 /*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/28 16:33:06 by nofloren          #+#    #+#             */
-/*   Updated: 2020/10/04 17:20:37 by nofloren         ###   ########.fr       */
+/*   Updated: 2020/10/05 16:20:24 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,13 @@ int			ft_make_with_redir_help(t_shell *shell, t_list_arg **tmp)
 	}
 	if ((*tmp)->flag_pipe == 1)
 		pipe(shell->fd);
+	if ((*tmp)->flag_redir_one_left == 1)
+	{
+		while (shell->count-- > 0)
+			shell->list_arg = shell->list_arg->next;
+		ft_make_with_left_redir(shell);
+		return (0);
+	}
 	return (1);
 }
 

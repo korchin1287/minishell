@@ -32,3 +32,5 @@ echo $PWD; cd ..; $PWD
 echo ; ls
 
 pwd ;;
+
+pwd > q > a < z > c
