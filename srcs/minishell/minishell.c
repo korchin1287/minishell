@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/07 15:46:34 by nofloren          #+#    #+#             */
-/*   Updated: 2020/10/12 13:17:45 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/10/12 20:52:12 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static void	ft_before_while(t_shell *shell, char **env)
 	ft_singnal();
 }
 
-static void	ft_while_help(t_shell *shell)
+void		ft_while_help(t_shell *shell)
 {
 	ft_parse_list_line(shell, &shell->list_arg);
 	ft_add_list_before_export(shell);
@@ -71,6 +71,7 @@ static void	ft_end_while(t_shell *shell)
 	ft_print_name();
 	ft_free_null((void **)&shell->costl);
 	ft_clear_lst(&shell->tmp_arg);
+	shell->tmp_redir = NULL;
 }
 
 int			main(int argc, char **argv, char **env)
@@ -86,17 +87,7 @@ int			main(int argc, char **argv, char **env)
 		if (!ft_read_info(&shell))
 			continue;
 		shell.j = 0;
-		while (shell.list_arg)
-		{
-			ft_while_help(&shell);
-			if (shell.list_arg->flag_end == 1)
-			{
-				dup2(shell.savestdin, 0);
-				dup2(shell.sevestdout, 1);
-				shell.j = 0;
-			}
-			shell.list_arg = shell.list_arg->next;
-		}
+		ft_main_help(&shell);
 		ft_end_while(&shell);
 	}
 	return (0);

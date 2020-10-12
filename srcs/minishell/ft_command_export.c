@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_command_export.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/18 16:26:17 by nofloren          #+#    #+#             */
-/*   Updated: 2020/10/08 20:46:01 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/10/12 17:00:57 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int			ft_check_name(char *str, char check)
 
 	i = 0;
 	check_before = ft_strlen_3(str, check);
-	if (!ft_isalpha(str[i]) && str[i] != '_' && str[i] != '\0')
+	if (!ft_isalpha(str[i]) && str[i] != '_' && str[i] != '\b')
 		return (0);
 	while (str[i] != '\0' && i < check_before)
 	{

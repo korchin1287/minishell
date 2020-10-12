@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_command_unset.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/18 18:11:39 by nofloren          #+#    #+#             */
-/*   Updated: 2020/10/03 16:12:41 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/10/12 17:00:36 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void		ft_unset_help1(t_shell *shell, char **str, int j)
 	ft_putstr_fd(str[j], 2);
 	write(2, "': not a valid identifier\n", 27);
 	ft_exitstatus(shell, 1);
-	str[j][0] = '\0';
+	str[j][0] = '\b';
 }
 
 static void		ft_unset_help_2(t_list *tmp, char **str, int j, int count)

@@ -6,7 +6,7 @@
 /*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/04 17:14:53 by nofloren          #+#    #+#             */
-/*   Updated: 2020/10/04 18:09:37 by nofloren         ###   ########.fr       */
+/*   Updated: 2020/10/12 19:32:21 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,6 @@ int		ft_make_with_redir_help3(t_shell *shell)
 		a = 1;
 	ft_free_str(&shell->str_path);
 	ft_free_str(&str);
+	ft_help_this(shell);
 	return (a);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/05 12:06:51 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/10/12 13:17:20 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/10/12 20:55:38 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ typedef struct	s_shell
 	int			j;
 	int			flag_stat;
 	int			fd_file;
+	int			fd_file_left;
 	int			flag_exit;
 	int			flag_cd;
 	int			count;
@@ -56,9 +57,11 @@ typedef struct	s_shell
 	t_list		*list_env;
 	t_list_arg	*list_arg;
 	t_list_arg	*tmp_arg;
+	t_list_arg	*tmp_redir;
 }				t_shell;
 
 int				ft_check_name(char *str, char check);
+int				ft_help_costl_redir_left(t_shell *shell, t_list_arg **tmp);
 int				ft_len_arg(t_shell *sherll, t_data *data, char *str, int *i);
 int				ft_open_file_redir_left(t_shell *shell, t_list_arg **tmp);
 int				ft_unset(t_shell *shell, char **str, t_list **list);
@@ -81,6 +84,10 @@ int				ft_what_command(t_shell *shell);
 int				ft_check_stat(t_shell *shell, char **s2);
 int				ft_make_with_redir_help3(t_shell *shell);
 int				status_return(int status);
+int				ft_make_with_left_redir_fork_end(t_shell *shell,
+					t_list_arg	**tmp);
+void			ft_while_help(t_shell *shell);
+void			ft_pid_help_redir_left(t_shell *shell, t_list_arg **tmp);
 void			ft_command_pwd(t_shell *shell);
 void			ft_exitstatus(t_shell *shell, int flag_exit);
 void			ft_print_name();
@@ -124,6 +131,8 @@ void			ft_add_list_before_export(t_shell *shell);
 void			ft_list_create(t_list **list_env, char **env);
 void			ft_free_str(char ***str);
 void			ft_init_parse(t_shell *shell, t_data *data);
+void			ft_command_cd_help4(t_shell *shell);
+void			ft_main_help(t_shell *shell);
 char			*ft_getcwd(void);
 char			**ft_sort_mass(char **tmp);
 char			**make_str(t_list **list_env, int size);

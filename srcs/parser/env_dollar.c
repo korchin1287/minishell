@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_dollar.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/24 18:36:22 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/10/12 13:27:37 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/10/12 16:38:31 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,8 @@ int		ft_len_dollars(char *str, t_list *lst_bfe, t_list *list_env, int k)
 	if (!tmp)
 		tmp = ft_check_doll(&str[k + 1], lst_bfe, count);
 	if (tmp)
-	{
 		len = ft_strlen(tmp);
-	}
-	if (g_status == 1)
+	else if (g_status == 1)
 		len = 1;
 	return (len);
 }

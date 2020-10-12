@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+         #
+#    By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/10/03 16:13:20 by ndreadno          #+#    #+#              #
-#    Updated: 2020/10/12 13:00:19 by ndreadno         ###   ########.fr        #
+#    Updated: 2020/10/12 20:57:14 by nofloren         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,8 @@ SRCS = srcs/minishell/ft_pork.c srcs/minishell/minishell.c\
 	srcs/minishell/ft_command_exit.c srcs/minishell/ft_minishell_help.c \
 	srcs/minishell/ft_minishell_help_2.c srcs/minishell/ft_getcwd.c \
 	srcs/minishell/ft_free_str.c srcs/minishell/ft_command_pwd.c \
-	srcs/minishell/ft_make_with_redir_help3.c srcs/minishell/ft_return_status.c
+	srcs/minishell/ft_make_with_redir_help3.c srcs/minishell/ft_return_status.c \
+	srcs/minishell/ft_make_with_left_redir_fork_end.c srcs/minishell/ft_main_help.c
 	
 
 SRCS_PARS = srcs/parser/parser.c srcs/parser/parser2.c srcs/parser/list.c\

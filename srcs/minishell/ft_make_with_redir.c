@@ -6,7 +6,7 @@
 /*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/28 16:33:06 by nofloren          #+#    #+#             */
-/*   Updated: 2020/10/05 16:20:24 by nofloren         ###   ########.fr       */
+/*   Updated: 2020/10/12 19:32:08 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int			ft_make_with_redir_help(t_shell *shell, t_list_arg **tmp)
 {
-	shell->count = 0;
-	(*tmp) = shell->list_arg;
+	shell->count = shell->count;
+	(*tmp) = *tmp == NULL ? shell->list_arg : *tmp;
 	ft_open_file_redir(shell, tmp);
 	if (shell->fd_file == -1)
 	{
@@ -70,24 +70,22 @@ int			ft_make_with_redir(t_shell *shell)
 {
 	pid_t		pid;
 	pid_t		wpid;
-	t_list_arg	*tmp;
 	int			status;
 
-	if ((ft_make_with_redir_help(shell, &tmp)) == 0)
+	if ((ft_make_with_redir_help(shell, &shell->tmp_redir)) == 0)
 		return (1);
 	if ((ft_make_with_redir_help3(shell)) > -1)
 		pid = fork();
 	else
 		return (ft_make_with_redir_help2(shell));
-	ft_help_this(shell);
 	g_process = pid;
 	if (pid == 0)
-		ft_pid_help_this(shell, &tmp);
+		ft_pid_help_this(shell, &shell->tmp_redir);
 	else if (pid < 0)
 		ft_putendl_fd(strerror(errno), 2);
 	else
 	{
-		ft_pid_close_help_this(shell, &tmp);
+		ft_pid_close_help_this(shell, &shell->tmp_redir);
 		wpid = waitpid(pid, &status, WUNTRACED);
 	}
 	return (WEXITSTATUS(status));

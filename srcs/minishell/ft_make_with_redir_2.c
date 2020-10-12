@@ -6,7 +6,7 @@
 /*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/29 20:06:34 by nofloren          #+#    #+#             */
-/*   Updated: 2020/10/05 16:01:02 by nofloren         ###   ########.fr       */
+/*   Updated: 2020/10/12 19:43:38 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ void		ft_make_first_argv_help(t_shell *shell, char **str)
 		tmp = tmp->next;
 	}
 	str[i] = NULL;
-	ft_free_str(&shell->list_arg->arg);
-	shell->list_arg->arg = str;
+	ft_free_str(&shell->list_arg->arg2);
+	shell->list_arg->arg2 = str;
 }
 
 void		ft_make_first_argv(t_shell *shell)

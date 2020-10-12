@@ -3,14 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   ft_read_info.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/22 20:30:10 by nofloren          #+#    #+#             */
-/*   Updated: 2020/10/08 18:02:33 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/10/12 20:53:46 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+void	ft_command_cd_help4(t_shell *shell)
+{
+	char	*tmp;
+
+	tmp = shell->list_arg->arg[shell->j];
+	if (shell->list_arg->arg[shell->j][0] == '\0')
+	{
+		shell->list_arg->arg[shell->j] = ft_strjoin(".", "");
+		ft_free_null((void **)&tmp);
+	}
+}
 
 int		ft_read_info(t_shell *shell)
 {

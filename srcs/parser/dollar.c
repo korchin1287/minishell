@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dollar.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 16:41:37 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/10/12 13:29:19 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/10/12 16:38:38 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,14 +63,12 @@ char	*ft_change_dollar(t_data *data, char *str, char *dst)
 	if (tmp3)
 	{
 		i = ft_strlen(dst);
-		if (g_status != 1)
-		{
-			ft_strcpy(&dst[i], tmp3);
-		}
-		else
-		{
-			ft_strcpy(&dst[i], "1");
-		}
+		ft_strcpy(&dst[i], tmp3);
+	}
+	else if (g_status == 1)
+	{
+		i = ft_strlen(dst);
+		ft_strcpy(&dst[i], "1");
 	}
 	return (tmp3);
 }

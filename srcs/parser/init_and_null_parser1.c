@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_and_null_parser1.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/27 14:39:11 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/10/05 13:26:17 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/10/12 17:11:11 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ void	ft_qoutes_null(t_data *data)
 void	ft_flag_null(t_data *data)
 {
 	data->parser.flag_close_quotes = 0;
+	data->parser.flag_double_quotes_count = 0;
+	data->parser.flag_single_quotes_count = 0;
 	data->parser.flag_open_quotes = 0;
 	data->parser.flag_single_quotes = 0;
 	data->parser.flag_double_quotes = 0;

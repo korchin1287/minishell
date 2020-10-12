@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_minishell_help_2.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/01 13:38:22 by nofloren          #+#    #+#             */
-/*   Updated: 2020/10/12 13:34:02 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/10/12 15:30:28 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,12 @@ void	ft_exitstatus(t_shell *shell, int flag_exit)
 	char *str1;
 	char *tmp;
 
+	g_status = flag_exit;
 	tmp = ft_itoa(flag_exit);
 	str1 = ft_strjoin("?=", tmp);
 	if (!(ft_check_list_for_export(&shell->lst_before_export, str1)))
 		ft_lstadd_back(&shell->lst_before_export, ft_lstnew2(str1));
 	shell->flag_exit = flag_exit;
-	g_status = 0;
 	ft_free_null((void **)&tmp);
 	ft_free_null((void **)&str1);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_minishell_help.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/01 13:35:10 by nofloren          #+#    #+#             */
-/*   Updated: 2020/10/03 16:12:57 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/10/12 18:59:24 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ void		ft_shell_init(t_shell *shell)
 	shell->lst_before_export = NULL;
 	shell->list_env = NULL;
 	shell->tmp_arg = NULL;
+	shell->tmp_redir = NULL;
 	shell->list_arg = NULL;
 	shell->str_path = NULL;
 	shell->flag_command_bash_not = 0;
@@ -75,6 +76,7 @@ void		ft_shell_init(t_shell *shell)
 	shell->sevestdout = dup(1);
 	shell->flag_redirect = 0;
 	shell->flag_stat = 0;
+	shell->count = 0;
 }
 
 int			ft_what_command(t_shell *shell)
