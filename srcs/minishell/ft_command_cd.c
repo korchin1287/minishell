@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_command_cd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/18 17:05:52 by nofloren          #+#    #+#             */
-/*   Updated: 2020/10/04 17:07:45 by nofloren         ###   ########.fr       */
+/*   Updated: 2020/10/05 17:13:10 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-static void	ft_command_cd_help3(t_shell *shell, t_list *tmp2, char **tmp)
+static void	ft_command_cd_help3(t_list *tmp2, char **tmp)
 {
 	while (tmp2)
 	{
@@ -48,7 +48,7 @@ void		ft_command_cd_help2(t_shell *shell, char **tmp, int flag_pwd)
 		ft_lstadd_back(&shell->lst_before_export, ft_lstnew2(ft_strjoin("PWD=",
 			tmp3)));
 	tmp2 = shell->list_env;
-	ft_command_cd_help3(shell, tmp2, tmp);
+	ft_command_cd_help3(tmp2, tmp);
 	ft_free_null((void **)&tmp3);
 }
 

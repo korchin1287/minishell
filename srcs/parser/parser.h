@@ -6,7 +6,7 @@
 /*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/10 16:28:59 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/10/04 13:04:38 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/10/05 17:04:08 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ void			ft_clear_lst(t_list_arg **head);
 void			ft_add_lst_end(t_list_arg **start, t_list_arg *new);
 void			ft_parse_arg_loop_list(t_data *data, char *str, int *i);
 char			*ft_check_doll(char *str, t_list *lst, int count);
-char			*ft_until_the_quote_is_closed(t_data *data, char *str, int *i);
+char			*ft_until_the_quote_is_closed(t_data *data, char **str, int *i);
 t_tmp_list		*ft_add(t_data *data, char *str);
 void			ft_clear_list(t_tmp_list **head);
 

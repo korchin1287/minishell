@@ -6,7 +6,7 @@
 /*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/17 10:08:03 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/10/04 16:42:21 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/10/05 17:13:28 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ void		ft_parse_list_line(t_shell *shell, t_list_arg **list)
 	int		i;
 	int		k;
 	int		len;
-	char	*tmp;
 
 	i = 0;
 	k = 0;

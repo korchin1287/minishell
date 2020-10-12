@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/21 21:49:33 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/10/04 19:36:39 by nofloren         ###   ########.fr       */
+/*   Updated: 2020/10/12 13:31:01 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,36 +14,24 @@
 
 static void	ft_sigint(int signal)
 {
-	if (g_process != 0)
+	signal = 0;
+	if (g_line && ft_strlen(g_line))
 	{
-		write(1, "\n", 1);
-		kill(g_process, signal);
+		ft_free_null((void **)&g_line);
+		g_line = ft_malloc(sizeof(char), 1);
+		g_line[0] = '\0';
+		g_buf[0] = '\0';
 	}
-	if (g_process == 0)
-	{
-		if (g_line && ft_strlen(g_line))
-		{
-			ft_free_null((void **)&g_line);
-			g_line = ft_malloc(sizeof(char), 1);
-			g_line[0] = '\0';
-			g_buf[0] = '\0';
-		}
-		write(1, "\n", 1);
-		ft_print_name();
-	}
+	g_status = 1;
+	write(1, "\n", 1);
+	ft_print_name();
 	g_process = 0;
 }
 
 static void	ft_sigquit(int signal)
 {
-	if (g_process != 0)
-	{
-		kill(g_process, signal);
-		write(1, "Quit: 3\n", 8);
-	}
-	if (g_process == 0)
-		write(1, "\b\b", 2);
-	g_process = 0;
+	signal = 0;
+	write(1, "\b\b", 2);
 }
 
 void		ft_singnal(void)

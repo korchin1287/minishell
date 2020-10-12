@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_command_bash_help1.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/28 17:26:06 by nofloren          #+#    #+#             */
-/*   Updated: 2020/10/04 15:29:00 by nofloren         ###   ########.fr       */
+/*   Updated: 2020/10/05 17:13:16 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	ft_command_bash_help1(t_shell *shell, char **env)
 {
-	DIR		*dir;
 	char	*path;
 
 	shell->flag_stat = 0;

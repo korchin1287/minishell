@@ -1,40 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_read_info.c                                     :+:      :+:    :+:   */
+/*   ft_return_status.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/09/22 20:30:10 by nofloren          #+#    #+#             */
-/*   Updated: 2020/10/08 18:02:33 by ndreadno         ###   ########.fr       */
+/*   Created: 2020/10/12 12:39:20 by ndreadno          #+#    #+#             */
+/*   Updated: 2020/10/12 13:34:31 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int		ft_read_info(t_shell *shell)
+int	status_return(int status)
 {
-	int		k;
-	char	*tmp;
-
-	g_line = NULL;
-	if ((k = ft_get_next_line(0, &g_line)) > 0)
+	if (WIFSIGNALED(status))
 	{
-		if (!(tmp = ft_parse_line(shell, g_line)))
-		{
-			ft_free_null((void **)&g_line);
-			ft_free_null((void **)&tmp);
-			ft_print_name(0);
-			return (0);
-		}
-		shell->tmp_arg = shell->list_arg;
-		ft_free_null((void **)&g_line);
-		ft_free_null((void **)&tmp);
+		if (WTERMSIG(status) == 2)
+			return (130);
+		if (WTERMSIG(status) == 3)
+			return (131);
 	}
-	if (k == 0)
-	{
-		write(1, "exit\n", 5);
-		exit(0);
-	}
-	return (1);
+	return (WEXITSTATUS(status));
 }

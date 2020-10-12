@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+         #
+#    By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/10/03 16:13:20 by ndreadno          #+#    #+#              #
-#    Updated: 2020/10/04 17:21:06 by nofloren         ###   ########.fr        #
+#    Updated: 2020/10/12 13:00:19 by ndreadno         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ SRCS = srcs/minishell/ft_pork.c srcs/minishell/minishell.c\
 	srcs/minishell/ft_command_exit.c srcs/minishell/ft_minishell_help.c \
 	srcs/minishell/ft_minishell_help_2.c srcs/minishell/ft_getcwd.c \
 	srcs/minishell/ft_free_str.c srcs/minishell/ft_command_pwd.c \
-	srcs/minishell/ft_make_with_redir_help3.c
+	srcs/minishell/ft_make_with_redir_help3.c srcs/minishell/ft_return_status.c
 	
 
 SRCS_PARS = srcs/parser/parser.c srcs/parser/parser2.c srcs/parser/list.c\
@@ -35,10 +35,9 @@ SRCS_PARS = srcs/parser/parser.c srcs/parser/parser2.c srcs/parser/list.c\
 
 OBJ = $(SRCS:.c=.o)
 OBJ_PARS = $(SRCS_PARS:.c=.o)
-#OBJ  = srcs/minishell.o srcs/parser.o srcs/ft_pork.o
 LIB = libft/libft.a
 INCLUDES = ./srcs
-FLAGS = -g 
+FLAGS =-Wall -Wextra -Werror
 all: $(NAME)
 
 $(NAME):$(OBJ) $(OBJ_PARS) $(LIB)

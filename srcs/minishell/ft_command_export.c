@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_command_export.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/18 16:26:17 by nofloren          #+#    #+#             */
-/*   Updated: 2020/10/05 16:21:15 by nofloren         ###   ########.fr       */
+/*   Updated: 2020/10/08 20:46:01 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ void		ft_command_export(t_shell *shell)
 	while (tmp[shell->j])
 	{
 		check = ft_check_name(tmp[shell->j], '=');
-		if ((shell->list_arg->flag_disable_char &&
+		if ((!shell->list_arg->flag_disable_char &&
 			shell->list_arg->flag_disable_char - 1 != shell->j) && check)
 		{
 			if (!ft_check_list_for_export(&shell->list_env, tmp[shell->j]))

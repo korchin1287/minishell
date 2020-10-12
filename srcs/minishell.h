@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/05 12:06:51 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/10/04 17:18:50 by nofloren         ###   ########.fr       */
+/*   Updated: 2020/10/12 13:17:20 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 
 pid_t	g_process;
 char	*g_line;
+int		g_status;
 
 typedef struct	s_costl
 {
@@ -79,6 +80,7 @@ int				ft_cout_mas(char **str);
 int				ft_what_command(t_shell *shell);
 int				ft_check_stat(t_shell *shell, char **s2);
 int				ft_make_with_redir_help3(t_shell *shell);
+int				status_return(int status);
 void			ft_command_pwd(t_shell *shell);
 void			ft_exitstatus(t_shell *shell, int flag_exit);
 void			ft_print_name();
@@ -89,7 +91,6 @@ void			ft_swap(char **s1, char **s2);
 void			ft_pid_help_open(t_shell *shell);
 void			ft_command_bash_help1(t_shell *shell, char **env);
 void			ft_singnal(void);
-void			ft_print_name(void);
 void			ft_add_list_before_export(t_shell *shell);
 void			ft_command_export(t_shell *shell);
 void			ft_command_cd(t_shell *shell);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/07 15:46:34 by nofloren          #+#    #+#             */
-/*   Updated: 2020/10/05 16:00:28 by nofloren         ###   ########.fr       */
+/*   Updated: 2020/10/12 13:17:45 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,12 @@ void		command_minishell(t_shell *shell)
 static void	ft_before_while(t_shell *shell, char **env)
 {
 	g_process = 0;
+	g_status = 0;
 	ft_shell_init(shell);
 	ft_list_create(&shell->list_env, env);
 	ft_print_name();
-	ft_singnal();
 	ft_exitstatus(shell, shell->flag_exit);
+	ft_singnal();
 }
 
 static void	ft_while_help(t_shell *shell)
@@ -81,6 +82,7 @@ int			main(int argc, char **argv, char **env)
 	ft_before_while(&shell, env);
 	while (1)
 	{
+		ft_singnal();
 		if (!ft_read_info(&shell))
 			continue;
 		shell.j = 0;

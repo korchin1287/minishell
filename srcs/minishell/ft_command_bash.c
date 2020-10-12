@@ -39,9 +39,7 @@ int		ft_command_bash_help(t_shell *shell, char **env)
 	while (shell->str_path && shell->str_path[k])
 	{
 		dir = opendir(shell->str_path[k]);
-		if (!dir)
-			ft_putendl_fd("Invalid path", 2);
-		while ((entry = readdir(dir)) != NULL)
+		while (dir && (entry = readdir(dir)) != NULL)
 		{
 			if ((ft_strcmp(shell->list_arg->arg[shell->j], entry->d_name)) == 0
 				|| (ft_strcmp(shell->list_arg->arg2[shell->j], entry->d_name))
@@ -51,7 +49,8 @@ int		ft_command_bash_help(t_shell *shell, char **env)
 				return (k);
 			}
 		}
-		closedir(dir);
+		if (dir)
+			closedir(dir);
 		k++;
 	}
 	return (-1);

@@ -6,7 +6,7 @@
 /*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/24 18:36:22 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/09/27 16:54:40 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/10/12 13:27:37 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ int		ft_len_dollars(char *str, t_list *lst_bfe, t_list *list_env, int k)
 	{
 		len = ft_strlen(tmp);
 	}
+	if (g_status == 1)
+		len = 1;
 	return (len);
 }
 

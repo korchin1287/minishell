@@ -6,7 +6,7 @@
 /*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/29 13:51:56 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/10/03 13:53:49 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/10/09 15:57:58 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,7 @@ static int	ft_return_len_qoutes(t_data *data, char *str, int *i, char c)
 		len++;
 		*i += 2;
 	}
-	else if (str[*i] == '$' && ((i && str[*i - 1] != '\\') || i == 0) &&
-		str[*i + 1] != '\0' && str[*i + 1] != '\\' &&
-			str[*i + 1] != '\"' && c != '\'')
+	else if (ft_condition_check(str, i, 2) && c != '\'')
 	{
 		len += ft_len_dollars(str, data->before_export, data->env, *i);
 		*i += ft_count_dollar(&str[*i + 1]) + 1;
@@ -65,7 +63,8 @@ static void	ft_return_len(t_data *data, char *str, int *i, int *len)
 	}
 	else if (str[*i] == '\'' || str[*i] == '\"')
 		*len += ft_len_qoutes_list(data, str, str[*i], i);
-	else if (ft_condition_check(str, i, 2))
+	else if (ft_condition_check(str, i, 2) ||
+		ft_condition_check2(str, *i, '\0', 7))
 	{
 		*len += ft_len_dollars(str, data->before_export, data->env, *i);
 		*i += ft_count_dollar(&str[*i + 1]) + 1;

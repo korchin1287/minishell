@@ -6,7 +6,7 @@
 /*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/13 12:51:12 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/10/03 14:07:02 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/10/05 17:03:36 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,8 @@ char		*ft_check_close_qoutes(t_data *data, char *str, int *i)
 		(*i)++;
 	}
 	if (data->parser.flag_close_quotes != 1)
-		return (ft_until_the_quote_is_closed(data, str, &k));
+	{
+		return (ft_until_the_quote_is_closed(data, &str, &k));
+	}
 	return (str);
 }
