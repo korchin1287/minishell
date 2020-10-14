@@ -34,3 +34,8 @@ echo ; ls
 pwd ;;
 
 pwd > q > a < z > c
+
+
+
+НОВЫЙ КЕЙС
+echo ssss > t1 qqq | ls > cat >t2 < t1

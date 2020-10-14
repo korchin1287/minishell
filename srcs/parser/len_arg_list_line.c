@@ -6,7 +6,7 @@
 /*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/29 13:51:56 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/10/09 15:57:58 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/10/13 11:52:39 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ static int	ft_return_len_qoutes(t_data *data, char *str, int *i, char c)
 		len += ft_len_dollars(str, data->before_export, data->env, *i);
 		*i += ft_count_dollar(&str[*i + 1]) + 1;
 	}
+	else if (ft_condition_check2(str, *i, '\0', 8) && c != '\'')
+		len += ft_len_status(i);
 	else
 	{
 		len++;
@@ -69,6 +71,8 @@ static void	ft_return_len(t_data *data, char *str, int *i, int *len)
 		*len += ft_len_dollars(str, data->before_export, data->env, *i);
 		*i += ft_count_dollar(&str[*i + 1]) + 1;
 	}
+	else if (ft_condition_check2(str, *i, '\0', 8))
+		*len += ft_len_status(i);
 	else
 	{
 		(*i)++;

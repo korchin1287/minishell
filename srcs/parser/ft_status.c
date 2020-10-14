@@ -1,41 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signal.c                                           :+:      :+:    :+:   */
+/*   ft_status.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/09/21 21:49:33 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/10/13 19:36:23 by ndreadno         ###   ########.fr       */
+/*   Created: 2020/10/13 10:56:07 by ndreadno          #+#    #+#             */
+/*   Updated: 2020/10/13 11:52:05 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-static void	ft_sigint(int signal)
+int	ft_len_status(int *i)
 {
-	signal = 0;
-	if (g_line && ft_strlen(g_line))
+	int k;
+	int tmp;
+
+	tmp = g_status;
+	k = g_status ? 0 : 1;
+	while (tmp != 0)
 	{
-		ft_free_null((void **)&g_line);
-		g_line = ft_malloc(sizeof(char), 1);
-		g_line[0] = '\0';
-		g_buf[0] = '\0';
+		tmp = tmp / 10;
+		k++;
 	}
-	g_status = 1;
-	write(1, "\n", 1);
-	ft_print_name();
-	g_process = 0;
+	*i += 2;
+	return (k);
 }
 
-static void	ft_sigquit(int signal)
+int	ft_get_status(t_data *data, int *l)
 {
-	signal = 0;
-	write(1, "\b\b", 2);
-}
+	char	*tmp;
+	int		i;
 
-void		ft_singnal(void)
-{
-	signal(SIGINT, &ft_sigint);
-	signal(SIGQUIT, &ft_sigquit);
+	i = ft_strlen(data->out);
+	tmp = ft_itoa(g_status);
+	ft_strcpy(&data->out[i], tmp);
+	*l += ft_strlen(tmp);
+	ft_free_null((void **)&tmp);
+	return (2);
 }

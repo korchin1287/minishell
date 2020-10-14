@@ -6,7 +6,7 @@
 /*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/17 10:08:03 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/10/05 17:13:28 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/10/13 11:49:49 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ char		*ft_parse_arg_list(t_data *data, char *str, int len, int i)
 
 	l = 0;
 	if ((data->out = (char *)malloc(sizeof(char*) * (len + 1))) == NULL)
-		exit(0);
+		exit(2);
 	ft_bzero(data->out, len);
 	ft_parse_arg_loop_list(data, str, &i);
 	ft_add_end(&data->arg_list, ft_add(data, data->out));

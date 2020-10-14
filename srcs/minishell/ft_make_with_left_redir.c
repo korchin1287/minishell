@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_make_with_left_redir.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/25 15:35:30 by nofloren          #+#    #+#             */
-/*   Updated: 2020/10/12 20:55:18 by nofloren         ###   ########.fr       */
+/*   Updated: 2020/10/14 13:58:57 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ void		ft_open_file_redir_left_2(t_shell *shell, t_list_arg **tmp)
 
 int			ft_open_file_redir_left(t_shell *shell, t_list_arg **tmp)
 {
-	shell->count = 0;
+	shell->count = shell->count;
 	shell->flag_redirect = 1;
-	(*tmp) = shell->list_arg;
+	(*tmp) = !shell->tmp_redir ? shell->list_arg : shell->tmp_redir;
 	shell->fd_file_left = -1;
 	while ((*tmp)->flag_redir_one_left == 1)
 	{
@@ -72,14 +72,14 @@ void		ft_pid_help_redir_left(t_shell *shell, t_list_arg **tmp)
 
 int			ft_make_with_left_redir(t_shell *shell)
 {
-	t_list_arg	*tmp;
+	//t_list_arg	*tmp;
 
-	if ((ft_open_file_redir_left(shell, &tmp)) == 0)
+	if ((ft_open_file_redir_left(shell, &shell->tmp_redir)) == 0)
 		return (0);
-	if (tmp->flag_pipe == 1)
+	if (shell->tmp_redir->flag_pipe == 1)
 		pipe(shell->fd);
-	if (((tmp)->flag_redir_one == 1 || (tmp)->flag_redir_two == 1))
-		return (ft_help_costl_redir_left(shell, &tmp));
+	if (shell->tmp_redir->flag_redir_one == 1 || (shell->tmp_redir->flag_redir_two == 1))
+		return (ft_help_costl_redir_left(shell, &shell->tmp_redir));
 	ft_help_this(shell);
-	return (ft_make_with_left_redir_fork_end(shell, &tmp));
+	return (ft_make_with_left_redir_fork_end(shell, &shell->tmp_redir));
 }

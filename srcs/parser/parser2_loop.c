@@ -6,7 +6,7 @@
 /*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/01 15:16:07 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/10/09 16:03:50 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/10/13 11:26:36 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ static int	ft_loop_qoutes(t_data *data, char *str, int *l, char c)
 		}
 		else if (ft_condition_check(str, &i, 2) && c != '\'')
 			i += ft_dollar(data, &str[i], data->out, l);
+		else if (ft_condition_check2(str, i, '\0', 8) && c != '\'')
+			i += ft_get_status(data, l);
 		else
 		{
 			if (ft_condition_check2(str, i, c, 6))
@@ -69,6 +71,8 @@ static int	ft_write_tmp(t_data *data, char *str, int *i, int *l)
 	else if (ft_condition_check(str, i, 2) ||
 		ft_condition_check2(str, *i, '\0', 7))
 		*i += ft_dollar(data, &str[*i], data->out, l);
+	else if (ft_condition_check2(str, *i, '\0', 8))
+		*i += ft_get_status(data, l);
 	else
 	{
 		if (ft_condition_check(str, i, 4))

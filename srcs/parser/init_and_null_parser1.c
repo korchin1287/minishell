@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_and_null_parser1.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/27 14:39:11 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/10/12 17:11:11 by nofloren         ###   ########.fr       */
+/*   Updated: 2020/10/13 17:40:17 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void	ft_flag_null(t_data *data)
 	data->parser.count_arg = 0;
 	data->parser.flag_disable_char = 0;
 	data->parser.flag_disable_dollar = 0;
+	data->parser.flag_slash = 0;
 }
 
 void	ft_init_parse(t_shell *shell, t_data *data)
@@ -54,7 +55,7 @@ char	*ft_init_parse_line(t_shell *shell, t_data *data, char *line)
 
 	i = 0;
 	ft_init_parse(shell, data);
-	line = ft_strtrim(line, " \t");
+	line = ft_strtrim(line, "\t");
 	ft_check_open_qoutes(data, line, &i);
 	tmp = line;
 	line = ft_check_close_qoutes(data, line, &i);

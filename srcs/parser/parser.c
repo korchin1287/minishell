@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/08 12:47:52 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/10/04 16:26:33 by nofloren         ###   ########.fr       */
+/*   Updated: 2020/10/13 17:40:57 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,7 @@ char		*ft_parse_line(t_shell *shell, char *line)
 	k = 0;
 	len = 0;
 	line = ft_init_parse_line(shell, &data, line);
+	i = ft_space(line, i);
 	while (line[i] != '\0')
 	{
 		k = i;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_make_with_pipe.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/23 17:31:44 by nofloren          #+#    #+#             */
-/*   Updated: 2020/10/01 15:38:32 by nofloren         ###   ########.fr       */
+/*   Updated: 2020/10/13 11:48:06 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int		ft_make_with_pipe(t_shell *shell)
 		exit(shell->flag_exit);
 	}
 	else if (pid < 0)
-		perror("lsh");
+		ft_putendl_fd(strerror(errno), 2);
 	else
 	{
 		ft_pid_help_close(shell);

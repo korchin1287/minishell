@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_command_export.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/18 16:26:17 by nofloren          #+#    #+#             */
-/*   Updated: 2020/10/12 17:00:57 by nofloren         ###   ########.fr       */
+/*   Updated: 2020/10/14 13:22:13 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,11 @@ static int	ft_add_env_from_export(t_shell *shell)
 	dst = shell->lst_before_export;
 	while (dst)
 	{
-		if ((ft_strncmp(shell->list_arg->arg[shell->j], dst->content,
+		if ((ft_strncmp(shell->list_arg->arg2[shell->j], dst->content,
 			ft_strlen_3(dst->content, '=')) == 0))
 		{
 			ft_lstadd_back(&shell->list_env, ft_lstnew2(dst->content));
-			ft_unset(shell, &shell->list_arg->arg[shell->j],
+			ft_unset(shell, &shell->list_arg->arg2[shell->j],
 				&shell->lst_before_export);
 			return (1);
 		}
@@ -94,9 +94,9 @@ void		ft_command_export(t_shell *shell)
 	int		check;
 
 	shell->j++;
-	tmp = shell->list_arg->arg;
+	tmp = shell->list_arg->arg2;
 	ft_exitstatus(shell, 0);
-	if (!shell->list_arg->arg[shell->j])
+	if (!shell->list_arg->arg2[shell->j])
 		ft_print_export(shell);
 	while (tmp[shell->j])
 	{
@@ -104,6 +104,7 @@ void		ft_command_export(t_shell *shell)
 		if ((!shell->list_arg->flag_disable_char &&
 			shell->list_arg->flag_disable_char - 1 != shell->j) && check)
 		{
+			ft_putendl_fd(tmp[shell->j], 2);
 			if (!ft_check_list_for_export(&shell->list_env, tmp[shell->j]))
 				if (!ft_add_env_from_export(shell))
 					ft_lstadd_back(&shell->list_env, ft_lstnew2(tmp[shell->j]));

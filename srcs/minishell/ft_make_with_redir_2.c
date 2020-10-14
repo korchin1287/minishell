@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_make_with_redir_2.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/29 20:06:34 by nofloren          #+#    #+#             */
-/*   Updated: 2020/10/12 19:43:38 by nofloren         ###   ########.fr       */
+/*   Updated: 2020/10/14 12:42:19 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ void		ft_make_first_argv_help(t_shell *shell, char **str)
 
 	i = -1;
 	k = 0;
-	while (shell->list_arg->arg[++i])
-		str[i] = ft_strdup(shell->list_arg->arg[i]);
+	while (shell->list_arg->arg2[++i])
+		str[i] = ft_strdup(shell->list_arg->arg2[i]);
 	tmp = shell->costl;
 	while (tmp)
 	{
@@ -54,8 +54,7 @@ void		ft_make_first_argv(t_shell *shell)
 		count += ft_cout_mas(tmp->content);
 		tmp = tmp->next;
 	}
-	if (!(str = malloc(sizeof(char *) * (count + 1))))
-		exit(-1);
+	str = (char **)ft_malloc(sizeof(char *), count + 1);
 	ft_make_first_argv_help(shell, str);
 }
 

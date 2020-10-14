@@ -6,7 +6,7 @@
 /*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/10 16:28:59 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/10/05 17:04:08 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/10/13 16:59:54 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ typedef struct	s_parser
 	int arg;
 	int count_arg;
 	int error_arg;
+	int flag_slash;
 }				t_parser;
 
 typedef struct	s_data
@@ -100,6 +101,8 @@ int				ft_check_char_qual(t_data *data, char *str, int k, char flag);
 int				ft_check_cmd(t_tmp_list *list);
 int				ft_search_char_equal_before_space_or_qoute(char *str,
 				int i, int flag);
+int				ft_len_status(int *i);
+int				ft_get_status(t_data *data, int *l);
 int				ft_len_arg_list(t_data *data, char *str, int *i);
 int				ft_check_redirect(char *str, int l);
 int				ft_len_qoutes_list(t_data *data, char *str, char c, int *i);

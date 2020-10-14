@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+         #
+#    By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/10/03 16:13:20 by ndreadno          #+#    #+#              #
-#    Updated: 2020/10/12 20:57:14 by nofloren         ###   ########.fr        #
+#    Updated: 2020/10/13 16:43:14 by ndreadno         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,11 +28,12 @@ SRCS = srcs/minishell/ft_pork.c srcs/minishell/minishell.c\
 	
 
 SRCS_PARS = srcs/parser/parser.c srcs/parser/parser2.c srcs/parser/list.c\
-	srcs/parser/list2.c srcs/parser/open_close_qoutes.c srcs/parser/check_arg.c\
+	srcs/parser/list2.c srcs/parser/close_qoutes.c srcs/parser/check_arg.c\
 	srcs/parser/dollar.c srcs/parser/env_dollar.c srcs/parser/ft_until_the_quote_is_closed.c\
 	srcs/parser/init_and_null_parser1.c srcs/parser/condition_check.c srcs/parser/len_arg.c\
 	srcs/parser/parse_redirect_and_pipe.c srcs/parser/char_qual.c srcs/parser/len_arg_list_line.c\
-	srcs/parser/condition_check2.c srcs/parser/check_arg2.c srcs/parser/parser2_loop.c
+	srcs/parser/condition_check2.c srcs/parser/check_arg2.c srcs/parser/parser2_loop.c srcs/parser/ft_status.c \
+	srcs/parser/open_qoutes.c
 
 OBJ = $(SRCS:.c=.o)
 OBJ_PARS = $(SRCS_PARS:.c=.o)
