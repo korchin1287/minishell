@@ -6,7 +6,7 @@
 /*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/29 20:06:34 by nofloren          #+#    #+#             */
-/*   Updated: 2020/10/14 12:42:19 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/10/14 14:37:14 by ndreadno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void		ft_make_first_argv_help(t_shell *shell, char **str)
 
 	i = -1;
 	k = 0;
-	while (shell->list_arg->arg2[++i])
+	while (shell->list_arg->arg2[++i] && shell->list_arg->arg2[0][0] != '\0')
 		str[i] = ft_strdup(shell->list_arg->arg2[i]);
 	tmp = shell->costl;
 	while (tmp)
@@ -47,7 +47,7 @@ void		ft_make_first_argv(t_shell *shell)
 	char	**str;
 	t_costl	*tmp;
 
-	count = ft_cout_mas(shell->list_arg->arg);
+	count = shell->list_arg->arg2[0][0] != '\0' ? ft_cout_mas(shell->list_arg->arg2) : 0;
 	tmp = shell->costl;
 	while (tmp)
 	{

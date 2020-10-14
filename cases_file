@@ -17,7 +17,7 @@ echo "$ "
 ls > file1 | grep m < file1 >file2
 grep m < file1 > file2
 grep m > file2 < file1
-> file2 grep m < file1
+> file2 grep m < file1./mi  
 grep e <> file1
 srcs (это папка! Должна быть ошибка и 127)
 unset $PWD
