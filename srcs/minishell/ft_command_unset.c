@@ -6,7 +6,7 @@
 /*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/18 18:11:39 by nofloren          #+#    #+#             */
-/*   Updated: 2020/10/12 17:00:36 by nofloren         ###   ########.fr       */
+/*   Updated: 2020/10/14 16:44:52 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,6 @@ void			ft_command_unset(t_shell *shell)
 {
 	shell->j++;
 	ft_exitstatus(shell, 0);
-	ft_unset(shell, &shell->list_arg->arg[shell->j], &shell->lst_before_export);
-	ft_unset(shell, &shell->list_arg->arg[shell->j], &shell->list_env);
+	ft_unset(shell, &shell->list_arg->arg2[shell->j], &shell->lst_before_export);
+	ft_unset(shell, &shell->list_arg->arg2[shell->j], &shell->list_env);
 }

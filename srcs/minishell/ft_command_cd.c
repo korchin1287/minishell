@@ -6,7 +6,7 @@
 /*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/18 17:05:52 by nofloren          #+#    #+#             */
-/*   Updated: 2020/10/12 20:26:42 by nofloren         ###   ########.fr       */
+/*   Updated: 2020/10/14 16:19:18 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,15 +55,15 @@ void		ft_command_cd_help2(t_shell *shell, char **tmp, int flag_pwd)
 int			ft_command_cd_help1(t_shell *shell, t_list *tmp2, int flag)
 {
 	tmp2 = shell->list_env;
-	if (!shell->list_arg->arg[shell->j])
+	if (!shell->list_arg->arg2[shell->j])
 	{
 		while (tmp2)
 		{
 			if (!(ft_strncmp(tmp2->content, "HOME=", 5)))
 			{
 				flag = 1;
-				free(shell->list_arg->arg[shell->j - 1]);
-				shell->list_arg->arg[shell->j - 1] =
+				free(shell->list_arg->arg2[shell->j - 1]);
+				shell->list_arg->arg2[shell->j - 1] =
 					ft_strdup(&tmp2->content[5]);
 				shell->j--;
 				break ;
@@ -84,7 +84,7 @@ int			ft_command_cd_help1(t_shell *shell, t_list *tmp2, int flag)
 static void	ft_command_cd_help(t_shell *shell, char **tmp)
 {
 	ft_putstr_fd("minishell: cd: ", 2);
-	ft_putstr_fd(shell->list_arg->arg[shell->j], 2);
+	ft_putstr_fd(shell->list_arg->arg2[shell->j], 2);
 	ft_putstr_fd(": ", 2);
 	ft_putendl_fd(strerror(errno), 2);
 	ft_free_null((void **)&(*tmp));
@@ -102,8 +102,8 @@ void		ft_command_cd(t_shell *shell)
 	shell->j++;
 	if ((ft_command_cd_help1(shell, &tmp2, 0) == 1))
 		return ;
-	if (shell->list_arg->arg[shell->j] &&
-		(k = chdir(shell->list_arg->arg[shell->j])) == -1)
+	if (shell->list_arg->arg2[shell->j] &&
+		(k = chdir(shell->list_arg->arg2[shell->j])) == -1)
 	{
 		ft_command_cd_help(shell, &tmp);
 		return ;

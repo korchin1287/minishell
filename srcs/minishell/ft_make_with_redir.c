@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_make_with_redir.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/28 16:33:06 by nofloren          #+#    #+#             */
-/*   Updated: 2020/10/14 13:56:59 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/10/14 16:36:36 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ int			ft_make_with_redir_help(t_shell *shell, t_list_arg **tmp)
 int			ft_make_with_redir_help2(t_shell *shell)
 {
 	shell->flag_command_bash_not = 1;
-	if (shell->list_arg->arg[shell->j][0])
-		ft_command_bash(shell);
+	if (shell->list_arg->arg2[shell->j][0])
+		command_minishell(shell);
 	while (shell->count-- > 0)
 		shell->list_arg = shell->list_arg->next;
 	return (shell->flag_exit);

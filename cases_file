@@ -25,8 +25,8 @@ echo ;    ;   ; echo asda
 echo <  <
 echo |   |
 echo \'
- echo -n -n -n -n sdfsdf
- echo " \$USER \' "
+echo -n -n -n -n sdfsdf
+echo " \$USER \' "
 echo     dsf       sdf          dsfsdf
 echo $PWD; cd ..; $PWD
 echo ; ls
@@ -37,5 +37,5 @@ pwd > q > a < z > c
 
 
 
-НОВЫЙ КЕЙС
+#НОВЫЙ КЕЙС
 echo ssss > t1 qqq | ls > cat >t2 < t1

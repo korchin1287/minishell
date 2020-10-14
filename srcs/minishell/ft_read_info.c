@@ -6,7 +6,7 @@
 /*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/22 20:30:10 by nofloren          #+#    #+#             */
-/*   Updated: 2020/10/12 20:53:46 by nofloren         ###   ########.fr       */
+/*   Updated: 2020/10/14 16:39:08 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@ void	ft_command_cd_help4(t_shell *shell)
 {
 	char	*tmp;
 
-	tmp = shell->list_arg->arg[shell->j];
-	if (shell->list_arg->arg[shell->j][0] == '\0')
+	tmp = shell->list_arg->arg2[shell->j];
+	if (shell->list_arg->arg2[shell->j][0] == '\0')
 	{
-		shell->list_arg->arg[shell->j] = ft_strjoin(".", "");
+		shell->list_arg->arg2[shell->j] = ft_strjoin(".", "");
 		ft_free_null((void **)&tmp);
 	}
 }

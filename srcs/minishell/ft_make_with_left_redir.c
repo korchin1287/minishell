@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_make_with_left_redir.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/25 15:35:30 by nofloren          #+#    #+#             */
-/*   Updated: 2020/10/14 13:58:57 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/10/14 19:02:30 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,8 @@ int			ft_make_with_left_redir(t_shell *shell)
 		pipe(shell->fd);
 	if (shell->tmp_redir->flag_redir_one == 1 || (shell->tmp_redir->flag_redir_two == 1))
 		return (ft_help_costl_redir_left(shell, &shell->tmp_redir));
-	ft_help_this(shell);
-	return (ft_make_with_left_redir_fork_end(shell, &shell->tmp_redir));
+	if (ft_make_with_redir_help3(shell) > -1)
+	//ft_help_this(shell);
+		return (ft_make_with_left_redir_fork_end(shell, &shell->tmp_redir));
+	return (ft_make_with_redir_help2(shell));
 }

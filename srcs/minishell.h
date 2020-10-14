@@ -6,7 +6,7 @@
 /*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/05 12:06:51 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/10/12 20:55:38 by nofloren         ###   ########.fr       */
+/*   Updated: 2020/10/14 17:20:17 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,6 +133,7 @@ void			ft_free_str(char ***str);
 void			ft_init_parse(t_shell *shell, t_data *data);
 void			ft_command_cd_help4(t_shell *shell);
 void			ft_main_help(t_shell *shell);
+void			ft_error_name(t_shell *shell);
 char			*ft_getcwd(void);
 char			**ft_sort_mass(char **tmp);
 char			**make_str(t_list **list_env, int size);

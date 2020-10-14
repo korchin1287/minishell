@@ -6,7 +6,7 @@
 /*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/01 13:35:10 by nofloren          #+#    #+#             */
-/*   Updated: 2020/10/12 18:59:24 by nofloren         ###   ########.fr       */
+/*   Updated: 2020/10/14 17:11:24 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,19 +81,23 @@ void		ft_shell_init(t_shell *shell)
 
 int			ft_what_command(t_shell *shell)
 {
-	if ((ft_strcmp(shell->list_arg->arg[shell->j], "export")) == 0)
+	if ((shell->list_arg->arg[shell->j][0] == '\0' || (ft_strcmp(shell->list_arg->arg[shell->j], "export")) == 0) 
+		&& (ft_strcmp(shell->list_arg->arg2[shell->j], "export")) == 0)
 		return (1);
-	else if ((ft_strcmp(shell->list_arg->arg[shell->j], "cd")) == 0)
+	else if ((shell->list_arg->arg[shell->j][0] == '\0' || (ft_strcmp(shell->list_arg->arg[shell->j], "cd")) == 0)
+		&& (ft_strcmp(shell->list_arg->arg2[shell->j], "cd")) == 0)
 		return (1);
-	else if ((ft_strcmp(shell->list_arg->arg[shell->j], "pwd")) == 0)
+	else if ((ft_strcmp(shell->list_arg->arg2[shell->j], "pwd")) == 0)
 		return (1);
-	else if ((ft_strcmp(shell->list_arg->arg[shell->j], "env")) == 0)
+	else if ((ft_strcmp(shell->list_arg->arg2[shell->j], "env")) == 0)
 		return (1);
-	else if ((ft_strcmp(shell->list_arg->arg[shell->j], "echo")) == 0)
+	else if ((ft_strcmp(shell->list_arg->arg2[shell->j], "echo")) == 0)
 		return (1);
-	else if ((ft_strcmp(shell->list_arg->arg[shell->j], "exit")) == 0)
+	else if ((shell->list_arg->arg[shell->j][0] == '\0' || (ft_strcmp(shell->list_arg->arg[shell->j], "exit")) == 0)
+		&& (ft_strcmp(shell->list_arg->arg2[shell->j], "exit")) == 0)
 		return (1);
-	else if ((ft_strcmp(shell->list_arg->arg[shell->j], "unset")) == 0)
+	else if ((shell->list_arg->arg[shell->j][0] == '\0' || (ft_strcmp(shell->list_arg->arg[shell->j], "unset")) == 0) 
+		&& (ft_strcmp(shell->list_arg->arg2[shell->j], "unset")) == 0)
 		return (1);
 	else
 		return (0);

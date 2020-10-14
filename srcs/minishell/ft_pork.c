@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_pork.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/08 17:01:56 by nofloren          #+#    #+#             */
-/*   Updated: 2020/10/12 12:43:30 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/10/14 17:42:56 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,25 +17,25 @@ static void	ft_check_stat_help(t_shell *shell, int i)
 	if (i == 1)
 	{
 		ft_putstr_fd("minishell: ", 2);
-		ft_putstr_fd(shell->list_arg->arg[shell->j], 2);
+		ft_error_name(shell);
 		ft_putendl_fd(": is a directory", 2);
 	}
 	else if (i == 2)
 	{
 		ft_putstr_fd("minishell: ", 2);
-		ft_putstr_fd(shell->list_arg->arg[shell->j], 2);
+		ft_error_name(shell);
 		ft_putendl_fd(": Permission denied", 2);
 	}
 	else if (i == 3)
 	{
 		ft_putstr_fd("minishell: ", 2);
-		ft_putstr_fd(shell->list_arg->arg[shell->j], 2);
+		ft_error_name(shell);
 		ft_putendl_fd(": No such file or directory", 2);
 	}
 	else
 	{
 		ft_putstr_fd("minishell: ", 2);
-		ft_putstr_fd(shell->list_arg->arg[shell->j], 2);
+		ft_error_name(shell);
 		ft_putendl_fd(": command not found", 2);
 	}
 }
@@ -60,7 +60,7 @@ int			ft_check_stat(t_shell *shell, char **s2)
 		}
 		return (0);
 	}
-	else if (ft_strchr(shell->list_arg->arg[shell->j], '/'))
+	else if (ft_strchr(shell->list_arg->arg[shell->j], '/') || ft_strchr(shell->list_arg->arg[shell->j], '='))
 		ft_check_stat_help(shell, 3);
 	else
 		ft_check_stat_help(shell, 4);

@@ -6,7 +6,7 @@
 /*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/12 20:39:39 by nofloren          #+#    #+#             */
-/*   Updated: 2020/10/12 20:57:31 by nofloren         ###   ########.fr       */
+/*   Updated: 2020/10/14 18:45:17 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,6 @@ void	ft_main_help(t_shell *shell)
 		shell->list_arg = shell->list_arg->next;
 		ft_free_null((void **)&shell->costl);
 		shell->count = 0;
+		shell->tmp_redir = NULL;
 	}
 }

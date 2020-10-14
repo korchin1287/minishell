@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/21 21:49:33 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/10/13 19:36:23 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/10/14 18:19:47 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ static void	ft_sigint(int signal)
 		g_buf[0] = '\0';
 	}
 	g_status = 1;
+	write(1, "\b\b  \b\b", 6);
 	write(1, "\n", 1);
 	ft_print_name();
 	g_process = 0;
@@ -31,7 +32,7 @@ static void	ft_sigint(int signal)
 static void	ft_sigquit(int signal)
 {
 	signal = 0;
-	write(1, "\b\b", 2);
+	write(1, "\b\b  \b\b", 6);
 }
 
 void		ft_singnal(void)
