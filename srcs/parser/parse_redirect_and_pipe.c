@@ -6,7 +6,7 @@
 /*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/27 15:27:46 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/10/14 17:39:18 by nofloren         ###   ########.fr       */
+/*   Updated: 2020/10/15 17:00:03 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ void	ft_flag_add(t_data *data, t_tmp_list **new)
 	{
 		*new = (t_tmp_list *)ft_malloc(sizeof(t_tmp_list), 1);
 		(*new)->str = ft_strdup("");
-		//data->parser.flag_disable_char = 0;
 		(*new)->next = NULL;
 	}
 	(*new)->flag_redir_one = data->parser.flag_redir_one;

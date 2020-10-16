@@ -6,7 +6,7 @@
 /*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/05 12:06:51 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/10/14 17:20:17 by nofloren         ###   ########.fr       */
+/*   Updated: 2020/10/15 17:14:00 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,8 @@ int				ft_make_with_redir_help3(t_shell *shell);
 int				status_return(int status);
 int				ft_make_with_left_redir_fork_end(t_shell *shell,
 					t_list_arg	**tmp);
+int				ft_make_with_redir_flag(t_shell *shell);
+int				ft_open_file_redir_left_2(t_shell *shell, t_list_arg **tmp);
 void			ft_while_help(t_shell *shell);
 void			ft_pid_help_redir_left(t_shell *shell, t_list_arg **tmp);
 void			ft_command_pwd(t_shell *shell);
@@ -122,7 +124,6 @@ void			ft_command_bash_help1(t_shell *shell, char **env);
 void			ft_command_cd(t_shell *shell);
 void			ft_command_env(t_shell *shell);
 void			ft_command_echo(t_shell *shell);
-void			ft_open_file_redir_left_2(t_shell *shell, t_list_arg **tmp);
 void			ft_command_unset(t_shell *shell);
 void			ft_command_bash(t_shell *shell);
 void			ft_list_clear_before(t_list **list_before_export);

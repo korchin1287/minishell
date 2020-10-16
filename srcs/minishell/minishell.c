@@ -6,7 +6,7 @@
 /*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/07 15:46:34 by nofloren          #+#    #+#             */
-/*   Updated: 2020/10/14 18:45:07 by nofloren         ###   ########.fr       */
+/*   Updated: 2020/10/15 17:00:56 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,12 @@
 
 void		command_minishell(t_shell *shell)
 {
-	if ((shell->list_arg->arg[shell->j][0] == '\0' || (ft_strcmp(shell->list_arg->arg[shell->j], "export")) == 0) 
+	if ((shell->list_arg->arg[shell->j][0] == '\0' ||
+		(ft_strcmp(shell->list_arg->arg[shell->j], "export")) == 0)
 		&& (ft_strcmp(shell->list_arg->arg2[shell->j], "export")) == 0)
 		ft_command_export(shell);
-	else if ((shell->list_arg->arg[shell->j][0] == '\0' || (ft_strcmp(shell->list_arg->arg[shell->j], "cd")) == 0)
+	else if ((shell->list_arg->arg[shell->j][0] == '\0' ||
+		(ft_strcmp(shell->list_arg->arg[shell->j], "cd")) == 0)
 		&& (ft_strcmp(shell->list_arg->arg2[shell->j], "cd")) == 0)
 		ft_command_cd(shell);
 	else if ((ft_strcmp(shell->list_arg->arg2[shell->j], "pwd")) == 0)
@@ -26,14 +28,16 @@ void		command_minishell(t_shell *shell)
 		ft_command_env(shell);
 	else if ((ft_strcmp(shell->list_arg->arg2[shell->j], "echo")) == 0)
 		ft_command_echo(shell);
-	else if ((shell->list_arg->arg[shell->j][0] == '\0' || (ft_strcmp(shell->list_arg->arg[shell->j], "exit")) == 0)
+	else if ((shell->list_arg->arg[shell->j][0] == '\0' ||
+		(ft_strcmp(shell->list_arg->arg[shell->j], "exit")) == 0)
 		&& (ft_strcmp(shell->list_arg->arg2[shell->j], "exit")) == 0)
 		ft_exit(shell);
-	else if ((shell->list_arg->arg[shell->j][0] == '\0' || (ft_strcmp(shell->list_arg->arg[shell->j], "unset")) == 0) 
+	else if ((shell->list_arg->arg[shell->j][0] == '\0' ||
+		(ft_strcmp(shell->list_arg->arg[shell->j], "unset")) == 0)
 		&& (ft_strcmp(shell->list_arg->arg2[shell->j], "unset")) == 0)
 		ft_command_unset(shell);
 	else
-		ft_command_bash(shell);		
+		ft_command_bash(shell);
 }
 
 static void	ft_before_while(t_shell *shell, char **env)

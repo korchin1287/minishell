@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+         #
+#    By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/10/03 16:13:20 by ndreadno          #+#    #+#              #
-#    Updated: 2020/10/13 16:43:14 by ndreadno         ###   ########.fr        #
+#    Updated: 2020/10/15 17:12:41 by nofloren         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,15 +16,16 @@ SRCS = srcs/minishell/ft_pork.c srcs/minishell/minishell.c\
 	srcs/minishell/ft_command_cd.c srcs/minishell/ft_command_env.c\
 	srcs/minishell/ft_command_echo.c srcs/minishell/ft_command_unset.c\
 	srcs/minishell/ft_command_bash.c srcs/minishell/signal.c srcs/minishell/ft_read_info.c\
-	srcs/minishell/ft_make_with_pipe.c srcs/minishell/ft_execve.c srcs/minishell/ft_make_with_left_redir.c\
-	srcs/minishell/ft_make_with_redir.c srcs/minishell/ft_command_bash_help1.c \
-	srcs/minishell/ft_make_with_redir_2.c srcs/minishell/ft_command_export_2.c \
-	srcs/minishell/ft_list_create.c srcs/minishell/ft_sort_mass.c \
-	srcs/minishell/ft_command_exit.c srcs/minishell/ft_minishell_help.c \
-	srcs/minishell/ft_minishell_help_2.c srcs/minishell/ft_getcwd.c \
-	srcs/minishell/ft_free_str.c srcs/minishell/ft_command_pwd.c \
-	srcs/minishell/ft_make_with_redir_help3.c srcs/minishell/ft_return_status.c \
-	srcs/minishell/ft_make_with_left_redir_fork_end.c srcs/minishell/ft_main_help.c
+	srcs/minishell/ft_make_with_pipe.c srcs/minishell/ft_execve.c\
+	srcs/minishell/ft_make_with_left_redir.c srcs/minishell/ft_make_with_redir.c\
+	srcs/minishell/ft_command_bash_help1.c srcs/minishell/ft_make_with_redir_2.c\
+	srcs/minishell/ft_command_export_2.c srcs/minishell/ft_list_create.c\
+	srcs/minishell/ft_sort_mass.c srcs/minishell/ft_command_exit.c \
+	srcs/minishell/ft_minishell_help.c srcs/minishell/ft_minishell_help_2.c\
+	srcs/minishell/ft_getcwd.c srcs/minishell/ft_free_str.c\
+	srcs/minishell/ft_command_pwd.c srcs/minishell/ft_make_with_redir_help3.c\
+	srcs/minishell/ft_return_status.c srcs/minishell/ft_make_with_left_redir_fork_end.c\
+	srcs/minishell/ft_main_help.c srcs/minishell/ft_make_with_redir_flag.c
 	
 
 SRCS_PARS = srcs/parser/parser.c srcs/parser/parser2.c srcs/parser/list.c\

@@ -6,7 +6,7 @@
 /*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/08 17:01:56 by nofloren          #+#    #+#             */
-/*   Updated: 2020/10/14 17:42:56 by nofloren         ###   ########.fr       */
+/*   Updated: 2020/10/15 17:01:40 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,8 @@ int			ft_check_stat(t_shell *shell, char **s2)
 		}
 		return (0);
 	}
-	else if (ft_strchr(shell->list_arg->arg[shell->j], '/') || ft_strchr(shell->list_arg->arg[shell->j], '='))
+	else if (ft_strchr(shell->list_arg->arg[shell->j], '/') ||
+		ft_strchr(shell->list_arg->arg[shell->j], '='))
 		ft_check_stat_help(shell, 3);
 	else
 		ft_check_stat_help(shell, 4);

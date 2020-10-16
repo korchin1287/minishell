@@ -1,30 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_getcwd.c                                        :+:      :+:    :+:   */
+/*   ft_make_with_redir_flag.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/02 16:00:54 by nofloren          #+#    #+#             */
-/*   Updated: 2020/10/15 17:04:49 by nofloren         ###   ########.fr       */
+/*   Created: 2020/10/15 16:57:12 by nofloren          #+#    #+#             */
+/*   Updated: 2020/10/15 17:13:13 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	ft_error_name(t_shell *shell)
+int		ft_make_with_redir_flag(t_shell *shell)
 {
-	if (shell->list_arg->arg[shell->j][0] == '\0')
-		ft_putstr_fd(shell->list_arg->arg2[shell->j], 2);
-	else
-		ft_putstr_fd(shell->list_arg->arg[shell->j], 2);
-}
+	int status;
 
-char	*ft_getcwd(void)
-{
-	char *ptr;
-
-	if ((ptr = getcwd(NULL, 0)) == NULL)
-		ft_putendl_fd(strerror(errno), 2);
-	return (ptr);
+	status = 0;
+	dup2(shell->fd_file, 1);
+	status = ft_make_with_left_redir(shell);
+	close(shell->fd_file);
+	return (status);
 }

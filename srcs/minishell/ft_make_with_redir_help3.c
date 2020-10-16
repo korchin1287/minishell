@@ -6,15 +6,15 @@
 /*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/04 17:14:53 by nofloren          #+#    #+#             */
-/*   Updated: 2020/10/14 16:46:36 by nofloren         ###   ########.fr       */
+/*   Updated: 2020/10/15 17:03:34 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-static int		ft_what_command2(t_shell *shell)
+static int	ft_what_command2(t_shell *shell)
 {
-	if ((ft_strcmp(shell->list_arg->arg2[shell->j], "export")) == 0 
+	if ((ft_strcmp(shell->list_arg->arg2[shell->j], "export")) == 0
 		&& shell->list_arg->arg2[shell->j + 1])
 		return (1);
 	else if ((ft_strcmp(shell->list_arg->arg2[shell->j], "cd")) == 0)

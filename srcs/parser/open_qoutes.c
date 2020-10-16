@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   open_qoutes.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/13 16:38:28 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/10/13 17:27:19 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/10/15 17:07:41 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ static int	ft_check_open_double_quotes(t_data *data, char *str, int *i, int *k)
 	}
 	return (0);
 }
-static int ft_check_open_single_qoutes(t_data *data, char *str, int *i, int *k)
+
+static int	ft_check_open_single_qoutes(t_data *data, char *str, int *i, int *k)
 {
 	if (str[*i] == '\'' && !data->parser.flag_double_quotes)
 	{
@@ -41,9 +42,10 @@ static int ft_check_open_single_qoutes(t_data *data, char *str, int *i, int *k)
 	}
 	return (0);
 }
+
 void		ft_check_open_qoutes(t_data *data, char *str, int *i)
 {
-	int k;
+	int		k;
 
 	k = *i;
 	while (str[*i])
@@ -61,6 +63,7 @@ void		ft_check_open_qoutes(t_data *data, char *str, int *i)
 		data->parser.flag_slash = 1;
 		(*i)++;
 	}
-	data->parser.flag_close_quotes = data->parser.flag_single_quotes || data->parser.flag_double_quotes ? 0 : 1;
+	data->parser.flag_close_quotes = data->parser.flag_single_quotes ||
+		data->parser.flag_double_quotes ? 0 : 1;
 	*i = k;
 }

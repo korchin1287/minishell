@@ -6,7 +6,7 @@
 /*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/29 20:06:34 by nofloren          #+#    #+#             */
-/*   Updated: 2020/10/14 17:00:35 by nofloren         ###   ########.fr       */
+/*   Updated: 2020/10/15 17:03:15 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ void		ft_make_first_argv_help(t_shell *shell, char **str)
 	str[i] = NULL;
 	ft_free_str(&shell->list_arg->arg2);
 	shell->list_arg->arg2 = str;
-	//shell->list_arg->arg = str;
 }
 
 void		ft_make_first_argv(t_shell *shell)
@@ -48,7 +47,8 @@ void		ft_make_first_argv(t_shell *shell)
 	char	**str;
 	t_costl	*tmp;
 
-	count = shell->list_arg->arg2[0][0] != '\0' ? ft_cout_mas(shell->list_arg->arg2) : 0;
+	count = shell->list_arg->arg2[0][0] != '\0' ?
+		ft_cout_mas(shell->list_arg->arg2) : 0;
 	tmp = shell->costl;
 	while (tmp)
 	{
@@ -82,9 +82,7 @@ void		ft_open_file_redir(t_shell *shell, t_list_arg **tmp)
 		}
 		shell->count++;
 		if ((*tmp)->next->arg[1])
-		{
 			ft_lstadd_back3(&shell->costl, ft_lstnew3(&((*tmp)->next->arg[1])));
-		}
 		(*tmp) = (*tmp)->next;
 	}
 }

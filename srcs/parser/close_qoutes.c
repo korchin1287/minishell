@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   close_qoutes.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/13 12:51:12 by ndreadno          #+#    #+#             */
-/*   Updated: 2020/10/13 17:13:39 by ndreadno         ###   ########.fr       */
+/*   Updated: 2020/10/15 16:53:27 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static int	ft_check_close_double_quotes(t_data *data, char *str, int *i)
 {
 	if (str[*i] == '\"' && data->parser.flag_double_quotes == 1)
 	{
-		if (*i && str[*i - 1] == '\\'  && data->parser.flag_slash)
+		if (*i && str[*i - 1] == '\\' && data->parser.flag_slash)
 		{
 			(*i)++;
 			return (1);

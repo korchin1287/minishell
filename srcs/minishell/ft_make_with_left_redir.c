@@ -6,21 +6,34 @@
 /*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/25 15:35:30 by nofloren          #+#    #+#             */
-/*   Updated: 2020/10/14 19:02:30 by nofloren         ###   ########.fr       */
+/*   Updated: 2020/10/15 17:02:40 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void		ft_open_file_redir_left_2(t_shell *shell, t_list_arg **tmp)
+int			ft_open_file_redir_left_2(t_shell *shell, t_list_arg **tmp)
 {
-	while (shell->list_arg->next && shell->list_arg->flag_end != 1)
+	if ((*tmp)->next->arg[0][0] == '\0')
+	{
+		pipe(shell->fd);
+		ft_pid_help_close(shell);
+		return (1);
+	}
+	while (shell->list_arg->next && shell->list_arg->flag_end != 1 &&
+		shell->list_arg->flag_pipe != 1)
 		shell->list_arg = shell->list_arg->next;
+	if (shell->list_arg->flag_pipe == 1)
+	{
+		shell->list_arg = shell->list_arg->next;
+		ft_make_with_pipe(shell);
+	}
 	ft_putstr_fd("minishell: ", 2);
 	ft_putstr_fd((*tmp)->next->arg[0], 2);
 	ft_putstr_fd(": ", 2);
 	ft_putendl_fd(strerror(errno), 2);
 	ft_exitstatus(shell, 1);
+	return (0);
 }
 
 int			ft_open_file_redir_left(t_shell *shell, t_list_arg **tmp)
@@ -42,10 +55,7 @@ int			ft_open_file_redir_left(t_shell *shell, t_list_arg **tmp)
 		(*tmp) = (*tmp)->next;
 	}
 	if (shell->fd_file_left == -1)
-	{
-		ft_open_file_redir_left_2(shell, tmp);
-		return (0);
-	}
+		return (ft_open_file_redir_left_2(shell, tmp));
 	return (1);
 }
 
@@ -72,16 +82,14 @@ void		ft_pid_help_redir_left(t_shell *shell, t_list_arg **tmp)
 
 int			ft_make_with_left_redir(t_shell *shell)
 {
-	//t_list_arg	*tmp;
-
 	if ((ft_open_file_redir_left(shell, &shell->tmp_redir)) == 0)
 		return (0);
 	if (shell->tmp_redir->flag_pipe == 1)
 		pipe(shell->fd);
-	if (shell->tmp_redir->flag_redir_one == 1 || (shell->tmp_redir->flag_redir_two == 1))
+	if (shell->tmp_redir->flag_redir_one == 1 ||
+		(shell->tmp_redir->flag_redir_two == 1))
 		return (ft_help_costl_redir_left(shell, &shell->tmp_redir));
 	if (ft_make_with_redir_help3(shell) > -1)
-	//ft_help_this(shell);
 		return (ft_make_with_left_redir_fork_end(shell, &shell->tmp_redir));
 	return (ft_make_with_redir_help2(shell));
 }

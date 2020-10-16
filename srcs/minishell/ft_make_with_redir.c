@@ -6,7 +6,7 @@
 /*   By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/28 16:33:06 by nofloren          #+#    #+#             */
-/*   Updated: 2020/10/14 16:36:36 by nofloren         ###   ########.fr       */
+/*   Updated: 2020/10/15 17:13:21 by nofloren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,6 @@ int			ft_make_with_redir_help(t_shell *shell, t_list_arg **tmp)
 	}
 	if ((*tmp)->flag_pipe == 1)
 		pipe(shell->fd);
-	// if ((*tmp)->flag_redir_one_left == 1)
-	// {
-	// 	// while (shell->count-- > 0)
-	// 	// 	shell->list_arg = shell->list_arg->next;
-	// 	// ft_make_with_left_redir(shell);
-	// 	return (0);
-	// }
 	return (1);
 }
 
@@ -77,13 +70,7 @@ int			ft_make_with_redir(t_shell *shell)
 	if ((ft_make_with_redir_help3(shell)) > -1)
 	{
 		if (shell->tmp_redir->flag_redir_one_left)
-		{
-			dup2(shell->fd_file, 1);
-			status = ft_make_with_left_redir(shell);
-			close(shell->fd_file);
-			return(status);
-			
-		}
+			return (ft_make_with_redir_flag(shell));
 		pid = fork();
 	}
 	else
