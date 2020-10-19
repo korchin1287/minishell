@@ -1,15 +1,3 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: nofloren <nofloren@student.42.fr>          +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2020/10/03 16:13:20 by ndreadno          #+#    #+#              #
-#    Updated: 2020/10/15 17:12:41 by nofloren         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
 NAME = minishell
 SRCS = srcs/minishell/ft_pork.c srcs/minishell/minishell.c\
 	srcs/minishell/ft_add_list_before_export.c srcs/minishell/ft_command_export.c\

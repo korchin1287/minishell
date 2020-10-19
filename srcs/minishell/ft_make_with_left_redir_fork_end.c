@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ft_make_with_left_redir_fork_end.c                 :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/12 20:47:32 by nofloren          #+#    #+#             */
-/*   Updated: 2020/10/13 11:48:03 by ndreadno         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "../minishell.h"
 
 int		ft_make_with_left_redir_fork_end(t_shell *shell, t_list_arg **tmp)

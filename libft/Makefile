@@ -1,15 +1,3 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: ndreadno <ndreadno@student.42.fr>          +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2020/05/12 18:43:36 by ndreadno          #+#    #+#              #
-#    Updated: 2020/10/04 14:03:16 by ndreadno         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
 NAME = libft.a
 OBJ  = ft_memcmp.o ft_memset.o ft_memcpy.o ft_memmove.o ft_isalnum.o ft_isalpha.o \
 	ft_isascii.o ft_isdigit.o ft_isprint.o ft_memccpy.o ft_memchr.o ft_strchr.o \
